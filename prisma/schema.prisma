@@ -20,6 +20,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  student   Student? // Relacionamento opcional com a tabela Student
 }
 
 model Account {
@@ -75,4 +76,21 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+model Student {
+  id             String         @id @default(cuid()) // ID único do aluno
+  userId         String         @unique // Referência ao ID do usuário
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studentSince   DateTime       @default(now())
+  paymentStatus  paymentStatus?
+  paymentDueDate DateTime? // Data de vencimento da mensalidade
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum paymentStatus {
+  ACTIVE
+  INACTIVE
 }
