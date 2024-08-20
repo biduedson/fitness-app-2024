@@ -47,10 +47,12 @@ const HeroSlider = () => {
               whileInView={"show"}
               viewport={{ once: false, amount: 0.2 }}
             >
-              <CustomButton
-                text="Get started"
-                containerStyles="w-[196px] h-[62px] "
-              />
+              <ScrollLink to="prices" smooth offset={-40}>
+                <CustomButton
+                  text="escolha seu plano"
+                  containerStyles="w-[196px] h-[62px]"
+                />
+              </ScrollLink>
             </motion.div>
           </div>
         </div>
