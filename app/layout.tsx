@@ -33,10 +33,6 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${roboto.variable} w-full max-w-[1920px] mx-auto bg-white`}
       >
-<<<<<<< HEAD
-=======
-        {" "}
->>>>>>> 5994e7c826147988e9aefdb75a173131d393ae7b
         <AuthProvider>
           <Header />
           {children}
