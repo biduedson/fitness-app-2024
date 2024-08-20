@@ -85,6 +85,7 @@ const HeroSlider = () => {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: false, amount: 0.2 }}
+              className="mb-4"
             >
               <ScrollLink to="prices" smooth offset={-40}>
                 <CustomButton
@@ -98,9 +99,10 @@ const HeroSlider = () => {
       </SwiperSlide>
 
       {/* swipper nav buttons*/}
+
       <SwiperNavButtons
         containerStyles="absolute bottom-2 lg:bottom-0 right-0 h-[130px] w-full
-        lg:w-[700px] z-50 flex justify-center lg:justify-start gap-1"
+        lg:w-[700px] z-50 flex justify-center lg:justify-start gap-1 "
         btnStyles="border border-accent text-white w-[56px] h-[56px] flex 
         justify-center items-center hover:bg-accent transition-all duration-300"
         iconStyles="text-2xl"
