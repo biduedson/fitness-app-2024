@@ -4,7 +4,7 @@ import "./globals.css";
 //components
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AuthProvider from "@/app/providers/auth";
+import AuthProvider from "@/app/_providers/auth";
 
 const oswald = Oswald({
   subsets: ["latin"],
