@@ -11,7 +11,7 @@ const links = [
   { name: "planos", target: "prices", offset: -40 },
   { name: "depoimentos", target: "testimonial", offset: 0 },
   { name: "blog", target: "blog", offset: 0 },
-  { name: "contato", target: "contact", offset: 0 },
+  { name: "exercícios", target: "exercices", offset: 0 },
 ];
 
 const MobileNav = ({

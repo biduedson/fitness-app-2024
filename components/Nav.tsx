@@ -9,8 +9,9 @@ const links = [
   { name: "instrutores", target: "team", offset: 0 },
   { name: "planos", target: "prices", offset: -40 },
   { name: "depoimentos", target: "testimonial", offset: 0 },
+  { name: "Meus exercícios", target: "myexercises", offset: 0 },
   { name: "blog", target: "blog", offset: 0 },
-  { name: "contato", target: "contact", offset: 0 },
+  { name: "exercícios", target: "exercices", offset: 0 },
 ];
 
 const Nav = ({ containerStyles }: { containerStyles: string }) => {

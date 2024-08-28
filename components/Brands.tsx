@@ -58,7 +58,7 @@ const brandItem = {
 };
 const Brands = () => {
   return (
-    <section className="py-8" id="contact">
+    <section className="py-8 min-h-[300px]" id="contact">
       <div className="container mx-auto">
         <motion.div
           variants={brandcontainerVariant}
