@@ -34,8 +34,8 @@ export interface IExerciseItemProps {
       }
     };
   }>;
-  addFavoriteFunction:( categoryName: string, exercise:any) => void;
-  removedFavoriteFunction:(exerciseId:string) => void
+  addFavoriteFunction?:( categoryName: string, exercise:any) => void;
+  removedFavoriteFunction?:(exerciseId:string) => void
 }
 
 export interface FavoriteCategoryAndExercisesByStudentsProps

@@ -5,10 +5,11 @@ import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import CategoryButtonsLIst from "@/components/categories/CategoryButtonsLIst";
 import ExerciseList from "@/components/exercices/components/ExerciseList";
-import ExercisesHeader from "./components/ExercisesHeader";
+import ExercisesHeader from "../../components/ExercisesHeader";
 import { FavoriteCategoryAndExercisesByStudentsProps } from "../interfaces/ExercicesInterfacesProps";
 import { notFound } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import ExercisesFooter from "@/components/ExercisesFoter";
 
 interface ICategories {
   categoryExercises: Prisma.ExerciseCategoryGetPayload<{
@@ -83,12 +84,14 @@ const Exercicies = () => {
   categoryExercises.map((category) => {
     exercicesAndComponent.push({
       name: category.name,
-      component: <ExerciseList exercises={category.exercises} />,
+      component: (
+        <ExerciseList exercises={category.exercises} key={category.id} />
+      ),
     });
   });
 
   return (
-    <section className="h-[1000px] w-full flex  justify-center bg-primary-300 mt-28">
+    <section className="overflow-y-hidden w-full  flex  justify-center bg-primary-300 mt-28">
       <ExercisesHeader />
       <CategoryButtonsLIst
         id="exercises"
@@ -97,6 +100,7 @@ const Exercicies = () => {
         setComponent={setComponent}
         exercises={exercicesAndComponent}
       />
+      <ExercisesFooter url="/myexercises" linkName="Exercícios favoritos" />
     </section>
   );
 };

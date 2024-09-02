@@ -3,11 +3,11 @@ import { Prisma } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { ReactElement, useContext, useEffect, useState } from "react";
 import ExercisesComponent from "@/components/exercices/ExercisesComponent";
-import ExerciseList from "@/components/exercices/components/ExerciseList";
 import { notFound } from "next/navigation";
-import MyExercisesHeader from "./componets/MyexercisesHeader";
 import MyExerciseList from "@/components/exercices/components/MyExescisesList";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import ExercisesFooter from "../../components/ExercisesFoter";
+import ExercisesHeader from "@/components/ExercisesHeader";
 
 interface FavoriteCategoryAndExercisesByStudentsProps
   extends Prisma.ExerciseCategoryGetPayload<{
@@ -79,15 +79,17 @@ const MyExercises = () => {
   categoryExercises.map((category) => {
     exercisesAndComponents.push({
       name: category.name,
-      component: <MyExerciseList exercises={category.exercises} />,
+      component: (
+        <MyExerciseList exercises={category.exercises} key={category.id} />
+      ),
     });
   });
 
   return (
     <>
-      <MyExercisesHeader />
+      <ExercisesHeader />
       <section
-        className="h-[1000px] w-full flex  justify-center bg-primary-300 mt-28"
+        className=" w-full flex  justify-center bg-primary-300 mt-28"
         id="myexercises"
       >
         <ExercisesComponent
@@ -95,6 +97,7 @@ const MyExercises = () => {
           exercisesAndComponents={exercisesAndComponents}
         />
       </section>
+      <ExercisesFooter url="/exercises" linkName="Todos os exercícios" />
     </>
   );
 };

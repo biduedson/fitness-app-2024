@@ -26,7 +26,7 @@ const CategoryButtonsLIst = ({
     setComponent(component);
   };
   return (
-    <div className="w-full  bg-primary-300" id={id}>
+    <div className="w-full  bg-primary-300 " id={id}>
       <motion.h2
         variants={fadeIn("up", 0.2)}
         initial="hidden"
@@ -36,13 +36,12 @@ const CategoryButtonsLIst = ({
       >
         {title}
       </motion.h2>
-      <div className="flex  py-6 lg:flex-wrap items-center overflow-x-scroll lg:overflow-x-hidden  [&::-webkit-scrollbar]:hidden lg:justify-center">
+      <div className="flex  py-2 lg:py-6 lg:flex-wrap items-center overflow-x-scroll lg:overflow-x-hidden  [&::-webkit-scrollbar]:hidden lg:justify-center">
         {exercises.map((exercice, index) => {
           return (
             <CategoryButton
               key={index}
               categoryName={exercice.name}
-              index={index}
               handleComponentClick={() =>
                 handleComponentClick(exercice.component!)
               }

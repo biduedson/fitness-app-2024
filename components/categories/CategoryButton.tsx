@@ -6,24 +6,21 @@ import CustomMobileButton from "../CustomMobileButton";
 
 interface CategoryButtonProps {
   categoryName: string;
-  index: number;
   handleComponentClick: () => void;
 }
 
 const CategoryButton = ({
   categoryName,
-  index,
   handleComponentClick,
 }: CategoryButtonProps) => {
   return (
     <>
       <motion.div
-        variants={fadeIn("up", index * 0.1)}
+        variants={fadeIn("up", 0.1)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
         className="mt-4 px-4 hidden lg:block "
-        key={index}
         onClick={handleComponentClick}
       >
         <CustomButton
@@ -32,12 +29,11 @@ const CategoryButton = ({
         />
       </motion.div>
       <motion.div
-        variants={fadeIn("up", index * 0.1)}
+        variants={fadeIn("up", 0.1)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
         className="mt-4 px-4 lg:hidden"
-        key={index}
         onClick={handleComponentClick}
       >
         <CustomMobileButton

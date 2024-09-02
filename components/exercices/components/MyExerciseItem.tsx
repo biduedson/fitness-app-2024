@@ -7,10 +7,10 @@ import { fadeIn } from "../../../lib/variants";
 import { useSession } from "next-auth/react";
 import { FaHeart } from "react-icons/fa";
 import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
+import Link from "next/link";
 
 const MyExerciseItem = ({
   exercise,
-  addFavoriteFunction,
   removedFavoriteFunction,
 }: IExerciseItemProps) => {
   const { data } = useSession();
@@ -43,7 +43,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       setFavorite(!favorite);
       setMessageFavorited(response.message);
       if (response.removed === true) {
-        removedFavoriteFunction(exercise.id);
+        removedFavoriteFunction!(exercise.id);
       }
     } catch (error) {
       setMessageFavorited("Erro ao adicionar aos favoritos");
@@ -68,8 +68,11 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
           alt="exercice"
           className="relative object-cover rounded-t-lg"
         />
+
         {/*para sobrepor a imagem e escurece-la*/}
-        <div className="absolute inset-0 bg-black opacity-30"></div>
+        <Link href={`/exercise/${exercise.name}`}>
+          <div className="absolute inset-0 bg-black opacity-30"></div>
+        </Link>
         {data?.user && (
           <motion.div
             variants={fadeIn("up", 0.2)}

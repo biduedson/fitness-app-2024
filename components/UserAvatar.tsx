@@ -3,7 +3,7 @@ import Image from "next/image";
 const UserAvatar = ({ imageUrl, name }: { imageUrl: string; name: string }) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className=" relative w-[40px]  h-[40px] ">
+      <div className=" relative w-[60px]  h-[60px] ">
         <Image
           src={imageUrl}
           fill
@@ -11,7 +11,7 @@ const UserAvatar = ({ imageUrl, name }: { imageUrl: string; name: string }) => {
           className=" object-cover shadow-md rounded-full"
         />
       </div>
-      <p className="text-white text-center text-[10px]">{name}</p>
+      <p className="text-white text-center text-[14px]">{name}</p>
     </div>
   );
 };

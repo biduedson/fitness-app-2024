@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactElement, useState } from "react";
 
 import { motion } from "framer-motion";
@@ -9,9 +10,11 @@ interface CategoryButtonListProps {
   title: string;
   component: ReactElement;
   setComponent: React.Dispatch<React.SetStateAction<ReactElement>>;
+  handleComponentClick: (categoryComponent: ReactElement) => void;
+
   exercises: {
     name: string;
-    component?: ReactElement;
+    component: ReactElement;
   }[];
 }
 
@@ -20,13 +23,13 @@ const MyCategoryButtonsLIst = ({
   title,
   component,
   setComponent,
+  handleComponentClick,
   exercises,
 }: CategoryButtonListProps) => {
-  const handleComponentClick = (component: ReactElement) => {
-    setComponent(component);
-  };
+  const [currentComponent, setCurrentComponent] = useState<ReactElement>(<></>);
+  console.log(exercises);
   return (
-    <div className="w-full   bg-primary-300" id={id}>
+    <div className="w-full   bg-primary-300 overflow-y-hidden" id={id}>
       <motion.h2
         variants={fadeIn("up", 0.2)}
         initial="hidden"
@@ -36,16 +39,16 @@ const MyCategoryButtonsLIst = ({
       >
         {title}
       </motion.h2>
-      <div className="flex lg:flex-wrap items-center overflow-x-scroll  lg:overflow-x-hidden [&::-webkit-scrollbar]:hidden lg:justify-center">
+      <div className="flex lg:flex-wrap items-center overflow-x-scroll   lg:overflow-x-hidden [&::-webkit-scrollbar]:hidden lg:justify-center">
         {exercises.map((exercice, index) => {
           return (
             <MyCategoryButton
               key={index}
               categoryName={exercice.name}
-              index={index}
-              handleComponentClick={() =>
-                handleComponentClick(exercice.component!)
-              }
+              handleComponentClick={() => {
+                setComponent(exercice.component!);
+                handleComponentClick(exercice.component!);
+              }}
             />
           );
         })}
