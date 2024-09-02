@@ -39,16 +39,14 @@ const Exercicies = ({ categoryExercises }: ICategories) => {
     });
   });
 
-  const [component, setComponent] = useState<ReactElement>(
-    <h3 className="h3 text-center py-4 text-white" id="exercices">
-      Selecione o grupo de exercícios que gostaria de ver.
-    </h3>
-  );
+  const [component, setComponent] = useState<ReactElement>(<></>);
   const handleComponentClick = (component: ReactElement) => {
     setComponent(component);
   };
   return (
     <CategoryButtonsLIst
+      id="exercises"
+      title="Exercícios"
       component={component}
       setComponent={setComponent}
       exercises={exercicesAndComponent}

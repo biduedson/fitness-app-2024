@@ -73,6 +73,7 @@ const Header = () => {
         {/*hide/open menu button*/}
         <div className="flex items-center gap-4">
           {/*avatar login user*/}
+
           {data?.user && (
             <UserAvatar
               imageUrl={data.user.image as string}

@@ -17,7 +17,6 @@ export interface IExerciseListProps {
       }
     };
   }>[];
-
 }
 
 export interface IExerciseItemProps {
@@ -26,10 +25,35 @@ export interface IExerciseItemProps {
       category: true,
       favoriteByStudents:{
         include:{
-          student:true
+          student: {
+                include: {
+                  user: true,
+                },
+             },
         }
       }
     };
   }>;
+  addFavoriteFunction:( categoryName: string, exercise:any) => void;
+  removedFavoriteFunction:(exerciseId:string) => void
 }
 
+export interface FavoriteCategoryAndExercisesByStudentsProps
+  extends Prisma.ExerciseCategoryGetPayload<{
+    include: {
+      exercises: {
+        include: {
+          category: true;
+          favoriteByStudents: {
+            include: {
+              student: {
+                include: {
+                  user: true;
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }> {}

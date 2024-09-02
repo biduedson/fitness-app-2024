@@ -1,31 +1,18 @@
 "use client";
-import { Prisma } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import { IExerciseItemProps } from "@/app/interfaces/ExercicesInterfacesProps";
-
 import Image from "next/image";
-
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../lib/variants";
 import { useSession } from "next-auth/react";
-import { HeartIcon } from "lucide-react";
 import { FaHeart } from "react-icons/fa";
 import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
-import { findUserfavoritesExercises } from "@/app/util/favoriteExercisesUser";
-import { escape } from "querystring";
 
-interface FavoriteExercises {
-  exercise: Prisma.FavoriteExerciseGetPayload<{
-    include: {
-      student: {
-        include: {
-          user: true;
-        };
-      };
-    };
-  }>;
-}
-const ExerciseItem = ({ exercise }: IExerciseItemProps) => {
+const ExerciseItem = ({
+  exercise,
+  addFavoriteFunction,
+  removedFavoriteFunction,
+}: IExerciseItemProps) => {
   const { data } = useSession();
   const [favorite, setFavorite] = useState<boolean>(false);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
@@ -54,8 +41,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
     try {
       const response = await toggleFavoriteExercise(data.user.id, exercise.id);
       setFavorite(!favorite);
-      setMessageFavorited(response);
-      console.log("adicionado aos favoritos");
+      setMessageFavorited(response.message);
     } catch (error) {
       setMessageFavorited("Erro ao adicionar aos favoritos");
       console.log("erro");

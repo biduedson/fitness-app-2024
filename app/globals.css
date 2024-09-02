@@ -14,11 +14,11 @@
   }
 
   .h1{
-    @apply text-white text-7xl lg:text-[128px] tracking-[-3px]
+    @apply text-white text-7xl text-[70px] lg:text-[128px] tracking-[-3px]
   }
 
   .h2{
-    @apply text-[36px]
+    @apply text-[26px] lg:text-[36px]
   }
 
   .h3{

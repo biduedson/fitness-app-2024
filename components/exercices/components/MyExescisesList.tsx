@@ -8,8 +8,9 @@ import {
 } from "@/app/interfaces/ExercicesInterfacesProps";
 import { findUserfavoritesExercises } from "@/app/util/favoriteExercisesUser";
 import { FavoriteExercisesContext } from "@/app/_context/favoriteExercisesContext";
+import MyExerciseItem from "./MyExerciseItem";
 
-function ExerciseList({ exercises }: IExerciseListProps) {
+function MyExerciseList({ exercises }: IExerciseListProps) {
   const [dataExercises, setDataExercises] = useState(exercises);
 
   const { categoryExercises, exercisesAndComponents, setCategoryExercises } =
@@ -63,7 +64,7 @@ function ExerciseList({ exercises }: IExerciseListProps) {
       <div className="flex flex-wrap gap-4 justify-center  overflow-y-scroll [&::-webkit-scrollbar]:hidden max-h-[450px]  lg:h-auto w-auto">
         {dataExercises.map((exercise, index) => {
           return (
-            <ExerciseItem
+            <MyExerciseItem
               key={index}
               exercise={exercise}
               removedFavoriteFunction={() =>
@@ -80,4 +81,4 @@ function ExerciseList({ exercises }: IExerciseListProps) {
   );
 }
 
-export default ExerciseList;
+export default MyExerciseList;

@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-import CategoryButton from "./CategoryButton";
+import MyCategoryButton from "./MyCategoryButton";
 
 interface CategoryButtonListProps {
   id: string;
@@ -15,7 +15,7 @@ interface CategoryButtonListProps {
   }[];
 }
 
-const CategoryButtonsLIst = ({
+const MyCategoryButtonsLIst = ({
   id,
   title,
   component,
@@ -26,7 +26,7 @@ const CategoryButtonsLIst = ({
     setComponent(component);
   };
   return (
-    <div className="w-full  bg-primary-300" id={id}>
+    <div className="w-full   bg-primary-300" id={id}>
       <motion.h2
         variants={fadeIn("up", 0.2)}
         initial="hidden"
@@ -36,10 +36,10 @@ const CategoryButtonsLIst = ({
       >
         {title}
       </motion.h2>
-      <div className="flex  py-6 lg:flex-wrap items-center overflow-x-scroll lg:overflow-x-hidden  [&::-webkit-scrollbar]:hidden lg:justify-center">
+      <div className="flex lg:flex-wrap items-center overflow-x-scroll  lg:overflow-x-hidden [&::-webkit-scrollbar]:hidden lg:justify-center">
         {exercises.map((exercice, index) => {
           return (
-            <CategoryButton
+            <MyCategoryButton
               key={index}
               categoryName={exercice.name}
               index={index}
@@ -55,4 +55,4 @@ const CategoryButtonsLIst = ({
   );
 };
 
-export default CategoryButtonsLIst;
+export default MyCategoryButtonsLIst;

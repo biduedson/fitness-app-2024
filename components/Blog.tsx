@@ -69,7 +69,7 @@ const blogData = [
 
 const Blog = () => {
   return (
-    <section className="bg-primary-300 text-white py-24" id="blog">
+    <section className="bg-primary-300 text-white py-4" id="blog">
       <div className="container mx-auto">
         <motion.h2
           variants={fadeIn("up", 0.4)}

@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthProvider from "@/app/_providers/auth";
+import { UserFavoriteExerciseProvider } from "./_context/favoriteExercisesContext";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -31,12 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-gray-200">
       <body
-        className={`${oswald.variable} ${roboto.variable} w-full max-w-[1920px] mx-auto bg-white`}
+        className={`${oswald.variable} ${roboto.variable} w-full max-w-[1920px] min-h-full mx-auto bg-white`}
       >
         <AuthProvider>
-          <Header />
-          {children}
-          <Footer />
+          <UserFavoriteExerciseProvider>
+            {children}
+          </UserFavoriteExerciseProvider>
         </AuthProvider>
       </body>
     </html>

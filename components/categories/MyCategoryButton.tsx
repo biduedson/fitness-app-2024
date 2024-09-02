@@ -10,7 +10,7 @@ interface CategoryButtonProps {
   handleComponentClick: () => void;
 }
 
-const CategoryButton = ({
+const MyCategoryButton = ({
   categoryName,
   index,
   handleComponentClick,
@@ -22,13 +22,13 @@ const CategoryButton = ({
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="mt-4 px-4 hidden lg:block "
+        className="mt-4 px-4 hidden lg:block"
         key={index}
         onClick={handleComponentClick}
       >
         <CustomButton
           text={categoryName}
-          containerStyles="text-[11px]  sm:text-[14px] lg:text-[16px]  w-[120px] h-[32px] sm:w-[146px] sm:h-[42px] lg:w-[196px] lg:h-[62px]"
+          containerStyles="text-[11px] sm:text-[14px] lg:text-[16px]  w-[120px] h-[32px] sm:w-[146px] sm:h-[42px] lg:w-[196px] lg:h-[62px]"
         />
       </motion.div>
       <motion.div
@@ -36,17 +36,17 @@ const CategoryButton = ({
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="mt-4 px-4 lg:hidden"
+        className="mt-4 px-4  lg:hidden"
         key={index}
         onClick={handleComponentClick}
       >
         <CustomMobileButton
           text={categoryName}
-          containerStyles="text-[11px]  sm:text-[14px] lg:text-[16px] "
+          containerStyles="text-[11px]  sm:text-[14px] lg:text-[16px]"
         />
       </motion.div>
     </>
   );
 };
 
-export default CategoryButton;
+export default MyCategoryButton;

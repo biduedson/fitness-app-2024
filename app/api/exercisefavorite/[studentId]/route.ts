@@ -5,28 +5,51 @@ import { authOptions } from '@/app/_lib/auth';
 
 
 export async function GET(req: NextRequest, { params }: { params: { studentId: string } }) {
+  const session = await getServerSession( authOptions);
     try {
+       if(!session?.user.student){
+         return NextResponse.json({message: "Nao autorizado" }, { status: 401}) 
+      }
 
+      if(session?.user.student?.id !== params.studentId ){
+         return NextResponse.json({message: "Nao autorizado" }, { status: 401}) 
+       }
         if(req.method !== "GET"){
       return NextResponse.json({message: "Metodo incorreto" }, { status: 401})  
-    }
+       }
         const { studentId } = params;
 
         if (!studentId) {
             return NextResponse.json({ error: "studentId é necessário." }, { status: 400 });
         }
 
-        const result = await db.favoriteExercise.findMany({
-            where: {
-                studentId: studentId,
+        const result = await db.exerciseCategory.findMany({
+           include: {
+           exercises: {
+              where: {
+        favoriteByStudents: {
+          some: {
+            studentId: studentId, // Filtrar pelo studentId específico
+          },
+        },
+      },
+      include: {
+        category: true,
+        favoriteByStudents: {
+          where: {
+            studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
+          },
+          include: {
+            student: {
+              include: {
+                user: true,
+              },
             },
-            include: {
-                exercise: {
-                    include: {
-                        category: true,
-                    },
-                },
-            },
+          },
+        },
+      },
+    },
+  },
         });
 
         return NextResponse.json(result, { status: 200 });
