@@ -143,11 +143,12 @@ model AdvancedExercise {
 }
 
 model Exercise {
-  id         String           @id @default(cuid()) // ID único do exercício
-  name       String // Nome do exercício
-  imageUrl   String? // URL da imagem do exercício
-  categoryId String
-  category   ExerciseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  id          String           @id @default(cuid()) // ID único do exercício
+  name        String // Nome do exercício
+  imageUrl    String? // URL da imagem do exercício
+  description String
+  categoryId  String
+  category    ExerciseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   favoriteByStudents FavoriteExercise[] // Relacionamento com alunos que favoritaram
 

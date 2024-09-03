@@ -37,6 +37,7 @@ const Exercicies = () => {
   const [categoryExercises, setCategoryExercises] = useState<
     FavoriteCategoryAndExercisesByStudentsProps[]
   >([]);
+
   const [component, setComponent] = useState<ReactElement>(<></>);
   const handleComponentClick = (component: ReactElement) => {
     setComponent(component);
@@ -52,10 +53,12 @@ const Exercicies = () => {
               "Content-Type": "application/json",
             },
           });
+
           if (!response.ok) {
             throw new Error(`Erro HTTP! status: ${response.status}`);
           }
           const data = await response.json();
+
           setCategoryExercises(data);
         } catch (error) {
           console.log("Erro interno do servidor: ", error);

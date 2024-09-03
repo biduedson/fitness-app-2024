@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { FaHeart } from "react-icons/fa";
 import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
 import Link from "next/link";
+import ExerciseModal from "@/components/ExerciseModal";
 
 const ExerciseItem = ({
   exercise,
@@ -18,6 +19,7 @@ const ExerciseItem = ({
   const [favorite, setFavorite] = useState<boolean>(false);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
   const [messageVisible, setMessageVisible] = useState<boolean>(false);
+  const [openModal, setOpemModal] = useState(false);
 
   /*para evitar varias renderizações, se  usa  o useeffect para antes de carregar  
 a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
@@ -53,6 +55,13 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       className="relative flex flex-col items-center justify-center  "
       key={exercise.id}
     >
+      <ExerciseModal
+        opemModal={openModal}
+        imageUrl={exercise.imageUrl as string}
+        exerciseName={exercise.name}
+        description={exercise.description}
+        setOpenModal={setOpemModal}
+      />
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
@@ -64,12 +73,15 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
           src={exercise.imageUrl!}
           fill
           alt="exercice"
-          className="relative object-cover rounded-t-lg"
+          className=" object-cover rounded-t-lg"
         />
         {/*para sobrepor a imagem e escurece-la*/}
-        <Link href={`/exercise/${exercise.name}`}>
-          <div className="absolute inset-0 bg-black opacity-30"></div>
-        </Link>
+
+        <div
+          className="absolute inset-0 bg-black opacity-30"
+          onClick={() => setOpemModal(!openModal)}
+        ></div>
+
         {data?.user && (
           <motion.div
             variants={fadeIn("up", 0.2)}
@@ -97,26 +109,26 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
+        className=" relative text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
              bg-accent flex items-center justify-center "
       >
         {exercise.name!}
-      </motion.p>
-      {messageVisible && (
-        <motion.p
-          variants={fadeIn("up", 0.1)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          onAnimationComplete={() =>
-            setTimeout(() => setMessageVisible(false), 400)
-          }
-          className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
+        {messageVisible && (
+          <motion.p
+            variants={fadeIn("up", 0.1)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.2 }}
+            onAnimationComplete={() =>
+              setTimeout(() => setMessageVisible(false), 400)
+            }
+            className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
          bg-accent flex items-center justify-center "
-        >
-          {messageFavorited}
-        </motion.p>
-      )}
+          >
+            {messageFavorited}
+          </motion.p>
+        )}
+      </motion.p>
     </div>
   );
 };
