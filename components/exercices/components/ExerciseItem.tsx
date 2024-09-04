@@ -61,24 +61,31 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         exerciseName={exercise.name}
         description={exercise.description}
         setOpenModal={setOpemModal}
+        favorite={favorite}
+        favoriteClick={() => {
+          setMessageVisible(!messageVisible);
+          handleFavoriteClick();
+        }}
+        setMessageVisible={setMessageVisible}
+        messageVisible={messageVisible}
       />
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[300px] lg:h-[300px] rounded-t-lg text-white "
+        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] rounded-t-lg text-white "
       >
         <Image
           src={exercise.imageUrl!}
           fill
           alt="exercice"
-          className=" object-cover rounded-t-lg"
+          className=" object-cover rounded-t-lg "
         />
         {/*para sobrepor a imagem e escurece-la*/}
 
         <div
-          className="absolute inset-0 bg-black opacity-30"
+          className="absolute inset-0 bg-black opacity-30 cursor-pointer"
           onClick={() => setOpemModal(!openModal)}
         ></div>
 
@@ -109,7 +116,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className=" relative text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
+        className=" relative text-sm text-primary-300 font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
              bg-accent flex items-center justify-center "
       >
         {exercise.name!}
@@ -122,7 +129,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
             onAnimationComplete={() =>
               setTimeout(() => setMessageVisible(false), 400)
             }
-            className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
+            className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
          bg-accent flex items-center justify-center "
           >
             {messageFavorited}

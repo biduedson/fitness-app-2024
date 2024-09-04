@@ -42,6 +42,7 @@ const Exercicies = () => {
   const handleComponentClick = (component: ReactElement) => {
     setComponent(component);
   };
+
   useEffect(() => {
     const fetchExercises = async () => {
       if (data?.user.student) {

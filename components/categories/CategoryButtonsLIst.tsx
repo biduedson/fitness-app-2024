@@ -36,7 +36,7 @@ const CategoryButtonsLIst = ({
       >
         {title}
       </motion.h2>
-      <div className="flex  py-2 lg:py-6 lg:flex-wrap items-center overflow-x-scroll lg:overflow-x-hidden  [&::-webkit-scrollbar]:hidden lg:justify-center">
+      <div className="flex  py-2 lg:py-2 lg:flex-wrap items-center overflow-x-scroll lg:overflow-x-hidden  [&::-webkit-scrollbar]:hidden lg:justify-center">
         {exercises.map((exercice, index) => {
           return (
             <CategoryButton

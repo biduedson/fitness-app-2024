@@ -37,6 +37,16 @@ const config: Config = {
         },
         accent:'#d4000d',
     },
+    keyframes: {
+        slideDownAndFadeOut: {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '70%': { transform: 'translateY(50%)', opacity: '0.5' },
+          '100%': { transform: 'translateY(100%)', opacity: '0' },
+        },
+      },
+      animation: {
+        slideDownAndFadeOut: 'slideDownAndFadeOut 2.5s ease-in-out forwards',
+      },
   },
   },
   plugins: [],

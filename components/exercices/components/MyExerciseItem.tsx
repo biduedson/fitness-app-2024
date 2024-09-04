@@ -5,9 +5,10 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../lib/variants";
 import { useSession } from "next-auth/react";
-import { FaHeart } from "react-icons/fa";
 import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
 import Link from "next/link";
+import { MdDeleteForever } from "react-icons/md";
+import ExerciseModal from "@/components/ExerciseModal";
 
 const MyExerciseItem = ({
   exercise,
@@ -28,6 +29,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       setFavorite(favoritedExercise);
     }
   }, [data, exercise.favoriteByStudents]);
+  const [openModal, setOpemModal] = useState(false);
 
   const handleFavoriteClick = async () => {
     if (!data?.user?.id) {
@@ -55,12 +57,24 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       className="relative flex flex-col items-center justify-center  "
       key={exercise.id}
     >
+      <ExerciseModal
+        opemModal={openModal}
+        imageUrl={exercise.imageUrl as string}
+        exerciseName={exercise.name}
+        description={exercise.description}
+        setOpenModal={setOpemModal}
+        favorite={favorite}
+        favoriteClick={() => {
+          setMessageVisible(!messageVisible);
+          handleFavoriteClick();
+        }}
+      />
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[300px] lg:h-[300px] rounded-t-lg text-white "
+        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] rounded-t-lg text-white "
       >
         <Image
           src={exercise.imageUrl!}
@@ -70,9 +84,12 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         />
 
         {/*para sobrepor a imagem e escurece-la*/}
-        <Link href={`/exercise/${exercise.name}`}>
-          <div className="absolute inset-0 bg-black opacity-30"></div>
-        </Link>
+
+        <div
+          className="absolute inset-0 bg-black opacity-30"
+          onClick={() => setOpemModal(!openModal)}
+        ></div>
+
         {data?.user && (
           <motion.div
             variants={fadeIn("up", 0.2)}
@@ -85,13 +102,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
               handleFavoriteClick();
             }}
           >
-            <FaHeart
-              className={
-                favorite
-                  ? "text-accent lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
-                  : "text-white lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
-              }
-            />
+            <MdDeleteForever className="text-primary-300 lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]" />
           </motion.div>
         )}
       </motion.div>
@@ -100,7 +111,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[300px] rounded-b-lg
+        className="text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px]  rounded-b-lg
              bg-accent flex items-center justify-center "
       >
         {exercise.name!}

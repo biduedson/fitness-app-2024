@@ -27,7 +27,6 @@ const MyCategoryButtonsLIst = ({
   exercises,
 }: CategoryButtonListProps) => {
   const [currentComponent, setCurrentComponent] = useState<ReactElement>(<></>);
-  console.log(exercises);
   return (
     <div className="w-full   bg-primary-300 overflow-y-hidden" id={id}>
       <motion.h2
