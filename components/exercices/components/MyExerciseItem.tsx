@@ -74,19 +74,19 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] rounded-t-lg text-white "
+        className="relative  h-[150px] w-[150px]   sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] rounded-t-lg text-white "
       >
         <Image
           src={exercise.imageUrl!}
           fill
           alt="exercice"
-          className="relative object-cover rounded-t-lg"
+          className="relative object-cover rounded-t-lg "
         />
 
         {/*para sobrepor a imagem e escurece-la*/}
 
         <div
-          className="absolute inset-0 bg-black opacity-30"
+          className="absolute inset-0 bg-black opacity-30 cursor-pointer"
           onClick={() => setOpemModal(!openModal)}
         ></div>
 

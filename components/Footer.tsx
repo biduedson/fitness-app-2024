@@ -45,7 +45,7 @@ const footerItem = {
 };
 const Footer = () => {
   return (
-    <footer className="bg-primary-300 pt-24" id="contact">
+    <footer className="bg-primary-200 pt-24" id="contact">
       <div className="container mx-auto pb-24">
         <motion.div
           variants={footerContainerVariant}

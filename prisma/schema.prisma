@@ -102,6 +102,7 @@ model Student {
 model ExerciseCategory {
   id        String     @id @default(cuid()) // ID único da categoria
   name      String // Nome da categoria (ex.: "Abdominais", "Antebraço", etc.)
+  imageUrl  String?
   exercises Exercise[] // Adicionando o relacionamento com Exercise
 
   beginnerExercises     BeginnerExercise[]

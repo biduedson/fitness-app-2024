@@ -27,7 +27,6 @@ const ExerciseModal = ({
   messageVisible,
   setMessageVisible,
 }: ExerciseModalProps) => {
-  console.log(messageVisible);
   return (
     <motion.div
       variants={fadeIn(opemModal ? "up" : "down", 0.1)}

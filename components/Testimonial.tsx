@@ -57,7 +57,7 @@ import { fadeIn } from "@/lib/variants";
 
 const Testimonial = () => {
   return (
-    <section className="py-12 xl:py-28" id="testimonial">
+    <section className="py-12 xl:py-28 bg-white" id="testimonial">
       <div className="container mx-auto">
         <motion.h2
           variants={fadeIn("up", 0.4)}

@@ -26,37 +26,19 @@ const ExercisesFooter = ({ url, linkName }: MyExercisesfooterProps) => {
       className={`${headrActive ? "h-[100px]" : "h-[124px]"} 
     fixed max-w-[1920px] bottom-0  w-full bg-primary-200 h-[100px] transition-all z-50`}
     >
-      <div className="container mx-auto h-full flex items-center justify-between">
+      <div className="container mx-auto h-full flex items-center justify-center">
         {/*hide/open menu button*/}
         {data?.user.student && (
-          <div className="flex gap-4 items-center w-full justify-between">
-            <div className="flex flex-col items-center ">
-              <Link
-                href={url}
-                className=" bg-accent  rounded-full flex items-center justify-center
-                 w-14 h-14 text-white transition-all hover:bg-white/10 "
-              >
-                <Image
-                  src="/assets/dunbels.png"
-                  alt="dunbels"
-                  width={40}
-                  height={40}
-                />
-              </Link>
-              <p className="text-white text-sm text-center ">{linkName}</p>
-            </div>
-            <div
-              className="flex flex-col items-center"
-              onClick={handleSigninClick}
-            >
-              <div
-                className=" bg-accent  rounded-full flex items-center justify-center
-                 w-14 h-14 text-white transition-all hover:bg-white/10 "
-              >
-                <FaHome className="text-primary-300 text-[40px]" />
-              </div>
-              <p className="text-white text-sm text-center ">inicio</p>
-            </div>
+          <div className="flex gap-4 items-center w-full justify-center">
+            {/* logo */}
+            <Link href="">
+              <Image
+                src={"/assets/img/logo.png"}
+                width={150}
+                height={55}
+                alt=""
+              />
+            </Link>
           </div>
         )}
       </div>

@@ -1,100 +1,58 @@
-"use client";
-import { Prisma } from "@prisma/client";
-import { useSession } from "next-auth/react";
-import { ReactElement, useContext, useEffect, useState } from "react";
-import ExercisesComponent from "@/components/exercices/ExercisesComponent";
+"use server";
 import { notFound } from "next/navigation";
-import MyExerciseList from "@/components/exercices/components/MyExescisesList";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import ExercisesFooter from "../../components/ExercisesFoter";
 import ExercisesHeader from "@/components/ExercisesHeader";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../_lib/auth";
+import MyCategoryButtonsLIst from "@/components/categories/MyCategoryButtonList";
+import { db } from "../_lib/prisma";
 
-interface FavoriteCategoryAndExercisesByStudentsProps
-  extends Prisma.ExerciseCategoryGetPayload<{
-    include: {
-      exercises: {
-        include: {
-          category: true;
-          favoriteByStudents: {
-            include: {
-              student: {
-                include: {
-                  user: true;
-                };
-              };
-            };
-          };
-        };
-      };
-    };
-  }> {}
-const MyExercises = () => {
-  const { data } = useSession();
-  const [categoryExercises, setCategoryExercises] = useState<
-    FavoriteCategoryAndExercisesByStudentsProps[]
-  >([]);
-  let exercisesAndComponents: { name: string; component: ReactElement }[] = [];
-  const [component, setComponent] = useState<ReactElement>(<></>);
-  const handleComponentClick = (component: ReactElement) => {
-    setComponent(component);
-  };
-  useEffect(() => {
-    const fetchExercises = async () => {
-      if (data?.user.student) {
-        const id = data?.user.student?.id;
-        try {
-          const response = await fetch(`/api/exercisefavorite/${id}`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          if (!response.ok) {
-            throw new Error(`Erro HTTP! status: ${response.status}`);
-          }
-          const data = await response.json();
-          setCategoryExercises(data);
-        } catch (error) {
-          console.log("Erro interno do servidor: ", error);
-        }
-      }
-    };
-    fetchExercises();
-  }, [data]);
-  if (!data?.user.student) {
-    return (
-      <div className=" bg-primary-300 flex items-center justify-center">
-        <h1 className="h1 animate-pulse flex gap-2">
-          <AiOutlineLoading3Quarters className="animate-spin" />
-          Loading...
-        </h1>
-      </div>
-    );
-  }
+const MyExercises = async () => {
+  const data = await getServerSession(authOptions);
 
   if (!data?.user.student) {
     return notFound();
   }
-
-  categoryExercises.map((category) => {
-    exercisesAndComponents.push({
-      name: category.name,
-      component: (
-        <MyExerciseList exercises={category.exercises} key={category.id} />
-      ),
-    });
+  const studentId = data.user.student.id;
+  const categoryAndMyExercises = await db.exerciseCategory.findMany({
+    include: {
+      exercises: {
+        where: {
+          favoriteByStudents: {
+            some: {
+              studentId: studentId, // Filtrar pelo studentId específico
+            },
+          },
+        },
+        include: {
+          category: true,
+          favoriteByStudents: {
+            where: {
+              studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
+            },
+            include: {
+              student: {
+                include: {
+                  user: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   });
 
   return (
     <>
-      <ExercisesHeader />
+      <ExercisesHeader title="meus exercícios favoritos" />
       <section
-        className=" w-full flex  justify-center bg-primary-300 mt-28"
+        className=" w-full flex  justify-center bg-primary-300 px-4 lg:px-0"
         id="myexercises"
       >
-        <ExercisesComponent
+        <MyCategoryButtonsLIst
           id="myexercises"
-          exercisesAndComponents={exercisesAndComponents}
+          categoryAndMyExercises={categoryAndMyExercises}
         />
       </section>
       <ExercisesFooter url="/exercises" linkName="Todos os exercícios" />

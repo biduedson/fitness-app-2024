@@ -8,21 +8,23 @@ import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import UserAvatar from "./UserAvatar";
+import UserProfile from "./UserProfile";
 
 const Header = () => {
   const { data } = useSession();
   const router = useRouter();
   const [headrActive, setHeaderActive] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const [openProfile, setopenProfile] = useState(false);
+
+  const [isLoading, setIsLoadin] = useState(false);
 
   const handleSigninClick = () => {
-    signIn().then(() => {
-      router.replace("/");
-    });
+    signIn("facebook", { callbackUrl: "/" });
   };
+
   const handleSigninOutClick = () => {
-    signOut();
+    signOut({ callbackUrl: "/" });
   };
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const Header = () => {
   return (
     <header
       className={`${headrActive ? "h-[100px]" : "h-[124px]"} 
-    fixed max-w-[1920px] top-0  w-full bg-primary-200 h-[100px] transition-all z-50`}
+    fixed max-w-[1920px] top-0  w-full bg-primary-200 h-[100px] transition-all z-50 shadow-lg  shadow-primary-300`}
     >
       <div className="container mx-auto h-full flex items-center justify-between">
         {/* logo */}
@@ -71,40 +73,42 @@ const Header = () => {
         />
 
         {/*hide/open menu button*/}
-        <div className="flex items-center gap-4">
-          {/*avatar login user*/}
 
-          {data?.user && (
-            <UserAvatar
-              imageUrl={data.user.image as string}
-              name={data.user.name as string}
-            />
+        {/*login & register buttons*/}
+        <div className="text-white flex items-center gap-4">
+          {!data?.user && (
+            <button
+              className="w-[180px] h-[40px] flex items-center justify-center gap-2 border-[1px] p-2 
+                 border-white rounded-md  text-[10px] uppercase font-light"
+              onClick={handleSigninClick}
+            >
+              <div className="relative w-[20px] h-[20px]">
+                <Image
+                  src="/assets/img/facebookIcon.png"
+                  alt="facebook login"
+                  fill
+                  className="absolute object-cover"
+                />
+              </div>
+
+              {!isLoading ? " Login com facebook" : "Loading..."}
+            </button>
           )}
-          {/*login & register buttons*/}
-          <div className="text-white flex items-center gap-4">
-            {data?.user ? (
-              <button
-                className="hover:text-accent transition-all text-base uppercase font-medium"
-                onClick={handleSigninOutClick}
-              >
-                Logout
-              </button>
-            ) : (
-              <button
-                className="hover:text-accent transition-all text-base uppercase font-medium"
-                onClick={handleSigninClick}
-              >
-                Login
-              </button>
-            )}
-          </div>
-          <button
-            className="text-white xl:hidden"
-            onClick={() => setOpenNav(!openNav)}
-          >
-            <MdMenu className="text-4xl" />
-          </button>
         </div>
+        {/*avatar login user*/}
+        {data?.user && (
+          <UserProfile
+            imageUrl={data.user.image as string}
+            openNav={openNav}
+            setOpenNav={setOpenNav}
+          />
+        )}
+        <button
+          className="text-white xl:hidden"
+          onClick={() => setOpenNav(!openNav)}
+        >
+          <MdMenu className="text-4xl" />
+        </button>
       </div>
     </header>
   );

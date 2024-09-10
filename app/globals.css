@@ -14,7 +14,7 @@
   }
 
   .h1{
-    @apply text-white text-7xl text-[70px] lg:text-[128px] tracking-[-3px]
+    @apply text-white text-7xl text-[60px] lg:text-[128px] tracking-[-3px]
   }
 
   .h2{

@@ -7,14 +7,9 @@ import { fadeIn } from "../../../lib/variants";
 import { useSession } from "next-auth/react";
 import { FaHeart } from "react-icons/fa";
 import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
-import Link from "next/link";
 import ExerciseModal from "@/components/ExerciseModal";
 
-const ExerciseItem = ({
-  exercise,
-  addFavoriteFunction,
-  removedFavoriteFunction,
-}: IExerciseItemProps) => {
+const ExerciseItem = ({ exercise }: IExerciseItemProps) => {
   const { data } = useSession();
   const [favorite, setFavorite] = useState<boolean>(false);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
@@ -51,10 +46,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
     }
   };
   return (
-    <div
-      className="relative flex flex-col items-center justify-center  "
-      key={exercise.id}
-    >
+    <div key={exercise.id}>
       <ExerciseModal
         opemModal={openModal}
         imageUrl={exercise.imageUrl as string}
@@ -74,7 +66,8 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] rounded-t-lg text-white "
+        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] 
+        lg:h-[250px] rounded-t-lg text-white"
       >
         <Image
           src={exercise.imageUrl!}
@@ -121,7 +114,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       >
         {exercise.name!}
         {messageVisible && (
-          <motion.p
+          <motion.span
             variants={fadeIn("up", 0.1)}
             initial="hidden"
             whileInView={"show"}
@@ -133,7 +126,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
          bg-accent flex items-center justify-center "
           >
             {messageFavorited}
-          </motion.p>
+          </motion.span>
         )}
       </motion.p>
     </div>

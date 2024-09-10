@@ -61,7 +61,7 @@ const trainerData = [
 
 const Team = () => {
   return (
-    <section className="py-12 xl:h-[110vh]" id="team">
+    <section className="py-12 xl:h-[110vh] bg-white" id="team">
       <div
         className="container mx-auto h-full flex flex-col items-center
       justify-center"

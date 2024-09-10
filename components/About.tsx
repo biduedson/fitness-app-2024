@@ -31,7 +31,7 @@ const featured = [
 
 const About = () => {
   return (
-    <section className="pt-8 pb-14 lg:pt-16 lg:pb-28" id="about">
+    <section className="pt-8 pb-14 lg:pt-16 bg-white lg:pb-28" id="about">
       <div className="container mx-auto">
         <div className="flex flex-col items-center gap-2 mb-8">
           <motion.h2

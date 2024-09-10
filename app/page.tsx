@@ -6,7 +6,6 @@ import Hero from "@/components/Hero";
 import Membership from "@/components/Membership";
 import Team from "@/components/Team";
 import Testimonial from "@/components/Testimonial";
-import Exercices from "@/components/Exercices";
 import { db } from "./_lib/prisma";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
