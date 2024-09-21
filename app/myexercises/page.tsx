@@ -55,7 +55,6 @@ const MyExercises = async () => {
           categoryAndMyExercises={categoryAndMyExercises}
         />
       </section>
-      <ExercisesFooter url="/exercises" linkName="Todos os exercícios" />
     </>
   );
 };

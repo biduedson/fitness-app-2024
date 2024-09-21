@@ -46,7 +46,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
     }
   };
   return (
-    <div key={exercise.id}>
+    <>
       <ExerciseModal
         opemModal={openModal}
         imageUrl={exercise.imageUrl as string}
@@ -61,75 +61,77 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         setMessageVisible={setMessageVisible}
         messageVisible={messageVisible}
       />
-      <motion.div
-        variants={fadeIn("up", 0.1)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] 
+      <div key={exercise.id}>
+        <motion.div
+          variants={fadeIn("up", 0.1)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="relative  h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] 
         lg:h-[250px] rounded-t-lg text-white"
-      >
-        <Image
-          src={exercise.imageUrl!}
-          fill
-          alt="exercice"
-          className=" object-cover rounded-t-lg "
-        />
-        {/*para sobrepor a imagem e escurece-la*/}
+        >
+          <Image
+            src={exercise.imageUrl!}
+            fill
+            alt="exercice"
+            className=" object-cover rounded-t-lg "
+          />
+          {/*para sobrepor a imagem e escurece-la*/}
 
-        <div
-          className="absolute inset-0 bg-black opacity-30 cursor-pointer"
-          onClick={() => setOpemModal(!openModal)}
-        ></div>
+          <div
+            className="absolute inset-0 bg-black opacity-30 cursor-pointer"
+            onClick={() => setOpemModal(!openModal)}
+          ></div>
 
-        {data?.user && (
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: false, amount: 0.2 }}
-            className="absolute right-2 top-2 flex h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9 cursor-pointer  items-center justify-center rounded-full  bg-gray-500 hover:bg-gray-700 "
-            onClick={() => {
-              setMessageVisible(!messageVisible);
-              handleFavoriteClick();
-            }}
-          >
-            <FaHeart
-              className={
-                favorite
-                  ? "text-accent lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
-                  : "text-white lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
-              }
-            />
-          </motion.div>
-        )}
-      </motion.div>
-      <motion.p
-        variants={fadeIn("up", 0.3)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className=" relative text-sm text-primary-300 font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
+          {data?.user && (
+            <motion.div
+              variants={fadeIn("up", 0.2)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+              className="absolute right-2 top-2 flex h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9 cursor-pointer  items-center justify-center rounded-full  bg-gray-500 hover:bg-gray-700 "
+              onClick={() => {
+                setMessageVisible(!messageVisible);
+                handleFavoriteClick();
+              }}
+            >
+              <FaHeart
+                className={
+                  favorite
+                    ? "text-accent lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
+                    : "text-white lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]"
+                }
+              />
+            </motion.div>
+          )}
+        </motion.div>
+        <motion.p
+          variants={fadeIn("up", 0.3)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className=" relative text-sm text-primary-300 font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
              bg-accent flex items-center justify-center "
-      >
-        {exercise.name!}
-        {messageVisible && (
-          <motion.span
-            variants={fadeIn("up", 0.1)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: false, amount: 0.2 }}
-            onAnimationComplete={() =>
-              setTimeout(() => setMessageVisible(false), 400)
-            }
-            className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
+        >
+          {exercise.name!}
+          {messageVisible && (
+            <motion.span
+              variants={fadeIn("up", 0.1)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+              onAnimationComplete={() =>
+                setTimeout(() => setMessageVisible(false), 400)
+              }
+              className="absolute bottom-0  text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
          bg-accent flex items-center justify-center "
-          >
-            {messageFavorited}
-          </motion.span>
-        )}
-      </motion.p>
-    </div>
+            >
+              {messageFavorited}
+            </motion.span>
+          )}
+        </motion.p>
+      </div>
+    </>
   );
 };
 

@@ -25,7 +25,7 @@ const ExercisesHeader = ({ title }: { title: string }) => {
   return (
     <header
       className={`${headrActive ? "h-[100px]" : "h-[124px]"} 
-    max-w-[1920px] top-0  w-full bg-primary-200 h-[100px] transition-all z-50 px-4`}
+   fixed max-w-[1920px] top-0  w-full bg-primary-200 h-[100px] transition-all z-50 px-4`}
     >
       <div className="container mx-auto h-full flex items-center justify-between ">
         <div className="flex flex-col items-center" onClick={handleHomeClick}>

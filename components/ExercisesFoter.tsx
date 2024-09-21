@@ -22,10 +22,7 @@ const ExercisesFooter = ({ url, linkName }: MyExercisesfooterProps) => {
   };
 
   return (
-    <header
-      className={`${headrActive ? "h-[100px]" : "h-[124px]"} 
-    fixed max-w-[1920px] bottom-0  w-full bg-primary-200 h-[100px] transition-all z-50`}
-    >
+    <header className="fixed max-w-[1920px] bottom-0  w-full bg-primary-200 h-[80px] transition-all z-50">
       <div className="container mx-auto h-full flex items-center justify-center">
         {/*hide/open menu button*/}
         {data?.user.student && (
@@ -34,8 +31,8 @@ const ExercisesFooter = ({ url, linkName }: MyExercisesfooterProps) => {
             <Link href="">
               <Image
                 src={"/assets/img/logo.png"}
-                width={150}
-                height={55}
+                width={120}
+                height={4}
                 alt=""
               />
             </Link>

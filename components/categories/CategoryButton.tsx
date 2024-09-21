@@ -1,30 +1,43 @@
-import React, { ReactElement } from "react";
+"use client";
+import React, { ReactElement, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import CustomButton from "../CustomButton";
 import CustomMobileButton from "../CustomMobileButton";
 import MobileExercisesGroup from "../MobileExercisesGroup";
+import ExercisesListMotal from "../ExercisesListMotal";
 
 interface CategoryButtonProps {
-  img: string;
   categoryName: string;
+  img: string;
   component: ReactElement;
-  handleComponentClick: () => void;
 }
 
 const CategoryButton = ({
   img,
   categoryName,
   component,
-  handleComponentClick,
 }: CategoryButtonProps) => {
+  const [openModal, setOpenModel] = useState(false);
   return (
-    <MobileExercisesGroup
-      img={img}
-      categoryName={categoryName}
-      handleComponentClick={handleComponentClick}
-      component={component}
-    />
+    <>
+      <button
+        className="flex items-center justify-center gap-3 rounded-full text-white/40  hover:text-accent bg-primary-200 shadow-accent/50 px-4 py-4 shadow-md
+    lg:h-[54px] lg:-[152px] lg:px-3 lg:py4"
+        onClick={() => setOpenModel(!openModal)}
+      >
+        <span className="text-sm font-semibold uppercase lg:text-xs ">
+          {categoryName}
+        </span>
+      </button>
+      <ExercisesListMotal
+        component={component}
+        openModal={openModal}
+        setOpenModal={setOpenModel}
+        categoryName={categoryName}
+        imageUrl={img}
+      />
+    </>
   );
 };
 

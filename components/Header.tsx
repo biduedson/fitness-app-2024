@@ -6,26 +6,14 @@ import Nav from "./Nav";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import UserProfile from "./UserProfile";
+import ButtonLogin from "./ButtonLogin";
 
 const Header = () => {
   const { data } = useSession();
-  const router = useRouter();
   const [headrActive, setHeaderActive] = useState(false);
   const [openNav, setOpenNav] = useState(false);
-  const [openProfile, setopenProfile] = useState(false);
-
-  const [isLoading, setIsLoadin] = useState(false);
-
-  const handleSigninClick = () => {
-    signIn("facebook", { callbackUrl: "/" });
-  };
-
-  const handleSigninOutClick = () => {
-    signOut({ callbackUrl: "/" });
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,31 +57,14 @@ const Header = () => {
         {/* desktop nav - hidden on small diveces*/}
         <Nav
           containerStyles="py-12 flex gap-4 text-white text-base uppercase font-medium 
-        transition-all hidden xl:flex"
+        transition-all hidden lg:flex"
         />
 
         {/*hide/open menu button*/}
 
         {/*login & register buttons*/}
         <div className="text-white flex items-center gap-4">
-          {!data?.user && (
-            <button
-              className="w-[180px] h-[40px] flex items-center justify-center gap-2 border-[1px] p-2 
-                 border-white rounded-md  text-[10px] uppercase font-light"
-              onClick={handleSigninClick}
-            >
-              <div className="relative w-[20px] h-[20px]">
-                <Image
-                  src="/assets/img/facebookIcon.png"
-                  alt="facebook login"
-                  fill
-                  className="absolute object-cover"
-                />
-              </div>
-
-              {!isLoading ? " Login com facebook" : "Loading..."}
-            </button>
-          )}
+          {!data?.user && <ButtonLogin />}
         </div>
         {/*avatar login user*/}
         {data?.user && (
@@ -104,7 +75,7 @@ const Header = () => {
           />
         )}
         <button
-          className="text-white xl:hidden"
+          className="text-white lg:hidden"
           onClick={() => setOpenNav(!openNav)}
         >
           <MdMenu className="text-4xl" />

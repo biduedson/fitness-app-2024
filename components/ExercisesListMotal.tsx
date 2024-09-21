@@ -26,11 +26,11 @@ function ExercisesListMotal({
       viewport={{ once: false, amount: 0.2 }}
       className={
         openModal
-          ? "fixed mt-24  z-20 w-full h-ful inset-0 bg-primary-300 lg:mx-auto lg:flex items-center justify-center"
-          : "hidden"
+          ? " fixed mt-[124px] lg:mt-0 z-40 lg:z-50 w-full h-ful inset-0 bg-primary-300 "
+          : "hidden "
       }
     >
-      <div className="relative flex items-end w-full h-[200px] ">
+      <div className="relative flex items-end w-full h-[200px] z-30 ">
         <Image
           src={imageUrl}
           fill
@@ -43,7 +43,7 @@ function ExercisesListMotal({
         >
           <IoCloseSharp
             onClick={() => setOpenModal(!openModal)}
-            className=" text-accent  w-[30px] h-[30px]"
+            className=" text-accent   w-[30px] h-[30px]"
           />
         </div>
         <div className="flex items-center w-[181px] h-[43px] bg-white/5 p-2 rounded-bl-[14px] backdrop-blur-[4px]">

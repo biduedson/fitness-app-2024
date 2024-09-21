@@ -3,6 +3,7 @@
 import { useSwiper } from "swiper/react";
 
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
+import { ReactElement } from "react";
 
 const SwiperNavButtons = ({
   containerStyles,
@@ -19,6 +20,7 @@ const SwiperNavButtons = ({
       <button className={`${btnStyles}`} onClick={() => swiper.slidePrev()}>
         <PiCaretLeftBold className={`${iconStyles}`} />
       </button>
+
       <button className={`${btnStyles}`} onClick={() => swiper.slideNext()}>
         <PiCaretRightBold className={`${iconStyles}`} />
       </button>

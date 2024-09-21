@@ -11,25 +11,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default async function Home() {
-  const categories = await db.exerciseCategory.findMany({
-    include: {
-      exercises: {
-        include: {
-          category: true,
-          favoriteByStudents: {
-            include: {
-              student: {
-                include: {
-                  user: true,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  });
-
   return (
     <main>
       <Header />

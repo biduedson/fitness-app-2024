@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import ExercisesListMotal from "./ExercisesListMotal";
-import { ReactElement, useState } from "react";
+import React, { ReactElement, useState } from "react";
 const MobileExercisesGroup = ({
   categoryName,
   img,
@@ -13,17 +13,20 @@ const MobileExercisesGroup = ({
   categoryName: string;
   img: string;
   component: ReactElement;
+
   handleComponentClick: () => void;
 }) => {
   const [openModal, setOpemModel] = useState(false);
   return (
-    <div className="w-full flex items-center justify-center">
+    <div className="w-full flex lg: flex-col items-center justify-center lg:z-10  ">
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="relative flex items-end w-[400px] sm:w-[640px] h-[127px] sm:h-[200px]  "
+        className="relative flex items-end w-[400px] sm:w-[640px] h-[127px] 
+        sm:h-[200px] lg:w-[1204px] lg:h-[400px] cursor-pointer lg:z-50 
+        "
         onClick={() => setOpemModel(!openModal)}
       >
         <Image

@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import { db } from "../_lib/prisma";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 const Exercicies = async () => {
   const data = await getServerSession(authOptions);
@@ -37,13 +38,12 @@ const Exercicies = async () => {
   return (
     <>
       <ExercisesHeader title="exercícios" />
-      <section className="overflow-y-hiddne w-full  h-full flex  justify-center bg-primary-300 px-4 lg:px-0">
+      <section className=" w-full  h-full flex flex-col   justify-center bg-primary-300 px-4 lg:px-0">
         <CategoryButtonsLIst
           id="exercises"
           categoryAndExercises={categoryExercises}
         />
       </section>
-      <ExercisesFooter url="/myexercises" linkName="Exercícios favoritos" />
     </>
   );
 };

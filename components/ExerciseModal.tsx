@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
+import CustomButton from "./CustomButton";
 
 interface ExerciseModalProps {
   opemModal: boolean;
@@ -29,74 +30,104 @@ const ExerciseModal = ({
 }: ExerciseModalProps) => {
   return (
     <motion.div
-      variants={fadeIn(opemModal ? "up" : "down", 0.1)}
+      variants={fadeIn("down", 0.1)}
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
       className={
         opemModal
-          ? "fixed mt-24  z-20 w-full h-ful inset-0 bg-primary-300 lg:mx-auto lg:flex items-center justify-center"
+          ? "fixed mt-24 lg:mt-0  z-50 w-full h-ful inset-0 bg-primary-300 lg:mx-auto lg:flex items-center justify-center"
           : "hidden"
       }
     >
-      <div className="w-full h-full flex flex-col lg:flex-row items-center lg:w-[800px] lg:gap-4  ">
-        <div className="relative w-full h-[350px] lg:w-[400px] lg:h-[400px]">
+      <div className="w-full h-full flex flex-col gap-8 lg:flex-row items-center lg:w-[800px] lg:gap-4 mt-12  ">
+        <div className="relative w-[90%] h-[200px]  lg:w-[400px] lg:h-[400px]">
           <Image
             src={imageUrl}
             alt={exerciseName}
             fill
-            className="abosolute object-cover sm:object-contain"
+            className="abosolute object-fill sm:object-contain rounded-lg"
           />
           <div className="absolute inset-0 bg-black opacity-30"></div>
-          <div className="bg-gray-500 hover:bg-gray-700 cursor-pointer absolute top-10 rounded-full right-4 w-[50px] h-[50px]">
-            <IoCloseSharp
-              onClick={() => setOpenModal(!opemModal)}
-              className=" text-accent  w-[50px] h-[50px]"
-            />
-          </div>
+          {favorite && (
+            <motion.div
+              variants={fadeIn("down", 0.1)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+              className="absolute right-2 top-4 flex  w-[40px] h-[40px]  "
+              onClick={favoriteClick}
+            >
+              <FaHeart className="text-accent text-[30px] " />
+            </motion.div>
+          )}
+        </div>
+        <motion.div
+          variants={fadeIn("up", 0.1)}
+          initial="hidden"
+          whileInView={"show"}
+          className="bg-primary-300 flex-1 lg:h-[400px] relative "
+        >
           <motion.div
             variants={fadeIn("up", 0.1)}
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: false, amount: 0.2 }}
-            className="absolute left-4 top-10 flex  w-[50px] h-[50px] cursor-pointer  items-center justify-center rounded-full  bg-gray-500 hover:bg-gray-700 "
-            onClick={favoriteClick}
+            className="w-full h-full flex flex-col justify-between  bg-[#202023] rounded-t-[30px] mt-2 p-8"
           >
-            <FaHeart
-              className={
-                favorite
-                  ? "text-accent text-[30px] "
-                  : "text-white text-[30px] "
-              }
-            />
+            <div className="relative">
+              <div className="w-full flex flex-col items-center justify-center ">
+                <p className="text-[#DDDDE1] text-[18px] font-semibold text-left ">
+                  {exerciseName}
+                </p>
+                <p className="text-[#81809E] text-[16px] font-semibold text-left ">
+                  3x12 Repetições
+                </p>
+              </div>
+              <p className="text-[#DDDDE1] text-[18px] font-semibold text-left py-4">
+                Descrição:
+              </p>
+              <p className="text-[#81809E] text-[18px] font-semibold text-justify">
+                {description}
+              </p>
+            </div>
+
+            <div className="relative w-full flex flex-col gap-4 py-4 mb-8">
+              <CustomButton
+                containerStyles="  w-full h-[50px] rounded-lg"
+                text={
+                  favorite
+                    ? " Remover exercicio dos favoritos"
+                    : "Adicionar exercício aos favoritos"
+                }
+                onclick={favoriteClick}
+              />
+
+              <CustomButton
+                containerStyles="w-full h-[50px] rounded-lg"
+                text="sair"
+                onclick={() => setOpenModal(!opemModal)}
+              />
+              {messageVisible && (
+                <motion.p
+                  variants={fadeIn("up", 0.1)}
+                  initial="hidden"
+                  whileInView={"show"}
+                  viewport={{ once: false, amount: 0.2 }}
+                  onAnimationComplete={() =>
+                    setTimeout(() => setMessageVisible!(false), 400)
+                  }
+                  className=" absolute  flex items-center justify-center top-4 rounded-lg w-full h-[56px]  text-center text-white 
+                  uppercase bg-accent "
+                >
+                  {favorite
+                    ? "Exercício adicionado aos favoritos."
+                    : "Exercício removido dos favoritos."}
+                </motion.p>
+              )}
+            </div>
           </motion.div>
-        </div>
-        <div className="bg-primary-300 flex-1 lg:h-[400px] relative ">
-          <h4 className="h4 rounded-b-[20px] w-full text-center text-primary-300 bg-accent">
-            {exerciseName}
-          </h4>
-          {messageVisible && (
-            <motion.h4
-              variants={fadeIn("up", 0.1)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.2 }}
-              onAnimationComplete={() =>
-                setTimeout(() => setMessageVisible!(false), 400)
-              }
-              className="h4 absolute top-0 rounded-b-[20px] w-full  text-center text-white bg-accent "
-            >
-              {favorite
-                ? "Exercício adicionado aos favoritos."
-                : "Exercício removido dos favoritos."}
-            </motion.h4>
-          )}
-          <div className="w-full px-4 py-8 ">
-            <p className="text-white text-[22px] font-semibold text-justify">
-              {description}
-            </p>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

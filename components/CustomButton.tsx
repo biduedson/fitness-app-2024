@@ -1,14 +1,17 @@
 const CustomButton = ({
   text,
   containerStyles,
+  onclick,
 }: {
   text: string;
   containerStyles: string;
+  onclick?: () => void;
 }) => {
   return (
     <button
       className={`${containerStyles} group relative cursor-pointer overflow-hidden 
       bg-accent uppercase`}
+      onClick={onclick}
     >
       <span
         className="ease absolute top-1/2 h-0 w-64 origin-center -translate-x-20
