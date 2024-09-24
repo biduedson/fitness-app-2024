@@ -2,10 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 const ButtonLogin = () => {
+  const router = useRouter();
   const handleSigninClick = () => {
-    signIn("facebook");
+    router.push("/login");
   };
 
   return (
@@ -14,15 +15,7 @@ const ButtonLogin = () => {
                  border-white rounded-md  text-[10px] uppercase font-light"
       onClick={handleSigninClick}
     >
-      <div className="relative w-[20px] h-[20px]">
-        <Image
-          src="/assets/img/facebookIcon.png"
-          alt="facebook login"
-          fill
-          className="absolute object-cover"
-        />
-      </div>
-      Login com facebook
+      Login
     </button>
   );
 };

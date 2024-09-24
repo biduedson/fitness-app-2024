@@ -62,10 +62,6 @@ const Header = () => {
 
         {/*hide/open menu button*/}
 
-        {/*login & register buttons*/}
-        <div className="text-white flex items-center gap-4">
-          {!data?.user && <ButtonLogin />}
-        </div>
         {/*avatar login user*/}
         {data?.user && (
           <UserProfile

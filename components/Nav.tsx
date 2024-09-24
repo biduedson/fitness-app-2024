@@ -13,6 +13,9 @@ const links = [
   { name: "planos", target: "prices", offset: -40 },
   { name: "depoimentos", target: "testimonial", offset: 0 },
   { name: "blog", target: "blog", offset: 0 },
+  { name: "Exercícios", target: "exercises", offset: -40 },
+  { name: "Meus Exercícios", target: "my-exercises", offset: -40 },
+  { name: "login", target: "login", offset: -40 },
 ];
 
 const Nav = ({ containerStyles }: { containerStyles: string }) => {

@@ -1,9 +1,8 @@
 import { Prisma } from "@prisma/client";
 
 
-
 export interface IExerciseListProps {
-  exercises: Prisma.ExerciseGetPayload<{
+  exercises:Prisma.ExerciseGetPayload<{
     include: {
       category: true,
       favoriteByStudents:{

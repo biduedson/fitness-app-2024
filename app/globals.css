@@ -5,10 +5,12 @@
 
 
 @layer base{
+  
   body{
-    @apply font-roboto;
+    @apply font-roboto  ;
   }
 }
+
   h1,h2,h3,h4,h5,h6{
     @apply  font-oswald font-bold uppercase;
   }
@@ -36,7 +38,10 @@
   .active{
     @apply text-accent;
   }
-
+.shadow-inner-smoke {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Ajuste os valores acima para obter o efeito desejado */
+}
   /* swiper pagination styles*/
   .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
   .swiper-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {

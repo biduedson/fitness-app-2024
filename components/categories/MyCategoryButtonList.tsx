@@ -5,6 +5,8 @@ import ExerciseList from "../exercices/components/ExerciseList";
 import SwiperNavButtons from "../SwiperNavButtons";
 import { Swiper, SwiperSlide } from "swiper/react";
 import MobileExercisesGroup from "../MobileExercisesGroup";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/variants";
 
 interface CategoryButtonListProps {
   id: string;
@@ -58,7 +60,7 @@ const MyCategoryButtonsLIst = ({
               className=" w-full text-center text-primary-300
             rounded-lg lg:text-white  bg-slate-100"
             >
-              não ha exercico cadastrado nesta categoria
+              não ha exercícios cadastrado nesta categoria
             </h5>
           </div>
         </>
@@ -68,6 +70,15 @@ const MyCategoryButtonsLIst = ({
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className="w-full h-full  bg-primary-300 mt-[124px]  " id={id}>
+      <motion.h2
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="h2 text-center mb-8 text-white"
+      >
+        Meu exercícios
+      </motion.h2>
       {/*mobile*/}
       <div className="flex w-full h-[700px] flex-col mty-2 lg:mt-0">
         <div

@@ -21,7 +21,11 @@ const CategoryButton = ({
   const [openModal, setOpenModel] = useState(false);
   return (
     <>
-      <button
+      <motion.button
+        variants={fadeIn("down", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
         className="flex items-center justify-center gap-3 rounded-full text-white/40  hover:text-accent bg-primary-200 shadow-accent/50 px-4 py-4 shadow-md
     lg:h-[54px] lg:-[152px] lg:px-3 lg:py4"
         onClick={() => setOpenModel(!openModal)}
@@ -29,7 +33,7 @@ const CategoryButton = ({
         <span className="text-sm font-semibold uppercase lg:text-xs ">
           {categoryName}
         </span>
-      </button>
+      </motion.button>
       <ExercisesListMotal
         component={component}
         openModal={openModal}

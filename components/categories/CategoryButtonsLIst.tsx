@@ -81,8 +81,25 @@ const CategoryButtonsLIst = ({
   };
   return (
     <div className="w-full h-full mt-[124px] ">
+      <motion.h2
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="h2 text-center mb-8 text-white"
+      >
+        Exercícios
+      </motion.h2>
       {/*mobile*/}
-      <div className="flex w-full h-[1700px]  flex-col my-2 lg:mt-0">
+      <div className="flex w-full   flex-col my-2 lg:mt-0">
+        <div className=" relative w-full  h-[200px] sm:h-[35%]  py-4  lg:hidden">
+          <Image
+            src="/assets/img/Banner-sem-botao.png"
+            alt="banner"
+            fill
+            className="absolute object-cover rounded-lg"
+          />
+        </div>
         <div
           className="grid grid-cols-2 gap-3 lg:flexx lg:items-centerr py-4 lg:justify-betweenn lg:hidden
           "
@@ -96,15 +113,6 @@ const CategoryButtonsLIst = ({
               />
             );
           })}
-        </div>
-
-        <div className=" relative w-full  h-[200px] sm:h-[35%]  py-4  lg:hidden">
-          <Image
-            src="/assets/img/Banner-sem-botao.png"
-            alt="banner"
-            fill
-            className="absolute object-cover rounded-lg"
-          />
         </div>
 
         <div className="  lg:flex w-full h-[700px] hidden flex-col my-2   lg:mt-0">

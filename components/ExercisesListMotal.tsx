@@ -26,7 +26,7 @@ function ExercisesListMotal({
       viewport={{ once: false, amount: 0.2 }}
       className={
         openModal
-          ? " fixed mt-[124px] lg:mt-0 z-40 lg:z-50 w-full h-ful inset-0 bg-primary-300 "
+          ? " fixed mt-[100px] lg:mt-0 z-40 lg:z-50 w-full h-ful inset-0 bg-primary-300 "
           : "hidden "
       }
     >

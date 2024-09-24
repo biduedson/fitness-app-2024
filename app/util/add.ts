@@ -170,8 +170,8 @@ const bicepsData = [
   },
 ];
 
- const addRecords = async () => await db.exercise.createMany({
-      data: bicepsData
-    });
+// const addRecords = async () => await db.exercise.createMany({
+    //  data: bicepsData
+  ////  });
  
-export default addRecords
+//export default addRecords

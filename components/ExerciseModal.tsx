@@ -41,12 +41,12 @@ const ExerciseModal = ({
       }
     >
       <div className="w-full h-full flex flex-col gap-8 lg:flex-row items-center lg:w-[800px] lg:gap-4 mt-12  ">
-        <div className="relative w-[90%] h-[200px]  lg:w-[400px] lg:h-[400px]">
+        <div className="relative w-[90%] h-[200px] sm:h-[400px] lg:w-[400px] lg:h-[400px]">
           <Image
             src={imageUrl}
             alt={exerciseName}
             fill
-            className="abosolute object-fill sm:object-contain rounded-lg"
+            className="abosolute object-fill sm:object-fill rounded-lg"
           />
           <div className="absolute inset-0 bg-black opacity-30"></div>
           {favorite && (
@@ -93,15 +93,14 @@ const ExerciseModal = ({
             </div>
 
             <div className="relative w-full flex flex-col gap-4 py-4 mb-8">
-              <CustomButton
-                containerStyles="  w-full h-[50px] rounded-lg"
-                text={
-                  favorite
-                    ? " Remover exercicio dos favoritos"
-                    : "Adicionar exercício aos favoritos"
-                }
-                onclick={favoriteClick}
-              />
+              <button
+                className=" w-full h-[50px] rounded-lg bg-accent text-white uppercase"
+                onClick={favoriteClick}
+              >
+                {favorite
+                  ? " Remover exercicio dos favoritos"
+                  : "Adicionar exercício aos favoritos"}
+              </button>
 
               <CustomButton
                 containerStyles="w-full h-[50px] rounded-lg"
