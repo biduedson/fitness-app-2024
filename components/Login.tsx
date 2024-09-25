@@ -15,57 +15,20 @@ const Login = () => {
     await signIn("facebook", { callbackUrl: "/" });
   };
   return (
-    <section
-      className="relative flex items-center justify-between w-full h-[100vh]  "
+    <motion.section
+      variants={fadeIn("down", 0.4)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.2 }}
+      className="relative flex items-center justify-end w-full xl:pr-[200px]  h-[100vh] bg-login lg:bg-hero "
       id="login"
     >
-      <motion.h1
-        variants={fadeIn("up", 0.2)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="absolute flex flex-col top-40 lg:top-20 h1 text-center  lg:text-left mb-2 z-50"
-      >
-        <span className="text-accent text-center ">Entre agora </span>{" "}
-        <span className="text-center">desafie-se e evolua constantemente.</span>
-      </motion.h1>
-      <motion.div
-        variants={fadeIn("down", 0.4)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="relative w-full h-full lg:hidden "
-      >
-        <Image
-          src="/assets/img/muscle.png"
-          alt="hero"
-          fill
-          className="absolute left-40  object-cover"
-        />
-        <div className="absolute inset-0 bg-black opacity-30 cursor-pointer"></div>
-      </motion.div>
-      <motion.div
-        variants={fadeIn("down", 0.4)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="relative w-full h-full hidden lg:flex flex-col"
-      >
-        <Image
-          src="/assets/img/hero/bg.png"
-          alt="hero"
-          fill
-          className="absolute left-40  object-cover"
-        />
-        <div className="absolute inset-0 bg-black opacity-30 cursor-pointer"></div>
-      </motion.div>
-
       <motion.div
         variants={fadeIn("up", 0.2)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="  absolute flex flex-col items-center gap-4 bottom-32 w-full h-auto px-8 "
+        className="  absolute flex flex-col items-center gap-4 bottom-32 w-full lg:w-[650px] h-auto px-8 z-40 "
       >
         <p className="text-white font-semibold text-[18px]">
           Entre para acessar seu perfil de exercícios
@@ -103,7 +66,32 @@ const Login = () => {
           </span>
         </button>
       </motion.div>
-    </section>
+      <motion.h1
+        variants={fadeIn("up", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="absolute flex flex-col top-40 lg:top-20 h1 text-center  lg:text-left mb-2 z-40 lg:w-[650px] lg:text-[90px]"
+      >
+        <span className="text-accent text-center ">Entre agora </span>{" "}
+        <span className="text-center">desafie-se e evolua constantemente.</span>
+      </motion.h1>
+      <motion.div
+        variants={fadeIn("down", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="relative w-full h-full lg:hidden "
+      >
+        <Image
+          src="/assets/img/muscle.png"
+          alt="hero"
+          fill
+          className="absolute left-40  object-cover"
+        />
+        <div className="absolute inset-0 bg-black opacity-30 cursor-pointer"></div>
+      </motion.div>
+    </motion.section>
   );
 };
 
