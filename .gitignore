@@ -39,8 +39,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 <<<<<<< HEAD
+<<<<<<< HEAD
 # docker conpose
 docker-compose.yml
 =======
 
 >>>>>>> 96dcffa (feat: add ci.yml)
+=======
+
+>>>>>>> 96dcffa5ad82c89a21df47a0da21a354aea591b3
