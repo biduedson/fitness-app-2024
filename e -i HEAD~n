@@ -1,0 +1,119 @@
+[33mcommit 96dcffa5ad82c89a21df47a0da21a354aea591b3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Sep 25 11:35:03 2024 -0300
+
+    feat: add ci.yml
+
+[33mcommit 8f8c17d7805a36a1e6693b3a52aa9f10d014542f[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Sep 25 10:11:56 2024 -0300
+
+    feat: add .ev.production to gitIgnore
+
+[33mcommit 13b05ef6ba93c1fa9cf32401a1d98c8decec132f[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Sep 25 10:10:57 2024 -0300
+
+    feat: configure docker-compose
+
+[33mcommit e7a0601d6369548255b496bb030a1a30ced3c75e[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Sep 25 10:05:26 2024 -0300
+
+    feat: configure .emv.production
+
+[33mcommit 4f4e16cf80a0b304ef05354b91cc282b966a01c4[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Sep 24 20:19:06 2024 -0300
+
+    feat: add docker-compose to gittignore
+
+[33mcommit 2330c3ca39daab682244ec4b8ce0f5dd72871a52[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Sep 24 20:15:41 2024 -0300
+
+    feat> remove files
+
+[33mcommit d03397e8cbe70473becb7516ee18bdf785cc2db2[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Sep 24 20:08:53 2024 -0300
+
+    feat: add docker configurations and neu exercises and myexercises page
+
+[33mcommit f67e4e45f360bcb6303ae87c0714a673611d9763[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Sat Sep 21 18:36:23 2024 -0300
+
+    feat: new exerciseModal style
+
+[33mcommit 44ddb73fe5f7082c5d90f71067cd3b8239c61b8d[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Sep 10 17:58:15 2024 -0300
+
+    feat: add new categoryButtons
+
+[33mcommit c31c4dc4e4d178185b3af5a814a68ea5133b6af8[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Sep 4 19:57:13 2024 -0300
+
+    feat: add modal exercise
+
+[33mcommit c8c46fd967ec7c0970fa4c40c6cf484023cda554[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Sep 3 18:46:24 2024 -0300
+
+    feat:add exerciseModal
+
+[33mcommit b75384569d0f1493236bc036ba447bd055000953[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Mon Sep 2 20:07:43 2024 -0300
+
+    feat: create pages of exercises and myexercises in newo routes
+
+[33mcommit 5ffee5d1f8ab0cc3f62a5b06e7cf068127cbd44f[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Sun Sep 1 23:35:44 2024 -0300
+
+    feat: add new pages myexercises and exercises whit student user
+
+[33mcommit ca63a389ade56bf871297171273b35f30e24137d[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Wed Aug 28 19:35:07 2024 -0300
+
+    feat: Added exercises and removed unnecessary components.
+
+[33mcommit b7d2d7cbce5834ebe0597ed9aa3e370a70b3ba15[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 15:59:18 2024 -0300
+
+    chore:   up h page hero
+
+[33mcommit 535ae7717083acd86a3c1a657ccdeab5b0e6c9a0[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 15:58:27 2024 -0300
+
+    feat: add table student
+
+[33mcommit 9138cdf6d155728462bfc3af12d6a6a8db7ec068[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 01:46:27 2024 -0300
+
+    chore: add link plane to button
+
+[33mcommit 1a96baa58268de072cf4ab29f0d652d541efab83[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 01:43:01 2024 -0300
+
+    bug: bug correctd
+
+[33mcommit 0f6a81b26af6557373cf4cffc75aac9e381dbbfd[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 01:24:46 2024 -0300
+
+    bug: remove bugs
+
+[33mcommit 60ea08aa7fc760c6949d9e7b7e462c2525a6e692[m
+Author: Edson <biduzao.bidu21@gmail.com>
+Date:   Tue Aug 20 01:17:34 2024 -0300
+
+    subindo novamente o projeto ao excluir o anterior
