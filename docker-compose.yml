@@ -11,7 +11,7 @@ services:
     depends_on:
       - db # Este serviço depende do serviço 'db', que é o banco de dados
     environment:
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${DATABASE_URL_PRODUCTION}
       # Define a URL de conexão com o banco de dados usando variáveis de ambiente
     command: sh -c "npx prisma migrate deploy && npm start"
     # Executa as migrações do Prisma antes de iniciar a aplicação
