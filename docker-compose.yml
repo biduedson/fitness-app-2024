@@ -23,6 +23,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER} # Define o usuário do banco de dados
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Define a senha do banco de dados
       POSTGRES_DB: ${POSTGRES_DB} # Define o nome do banco de dados
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
     volumes:
       - fitnessApp_data:/var/lib/postgresql/data # Define um volume para persistir os dados do banco
 
