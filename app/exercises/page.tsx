@@ -2,15 +2,11 @@
 
 import React from "react";
 import CategoryButtonsLIst from "@/components/categories/CategoryButtonsLIst";
-import ExercisesHeader from "../../components/ExercisesHeader";
-import ExercisesFooter from "@/components/ExercisesFoter";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../_lib/auth";
-import { db } from "../_lib/prisma";
-import { notFound } from "next/navigation";
-import Image from "next/image";
+import { authOptions } from "@/app/_lib/auth";
+import { db } from "@/app/_lib/prisma";
 
-const Exercicies = async () => {
+const page = async () => {
   const data = await getServerSession(authOptions);
 
   const categoryExercises = await db.exerciseCategory.findMany({
@@ -32,20 +28,28 @@ const Exercicies = async () => {
     },
   });
   if (!data?.user.student) {
-    return notFound();
+    return (
+      <section
+        className=" w-full flex h-[100vh] justify-center items-center bg-primary-300 px-4 lg:px-0"
+        id="exercises"
+      >
+        <h4 className="h4 text-white text-center">
+          Somente alunos tem acesso a este conteúdo
+        </h4>
+      </section>
+    );
   }
 
   return (
     <>
-      <ExercisesHeader title="exercícios" />
-      <section className=" w-full  h-full flex flex-col justify-center bg-primary-300 px-4 lg:px-0">
-        <CategoryButtonsLIst
-          id="exercises"
-          categoryAndExercises={categoryExercises}
-        />
+      <section
+        className=" w-full  h-auto flex flex-col   justify-center bg-primary-300 px-4 lg:px-0"
+        id="exercises"
+      >
+        <CategoryButtonsLIst id="s" categoryAndExercises={categoryExercises} />
       </section>
     </>
   );
 };
 
-export default Exercicies;
+export default page;

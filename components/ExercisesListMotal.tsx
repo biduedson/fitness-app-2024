@@ -26,33 +26,39 @@ function ExercisesListMotal({
       viewport={{ once: false, amount: 0.2 }}
       className={
         openModal
-          ? " fixed mt-[100px] lg:mt-0 z-40 lg:z-50 w-full h-ful inset-0 bg-primary-300 "
+          ? "fixed  flex flex-col lg:items-end   z-50  w-full  inset-0 overflow-y-hidden bg-black_texture sm:bg-hero bg-cover "
           : "hidden "
       }
     >
-      <div className="relative flex items-end w-full h-[200px] z-30 ">
-        <Image
-          src={imageUrl}
-          fill
-          alt="Exercises list"
-          className="absolute object-cover rounded-b-[14px]"
-        />
-        <div
-          className=" flex items-center justify-center bg-gray-500 hover:bg-gray-700 cursor-pointer absolute top-2 rounded-full
-         right-2 w-[40px] h-[40px]"
+      <div className="flex flex-col  justify-between lg:items-center h-full w-full lg:w-[450px]">
+        <motion.h1
+          variants={fadeIn("up", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="h1 text-center lg:text-left my-4 lg:text-[70px] "
         >
-          <IoCloseSharp
+          <span className="text-accent ">{categoryName}</span>
+        </motion.h1>
+        <motion.div
+          variants={fadeIn("up", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className=" h-full mb-4  overflow-y-scroll [&::-webkit-scrollbar]:hidden"
+        >
+          {component}
+        </motion.div>
+
+        <div className="w-full px-4 ">
+          <button
+            className=" w-full h-[50px] rounded-lg bg-accent text-white mb-2 uppercase "
             onClick={() => setOpenModal(!openModal)}
-            className=" text-accent   w-[30px] h-[30px]"
-          />
-        </div>
-        <div className="flex items-center w-[181px] h-[43px] bg-white/5 p-2 rounded-bl-[14px] backdrop-blur-[4px]">
-          <p className="text-[#e7e7e7] text-[14px] justify-self-start uppercase font-medium  z-10">
-            {categoryName}
-          </p>
+          >
+            sair
+          </button>
         </div>
       </div>
-      {component}
     </motion.div>
   );
 }

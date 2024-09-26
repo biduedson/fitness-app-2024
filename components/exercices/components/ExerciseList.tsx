@@ -8,7 +8,7 @@ function ExerciseList({ exercises }: IExerciseListProps) {
 
   return (
     <div className=" mt-6 p-8  ">
-      <div className="flex flex-wrap gap-4 lg:h-full overflow-y-scroll [&::-webkit-scrollbar]:hidden max-h-[450px]   ">
+      <div className="flex flex-wrap gap-4 lg:h-full overflow-y-scroll  [&::-webkit-scrollbar]:hidden max-h-[450px]   ">
         {dataExercises.map((exercise, index) => {
           return <ExerciseItem key={index} exercise={exercise} />;
         })}

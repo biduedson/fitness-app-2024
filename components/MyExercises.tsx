@@ -57,7 +57,7 @@ const MyExercises = async () => {
     <>
       {data?.user.student ? (
         <section
-          className=" w-full flex  justify-center bg-primary-300 px-4 lg:px-0"
+          className=" w-full flex  justify-center bg-primary-300 px-4  "
           id="my-exercises"
         >
           <MyCategoryButtonsLIst

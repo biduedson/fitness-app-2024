@@ -20,7 +20,7 @@ const Login = () => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
-      className="relative flex items-center justify-end w-full xl:pr-[200px]  h-[100vh] bg-login lg:bg-hero "
+      className="relative flex items-center justify-end w-full xl:pr-[200px]  h-[100vh] bg-login lg:bg-hero z-20"
       id="login"
     >
       <motion.div

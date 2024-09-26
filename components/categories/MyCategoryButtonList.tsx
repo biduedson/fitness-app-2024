@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import MobileExercisesGroup from "../MobileExercisesGroup";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
+import MyCategoryButton from "./MyCategoryButton";
 
 interface CategoryButtonListProps {
   id: string;
@@ -54,14 +55,19 @@ const MyCategoryButtonsLIst = ({
         <>
           <div
             className="  flex flex-col w-full justify-center items-center
-         px-4  mt-10  lg:bg-primary-300  "
+         px-4  mt-10  "
           >
-            <h5
-              className=" w-full text-center text-primary-300
-            rounded-lg lg:text-white  bg-slate-100"
+            <motion.h2
+              variants={fadeIn("up", 0.4)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+              className="h2 text-center lg:text-left my-4 bg "
             >
-              não ha exercícios cadastrado nesta categoria
-            </h5>
+              <span className="text-white ">
+                Não há exercícios cadastrados.
+              </span>
+            </motion.h2>
           </div>
         </>
       ),
@@ -69,7 +75,7 @@ const MyCategoryButtonsLIst = ({
   });
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="w-full h-full  bg-primary-300 mt-[124px]  " id={id}>
+    <div className="w-full h-full  bg-primary-300 mt-[64px] " id={id}>
       <motion.h2
         variants={fadeIn("up", 0.4)}
         initial="hidden"
@@ -79,54 +85,23 @@ const MyCategoryButtonsLIst = ({
       >
         Meu exercícios
       </motion.h2>
-      {/*mobile*/}
-      <div className="flex w-full h-[700px] flex-col mty-2 lg:mt-0">
-        <div
-          className="flex flex-col h-full gap-4 py-4 my-4  items-center overflow-x-scroll overflow-y-scroll  
-          lg:overflow-x-hidden [&::-webkit-scrollbar]:hidden lg:justify-center 
-            lg:flex-row lg:bg-primary-200 lg:p-4 lg:h-full lg:hidden
+      <div
+        className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:px-24 w-full h-full gap-4 py-4 my-4  
+                    items-center  overflow-y-scroll  
+                    overflow-x-hidden [&::-webkit-scrollbar]:hidden
           "
-        >
-          {exercicesAndComponent.map((category, index) => {
-            return (
-              <MobileExercisesGroup
-                img={category.img}
-                categoryName={category.name}
-                handleComponentClick={() => setComponent(category.component!)}
-                component={category.component!}
-              />
-            );
-          })}
-        </div>
-        <div className="lg:flex w-full h-[700px] hidden  flex-col mty-2 lg:mt-0">
-          {/*Desktop*/}
-          <Swiper className="h-full w-[640px] mt-4 relative  ">
-            {exercicesAndComponent.map((category, index) => {
-              return (
-                <SwiperSlide>
-                  <MobileExercisesGroup
-                    img={category.img}
-                    categoryName={category.name}
-                    handleComponentClick={() =>
-                      setComponent(category.component!)
-                    }
-                    component={category.component!}
-                  />
-                </SwiperSlide>
-              );
-            })}
-            <SwiperNavButtons
-              containerStyles={`absolute top-[180px]  left-60 h-[30px] w-[140px] hidden ${
-                openModal ? "lg:hidden" : "lg:flex"
-              }  
-         z-10 flex justify-between `}
-              btnStyles="border border-accent text-white w-[56px] h-[56px] rounded-full flex 
-        justify-center items-center hover:bg-accent transition-all duration-300"
-              iconStyles="text-2xl"
+      >
+        {exercicesAndComponent.map((category, index) => {
+          return (
+            <MyCategoryButton
+              categoryName={category.name}
+              component={category.component}
+              img={category.img}
             />
-          </Swiper>
-        </div>
+          );
+        })}
       </div>
+      {/*mobile*/}
     </div>
   );
 };

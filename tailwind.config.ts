@@ -28,6 +28,7 @@ const config: Config = {
        hero:'url(/assets/img/hero/bg.png)',
        membership:'url(/assets/img/membership/bg.jpg)',
        login:'url(/assets/img/muscle.png)',
+       black_texture:'url(/assets/img/black_texture.jpg)',
     },
     extend: {
       colors: {

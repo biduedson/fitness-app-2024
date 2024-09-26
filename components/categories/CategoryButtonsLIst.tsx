@@ -80,7 +80,7 @@ const CategoryButtonsLIst = ({
     setComponent(component);
   };
   return (
-    <div className="w-full h-full mt-[124px] ">
+    <div className="w-full h-full mt-[54px] ">
       <motion.h2
         variants={fadeIn("up", 0.4)}
         initial="hidden"
@@ -92,7 +92,7 @@ const CategoryButtonsLIst = ({
       </motion.h2>
       {/*mobile*/}
       <div className="flex w-full   flex-col my-2 lg:mt-0">
-        <div className=" relative w-full  h-[200px] sm:h-[35%]  py-4  lg:hidden">
+        <div className=" relative w-full  h-[200px] sm:h-[350px]  py-4  lg:hidden">
           <Image
             src="/assets/img/Banner-sem-botao.png"
             alt="banner"
