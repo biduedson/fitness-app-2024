@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 
+import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
+
 const page = async () => {
   const data = await getServerSession(authOptions);
 
@@ -43,10 +45,11 @@ const page = async () => {
   return (
     <>
       <section
-        className=" w-full  h-auto flex flex-col   justify-center bg-primary-300 px-4 lg:px-0"
+        className=" w-full  h-[100vh] flex flex-col justify-betweenr bg-primary-300  lg:px-0"
         id="exercises"
       >
         <CategoryButtonsLIst id="s" categoryAndExercises={categoryExercises} />
+        <MobileNavHomeFooter />
       </section>
     </>
   );

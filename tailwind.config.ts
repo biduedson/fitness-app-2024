@@ -30,6 +30,11 @@ const config: Config = {
        login:'url(/assets/img/muscle.png)',
        black_texture:'url(/assets/img/black_texture.jpg)',
     },
+     textShadow: {
+           'outline-red': '2px 2px 0 #d4000d, -2px -2px 0 #d4000d, 2px -2px 0 #d4000d, -2px 2px 0 #d4000d',
+           'outline-white': '1px 1px 0 #d4000d, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff',
+         },
+         
     extend: {
       colors: {
         primary:{
@@ -39,7 +44,11 @@ const config: Config = {
           300:'#111',
         },
         accent:'#d4000d',
+        
     },
+   clipPath: {
+        'custom-bottom': 'ellipse(90% 100% at 50% 0%)',
+      },
     keyframes: {
         slideDownAndFadeOut: {
           '0%': { transform: 'translateY(0)', opacity: '1' },
@@ -52,6 +61,16 @@ const config: Config = {
       },
   },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: { addUtilities: (utilities: any) => void }) {
+      const newUtilities = {
+        '.clip-custom-bottom': {
+          'clip-path': 'ellipse(90% 100% at 50% 0%)',
+        },
+      };
+      addUtilities(newUtilities);
+    },
+    require('tailwindcss-textshadow'),
+  ] ,
 };
 export default config;

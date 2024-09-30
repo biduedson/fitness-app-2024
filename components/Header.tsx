@@ -45,9 +45,10 @@ const Header = () => {
         <MobileNav
           closeNav={() => setOpenNav(!openNav)}
           contaynerStyle={`${headrActive ? "top-[90px]" : "top-[124px]"}
+          
             ${
               openNav
-                ? "max-h-max pt-8 pb-10 border-t border-white/10"
+                ? "max-h-max  pb-10 border-t border-white/10"
                 : "max-h-0 pt-0 pb-0 overflow-hidden border-white/0"
             } 
             flex flex-col text-center gap-8 bg-primary-200 w-full 

@@ -11,12 +11,27 @@
   }
 }
 
+@layer utilities {
+  .text-outline {
+    position: relative;
+    color: transparent;
+  }
+
+  .text-outline::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-text-stroke: 1px #d4000d; /* Define a cor da borda aqui */
+  }
+}
   h1,h2,h3,h4,h5,h6{
     @apply  font-oswald font-bold uppercase;
   }
 
   .h1{
-    @apply text-white text-7xl text-[60px] lg:text-[128px] tracking-[-3px]
+    @apply text-white text-7xl sm:text-[50px] text-[60px] lg:text-[128px] tracking-[-3px]
   }
 
   .h2{

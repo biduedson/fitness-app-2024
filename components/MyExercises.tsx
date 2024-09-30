@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ExercisesHeader from "@/components/ExercisesHeader";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/auth";
-import MyCategoryButtonsLIst from "@/components/categories/MyCategoryButtonList";
+import MyCategoryButtonsLIst from "@/components/categories/MyCategoryList";
 import { db } from "@/app/_lib/prisma";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";

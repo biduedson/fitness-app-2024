@@ -3,6 +3,7 @@ import { fadeIn } from "@/lib/variants";
 import Image from "next/image";
 import { ReactElement } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import MobileNavCloseModalFooter from "./MobileNavCloseModalFooter";
 
 interface ExerciseModalListProps {
   openModal: boolean;
@@ -36,7 +37,7 @@ function ExercisesListMotal({
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="h1 text-center lg:text-left my-4 lg:text-[70px] "
+          className="h1 text-center lg:text-left mt-4 lg:text-[70px] "
         >
           <span className="text-accent ">{categoryName}</span>
         </motion.h1>
@@ -50,14 +51,7 @@ function ExercisesListMotal({
           {component}
         </motion.div>
 
-        <div className="w-full px-4 ">
-          <button
-            className=" w-full h-[50px] rounded-lg bg-accent text-white mb-2 uppercase "
-            onClick={() => setOpenModal(!openModal)}
-          >
-            sair
-          </button>
-        </div>
+        <MobileNavCloseModalFooter onclick={() => setOpenModal(!openModal)} />
       </div>
     </motion.div>
   );

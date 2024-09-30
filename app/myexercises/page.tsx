@@ -1,12 +1,9 @@
 "use server";
-import { notFound } from "next/navigation";
-import ExercisesHeader from "@/components/ExercisesHeader";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/_lib/auth";
-import MyCategoryButtonsLIst from "@/components/categories/MyCategoryButtonList";
 import { db } from "@/app/_lib/prisma";
-import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/variants";
+import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
+import MyCategoryLIst from "@/components/categories/MyCategoryList";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
@@ -57,13 +54,14 @@ const page = async () => {
     <>
       {data?.user.student ? (
         <section
-          className=" w-full flex  justify-center bg-primary-300 px-4  "
+          className=" w-full h-[100vh] flex flex-col justify-between bg-primary-300   "
           id="my-exercises"
         >
-          <MyCategoryButtonsLIst
+          <MyCategoryLIst
             id="s"
             categoryAndMyExercises={categoryAndMyExercises}
           />
+          <MobileNavHomeFooter />
         </section>
       ) : (
         <section

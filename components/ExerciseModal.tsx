@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import Image from "next/image";
 import React, { useState } from "react";
-import { IoCloseSharp } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
-import CustomButton from "./CustomButton";
+import { FaHeart, FaHome } from "react-icons/fa";
+import { TbArrowBack } from "react-icons/tb";
+
+import { useRouter } from "next/navigation";
 
 interface ExerciseModalProps {
   opemModal: boolean;
@@ -28,6 +29,8 @@ const ExerciseModal = ({
   messageVisible,
   setMessageVisible,
 }: ExerciseModalProps) => {
+  const router = useRouter();
+
   return (
     <motion.div
       variants={fadeIn("down", 0.1)}
@@ -36,10 +39,29 @@ const ExerciseModal = ({
       viewport={{ once: false, amount: 0.2 }}
       className={
         opemModal
-          ? "fixed mt-24 lg:mt-0  z-50 w-full h-ful inset-0 bg-primary-300 lg:mx-auto lg:flex items-center justify-center"
+          ? "fixed mt-24 lg:mt-0  z-50 w-full h-auto inset-0 bg-primary-300 lg:mx-auto lg:flex items-center justify-center"
           : "hidden"
       }
     >
+      {messageVisible && (
+        <motion.p
+          variants={fadeIn("up", 0.1)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          onAnimationComplete={() =>
+            setTimeout(() => setMessageVisible!(false), 400)
+          }
+          className=" fixed z-50 top-0  flex items-center justify-center bg-black_texture Ttop-4 rounded-lg w-full h-[100px]  text-center text-accent 
+                  uppercase bg-transparent "
+        >
+          <h1 className="h2">
+            {favorite
+              ? "Exercício adicionado aos favoritos."
+              : "Exercício removido dos favoritos."}
+          </h1>
+        </motion.p>
+      )}
       <div className="w-full h-full flex flex-col gap-8 lg:flex-row items-center lg:w-[800px] lg:gap-4 mt-12  ">
         <div className="relative w-[90%] h-[200px] sm:h-[400px] lg:w-[400px] lg:h-[400px]">
           <Image
@@ -73,9 +95,9 @@ const ExerciseModal = ({
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: false, amount: 0.2 }}
-            className="w-full h-full flex flex-col justify-between  bg-[#202023] rounded-t-[30px] mt-2 p-8"
+            className="w-full h-full flex flex-col justify-between  bg-[#202023] rounded-t-[30px] mt-2 "
           >
-            <div className="relative">
+            <div className="relative px-4">
               <div className="w-full flex flex-col items-center justify-center ">
                 <p className="text-[#DDDDE1] text-[18px] font-semibold text-left ">
                   {exerciseName}
@@ -93,37 +115,57 @@ const ExerciseModal = ({
             </div>
 
             <div className="relative w-full flex flex-col gap-4 py-4 mb-8">
-              <button
-                className=" w-full h-[50px] rounded-lg bg-accent text-white uppercase"
-                onClick={favoriteClick}
+              <motion.div
+                variants={fadeIn("up", 0.4)}
+                initial="hidden"
+                whileInView={"show"}
+                viewport={{ once: false, amount: 0.2 }}
+                className="relative w-full h-[70px] flex items-center justify-center 
+                 bg-accent cursor-pointer mb-2"
+                onClick={() => onclick}
               >
-                {favorite
-                  ? " Remover exercicio dos favoritos"
-                  : "Adicionar exercício aos favoritos"}
-              </button>
-
-              <CustomButton
-                containerStyles="w-full h-[50px] rounded-lg"
-                text="sair"
-                onclick={() => setOpenModal(!opemModal)}
-              />
-              {messageVisible && (
-                <motion.p
-                  variants={fadeIn("up", 0.1)}
+                <motion.div
+                  variants={fadeIn("down", 0.6)}
                   initial="hidden"
                   whileInView={"show"}
                   viewport={{ once: false, amount: 0.2 }}
-                  onAnimationComplete={() =>
-                    setTimeout(() => setMessageVisible!(false), 400)
-                  }
-                  className=" absolute  flex items-center justify-center top-4 rounded-lg w-full h-[56px]  text-center text-white 
-                  uppercase bg-accent "
+                  onClick={() => router.push("/")}
+                  className=" absolute top-[-25px] flex flex-col items-center justify-center   
+                  bg bg-primary-200 rounded-full w-[80px] h-[80px] border-accent border-[5px] 
+                  text-[40px] text-white z-50"
                 >
-                  {favorite
-                    ? "Exercício adicionado aos favoritos."
-                    : "Exercício removido dos favoritos."}
-                </motion.p>
-              )}
+                  <FaHome />
+                </motion.div>
+
+                <div className="absolute  top-[-15px] w-full h-[50px] flex items-center justify-between px-4 ">
+                  <motion.div
+                    variants={fadeIn("down", 0.6)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: false, amount: 0.2 }}
+                    onClick={() => setOpenModal(!opemModal)}
+                    className="  flex  items-center justify-center  top-[-25px]
+                     bg bg-primary-200 rounded-full w-[60px] h-[60px] text-[30px]
+                      border-accent border-[5px] "
+                  >
+                    <TbArrowBack className="text-white" />
+                  </motion.div>
+                  <motion.div
+                    variants={fadeIn("down", 0.6)}
+                    initial="hidden"
+                    whileInView={"show"}
+                    viewport={{ once: false, amount: 0.2 }}
+                    onClick={favoriteClick}
+                    className="  flex  items-center justify-center  
+                    top-[-25px] bg bg-primary-200 rounded-full w-[60px] h-[60px]
+                     text-[30px] border-accent border-[5px] "
+                  >
+                    <FaHeart
+                      className={favorite ? "text-accent" : "text-white"}
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

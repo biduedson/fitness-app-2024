@@ -1,21 +1,18 @@
 "use client";
 import React, { ReactElement, useState } from "react";
-import CategoryButton from "./CategoryButton";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 
 //components
-import CustomButton from "../CustomButton";
-import SwiperNavButtons from "../SwiperNavButtons";
 import { Prisma } from "@prisma/client";
 import ExerciseList from "../exercices/components/ExerciseList";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import MobileExercisesGroup from "../MobileExercisesGroup";
 import SwiperNavCategoryButtons from "../SwiperNavCategoryButtons";
+import CategoryItem from "./CategoryItem";
 
 interface CategoryButtonListProps {
   id: string;
@@ -80,40 +77,59 @@ const CategoryButtonsLIst = ({
     setComponent(component);
   };
   return (
-    <div className="w-full h-full mt-[54px] ">
-      <motion.h2
-        variants={fadeIn("up", 0.4)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="h2 text-center mb-8 text-white"
-      >
-        Exercícios
-      </motion.h2>
+    <div className="w-full h-full bg-black_texture bg-cover ">
       {/*mobile*/}
-      <div className="flex w-full   flex-col my-2 lg:mt-0">
-        <div className=" relative w-full  h-[200px] sm:h-[350px]  py-4  lg:hidden">
+      <div className="flex w-full   flex-col mb-2 lg:mt-0">
+        <motion.div
+          variants={fadeIn("down", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className=" relative w-full  h-[200px] sm:h-[400px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
+        >
           <Image
-            src="/assets/img/Banner-sem-botao.png"
+            src="/assets/img/bannerExercisePage.png"
             alt="banner"
             fill
-            className="absolute object-cover rounded-lg"
+            className="absolute object-cover rounded-b-[]"
           />
+        </motion.div>
+        <div className="flex items-center justify-center w-full">
+          <motion.h2
+            variants={fadeIn("up", 0.6)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.2 }}
+            className="h2 flex flex-col   w-[350px] sm:w-[380px] sm:text-[40px]
+             text-center mb-8 text-accent le leading-[1.1] mt-4 border-white border-y-[1px] "
+          >
+            <span className="text-[50px] sm:text-[70px] mt-2">Guia</span>
+            <span className="text-[30px] sm:text-[40px] mb-2">
+              de exercícios
+            </span>
+          </motion.h2>
         </div>
-        <div
-          className="grid grid-cols-2 gap-3 lg:flexx lg:items-centerr py-4 lg:justify-betweenn lg:hidden
+        <motion.div
+          variants={fadeIn("up", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="grid grid-cols-3  gap-3 lg:flexx lg:items-centerr py-4 px-4 
+          pt-8 lg:justify-betweenn lg:hidden
           "
         >
           {exercicesAndComponent.map((category, index) => {
             return (
-              <CategoryButton
-                categoryName={category.name}
-                component={category.component}
-                img={category.img}
-              />
+              <div className="w-full h-full flex items-center justify-center">
+                <CategoryItem
+                  categoryName={category.name}
+                  component={category.component}
+                  img={category.img}
+                />
+              </div>
             );
           })}
-        </div>
+        </motion.div>
 
         <div className="  lg:flex w-full h-[700px] hidden flex-col my-2   lg:mt-0">
           {/*Desktop*/}
