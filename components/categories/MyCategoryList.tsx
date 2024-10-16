@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import Image from "next/image";
 import CategoryItem from "./CategoryItem";
+import MyCategoryButton from "./MyCategoryButton";
+import MyExerciseList from "../exercices/components/MyExescisesList";
 
 interface CategoryButtonListProps {
   id: string;
@@ -48,7 +50,7 @@ const MyCategoryLIst = ({
       img: category.imageUrl!,
       name: category.name,
       component: category.exercises.length ? (
-        <ExerciseList exercises={category.exercises} key={category.id} />
+        <MyExerciseList exercises={category.exercises} key={category.id} />
       ) : (
         <>
           <div
@@ -79,7 +81,7 @@ const MyCategoryLIst = ({
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className=" relative w-full  h-[200px] sm:h-[400px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
+        className=" relative w-full  h-[200px] sm:h-[300px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
       >
         <Image
           src="/assets/img/bannerExercisePage.png"
@@ -97,9 +99,7 @@ const MyCategoryLIst = ({
           className="h2 flex flex-col   w-[350px] sm:w-[380px] sm:text-[40px]
              text-center mb-8 text-accent le leading-[1.1] mt-4 border-white border-y-[1px] "
         >
-          <span className="text-[50px] sm:text-[70px] mb-2">
-            Meus exercícios
-          </span>
+          <span className="text-[50px] sm:text-[70px] mb-2">exercícios</span>
           <span className="text-[30px] sm:text-[40px] mb-2">favoritos</span>
         </motion.h2>
       </div>
@@ -111,7 +111,7 @@ const MyCategoryLIst = ({
         {exercicesAndComponent.map((category, index) => {
           return (
             <div className="w-full h-full flex items-center justify-center">
-              <CategoryItem
+              <MyCategoryButton
                 categoryName={category.name}
                 component={category.component}
                 img={category.img}

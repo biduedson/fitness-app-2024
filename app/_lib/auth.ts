@@ -26,6 +26,7 @@ export const authOptions: AuthOptions = {
         where: { id: user.id },
         include: {
           student: true, // Incluir o relacionamento student
+          gymAdmin:true,
         },
       });
 
@@ -34,6 +35,7 @@ export const authOptions: AuthOptions = {
         ...session.user,
         id: user.id,
         student: userWithStudent?.student, // Incluindo o campo student na sessão
+        gymAdmin: userWithStudent?.gymAdmin || null
       };
 
       return session;

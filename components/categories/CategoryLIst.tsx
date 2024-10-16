@@ -14,7 +14,7 @@ import MobileExercisesGroup from "../MobileExercisesGroup";
 import SwiperNavCategoryButtons from "../SwiperNavCategoryButtons";
 import CategoryItem from "./CategoryItem";
 
-interface CategoryButtonListProps {
+interface CategoryListProps {
   id: string;
 
   categoryAndExercises: Prisma.ExerciseCategoryGetPayload<{
@@ -37,10 +37,7 @@ interface CategoryButtonListProps {
   }>[];
 }
 
-const CategoryButtonsLIst = ({
-  id,
-  categoryAndExercises,
-}: CategoryButtonListProps) => {
+const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
   const [component, setComponent] = useState<ReactElement>(<></>);
   const [closeBtnSlider, setCloseBtnSlider] = useState(false);
   let exercicesAndComponent: {
@@ -85,7 +82,7 @@ const CategoryButtonsLIst = ({
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className=" relative w-full  h-[200px] sm:h-[400px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
+          className=" relative w-full  h-[200px] sm:h-[300px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
         >
           <Image
             src="/assets/img/bannerExercisePage.png"
@@ -114,7 +111,7 @@ const CategoryButtonsLIst = ({
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="grid grid-cols-3  gap-3 lg:flexx lg:items-centerr py-4 px-4 
+          className="grid grid-cols-3  gap-3  lg:items-centerr py-4 px-4 
           pt-8 lg:justify-betweenn lg:hidden
           "
         >
@@ -163,4 +160,4 @@ const CategoryButtonsLIst = ({
   );
 };
 
-export default CategoryButtonsLIst;
+export default CategoryLIst;

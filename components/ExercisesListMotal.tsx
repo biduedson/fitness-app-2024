@@ -27,7 +27,7 @@ function ExercisesListMotal({
       viewport={{ once: false, amount: 0.2 }}
       className={
         openModal
-          ? "fixed  flex flex-col lg:items-end   z-50  w-full  inset-0 overflow-y-hidden bg-black_texture sm:bg-hero bg-cover "
+          ? "fixed  flex flex-col lg:items-end   z-50  w-full  inset-0 overflow-y-hidden bg-black_texture "
           : "hidden "
       }
     >
@@ -46,7 +46,7 @@ function ExercisesListMotal({
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className=" h-full mb-4  overflow-y-scroll [&::-webkit-scrollbar]:hidden"
+          className=" flex  justify-center  h-full mb-4  overflow-y-scroll [&::-webkit-scrollbar]:hidden"
         >
           {component}
         </motion.div>

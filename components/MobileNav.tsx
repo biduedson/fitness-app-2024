@@ -42,36 +42,44 @@ const MobileNav = ({
 
   return (
     <nav className={`${contaynerStyle} bg-primary-300 `}>
-      {data?.user.student && (
-        <motion.div
-          variants={fadeIn("down", 0.2)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="relative  w-full h-[150px] flex flex-col items-center mx-auto p-4 clip-custom-bottom
-         bg-accent/50 "
-        ></motion.div>
-      )}
       <motion.div
-        variants={fadeIn("up", 0.2)}
+        variants={fadeIn("down", 0.2)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="absolute top-[7%] w-full flex flex-col items-center   "
+        className="relative  w-full h-[150px] flex flex-col items-center mx-auto p-4 clip-custom-bottom
+        "
       >
-        <div className="relative w-[140px] h-[140px] mb-2">
-          <Image
-            src={data?.user.image!}
-            alt="userImage"
-            fill
-            className="absolute rounded-full object-cover shadow-slate-100  shadow-2xl"
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h3 className=" h3 capitalize">{data?.user.name!}</h3>
-          <span className=" lowercase text-sm">{data?.user.email}</span>
-        </div>
+        <Image
+          src="/assets/img/bannerExercisePage.png"
+          alt="banner"
+          fill
+          className="absolute object-cover rounded-b-[]"
+        />
       </motion.div>
+
+      {data?.user.student && (
+        <motion.div
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="absolute top-[7%] w-full flex flex-col items-center   "
+        >
+          <div className="relative w-[140px] h-[140px] mb-2">
+            <Image
+              src={data?.user.image!}
+              alt="userImage"
+              fill
+              className="absolute rounded-full object-cover shadow-slate-100  shadow-2xl"
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <h3 className=" h3 capitalize">{data?.user.name!}</h3>
+            <span className=" lowercase text-sm">{data?.user.email}</span>
+          </div>
+        </motion.div>
+      )}
       <div className="w-full mt-[100px] ">
         <motion.div
           variants={fadeIn("up", 0.2)}

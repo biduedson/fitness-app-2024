@@ -14,6 +14,12 @@ declare module 'next-auth'{
         createdAt: Date;
         updatedAt: Date;
       } | null;
+      gymAdmin?: {
+        id: string;
+        userId: string;
+        createdAt: Date;
+        updatedAt: Date;
+      } | null;
         } & DefaultSession['user'];
     }
     interface User extends DefaultUser {
@@ -27,5 +33,11 @@ declare module 'next-auth'{
       createdAt: Date;
       updatedAt: Date;
     } | null;
+     gymAdmin?: {
+       id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: string;
+      } | null;
   }
 }

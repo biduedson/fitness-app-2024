@@ -5,7 +5,7 @@ services:
     build: # Inicia o processo de construção da imagem
       context: . # Usa o diretório atual como contexto de construção
       dockerfile: Dockerfile # Usa o Dockerfile localizado no diretório atual
-    image: bdpcs214/nextjs-fitness-app-2024:latest # Nome da imagem no Docker Hub
+    image: nextjs-fitness-app-local:latest # Nome da imagem no Docker Hub
     ports:
       - "3000:3000" # Mapeia a porta 3000 do contêiner para a porta 3000 do host
       - "5555:5555"

@@ -10,8 +10,6 @@ import { db } from "./_lib/prisma";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Login from "@/components/Login";
-import Exercicies from "@/components/Exercises";
-import MyExercises from "@/components/MyExercises";
 export default async function Home() {
   return (
     <main>
@@ -24,8 +22,6 @@ export default async function Home() {
       <Membership />
       <Testimonial />
       <Blog />
-      <Exercicies />
-      <MyExercises />
       <Brands />
       <Login />
 
