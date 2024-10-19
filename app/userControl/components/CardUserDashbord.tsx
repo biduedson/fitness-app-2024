@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface ICardUserDashbordProps {
@@ -16,6 +17,10 @@ interface ICardUserDashbordProps {
 }
 const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
   const { data } = useSession();
+  const router = useRouter();
+  const handleUserRouterClick = (id: string) => {
+    router.push(`/user/${id}`);
+  };
   return (
     <motion.div
       variants={fadeIn("down", 0.4)}
@@ -30,14 +35,18 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
         className="h2 flex flex-col   w-full sm:w-[380px] sm:text-[40px]
-             text-center mb-8 text-accent le leading-[1.1]  border-white border-y-[1px] "
+             text-center mb-8 text-accent le leading-[1.1]  border-white border-b-[1px] "
       >
-        <span className="text-[50px] sm:text-[70px] mb-2">Usuarios</span>
+        <span className="text-[50px] sm:text-[70px] mb-2">Controle</span>
+        <span className="text-[30px] sm:text-[40px] mb-2">de usuários</span>
       </motion.h2>
       <div className="w-full h-full grid grid-cols-2  gap-4 p-8 overflow-y-scroll [&::-webkit-scrollbar]:hidden">
         {users.map((user) => {
           return (
-            <div className=" w-full h-[314px] flex flex-col justify-between border-accent border-[1px] rounded-lg  bg-white">
+            <div
+              className=" w-full h-[314px] flex flex-col justify-between border-accent border-[1px] rounded-lg  bg-white cursor-pointer"
+              onClick={() => handleUserRouterClick(user.id)}
+            >
               <div className=" relative bg-accent bg- w-full h-[120px]">
                 <div className="absolute top-[50px] w-full flex flex-col items-center justify-center ">
                   <div className="relative w-[120px] h-[120px]   ">

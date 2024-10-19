@@ -6,6 +6,7 @@ import { authOptions } from '@/app/_lib/auth';
 
 export async function GET(req: NextRequest) {
     try {
+      
         if(req.method !== "GET"){
       return NextResponse.json({message: "Metodo incorreto" }, { status: 401})  
     }
