@@ -82,13 +82,13 @@ const MobileNav = ({
           </div>
         </motion.div>
       )}
-      <div className="w-full mt-[100px] ">
+      <div className="w-full mt-[50px] ">
         <motion.div
           variants={fadeIn("up", 0.2)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="flex flex-col w-full justify-center items-center gap-2  h-[55vh]  rounded-lg
+          className="flex flex-col w-full justify-center items-center gap-2  h-[65vh]  rounded-lg
          "
         >
           {links.map((link, index) => {
