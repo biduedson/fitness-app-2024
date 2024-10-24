@@ -112,7 +112,6 @@ const MyCategoryLIst = ({
               <MyCategoryButton
                 categoryName={category.name}
                 component={category.component}
-                img={category.img}
               />
             </div>
           );
