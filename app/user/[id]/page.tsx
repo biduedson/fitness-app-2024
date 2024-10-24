@@ -51,7 +51,7 @@ const Userpage = () => {
     }
   };
 
-  if (status === "loading" || !userData) {
+  if (!userData) {
     return (
       <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
         <span className=" animate-spin text-[20px]">
