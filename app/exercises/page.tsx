@@ -29,6 +29,7 @@ const page = async () => {
       },
     },
   });
+
   if (!data?.user.student) {
     return (
       <section

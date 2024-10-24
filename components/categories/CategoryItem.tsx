@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import CustomButton from "../CustomButton";
 import CustomMobileButton from "../CustomMobileButton";
-import MobileExercisesGroup from "../MobileExercisesGroup";
 import ExercisesListMotal from "../ExercisesListMotal";
 
 interface CategoryButtonProps {
@@ -39,7 +38,6 @@ const CategoryItem = ({
         openModal={openModal}
         setOpenModal={setOpenModel}
         categoryName={categoryName}
-        imageUrl={img}
       />
     </>
   );

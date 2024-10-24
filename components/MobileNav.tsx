@@ -72,6 +72,8 @@ const MobileNav = ({
               alt="userImage"
               fill
               className="absolute rounded-full object-cover shadow-slate-100  shadow-2xl"
+              sizes="(width: 140px)"
+              priority
             />
           </div>
           <div className="flex flex-col gap-2">

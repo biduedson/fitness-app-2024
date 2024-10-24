@@ -2,6 +2,8 @@ import { db } from "@/app/_lib/prisma"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import NextAuth, { AuthOptions } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook";
+import InstagramProvider from "next-auth/providers/instagram";
+
 
 import { Adapter } from "next-auth/adapters"
 import GoogleProvider from 'next-auth/providers/google'
@@ -17,6 +19,11 @@ export const authOptions: AuthOptions = {
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
     }),
+     InstagramProvider({
+    clientId: process.env.INSTAGRAM_CLIENT_ID as string,
+    clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string ,
+    
+  })
     ],
     
     callbacks: {

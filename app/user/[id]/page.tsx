@@ -3,27 +3,25 @@ import useSWR from "swr";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Prisma, User } from "@prisma/client";
 import { MdArrowBackIos } from "react-icons/md";
-import { useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 
-interface IUserPageprops {
-  user: Prisma.UserGetPayload<{}>;
-}
-const Userpage = ({ user }: IUserPageprops) => {
+const fetcher = (url: string): Promise<User> =>
+  fetch(url).then((res) => res.json());
+
+const Userpage = () => {
   const params = useParams();
   const { id } = params;
-  //const [user, setUser] = useState<User | null>(null);
-  //const [error, setError] = useState<null | string>(null);
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const fetcher = (url: string): Promise<User> =>
-    fetch(url).then((res) => res.json());
-
+  if (!session?.user.gymAdmin) {
+    return notFound();
+  }
   const { data: initialUser, error } = useSWR<User>(() => {
     if (status === "authenticated" && session?.user.gymAdmin) {
       return `/api/user/${id}`;
@@ -53,34 +51,6 @@ const Userpage = ({ user }: IUserPageprops) => {
     }
   };
 
-  /*useEffect(() => {
-    const fechDataUser = async () => {
-      try {
-        if (status === "loading") {
-          // Aguardando a sessão ser carregada
-          return;
-        }
-
-        if (!session?.user.gymAdmin) {
-          router.push("/login");
-          return;
-        }
-        const response = await fetch(`/api/user/${id}`);
-        if (!response.ok) {
-          setError("Erro ao buscar dados do usuário");
-          return;
-        }
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error) {
-        setError("Erro na comunicação com o servidor");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fechDataUser();
-  }, [id, session, status, router]);*/
-
   if (status === "loading" || !userData) {
     return (
       <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
@@ -99,7 +69,6 @@ const Userpage = ({ user }: IUserPageprops) => {
     );
   }
 
-  //setUserData(initialUser);
   return (
     <section className="w-full h-[100vh] flex flex-col  items-center bg-black_texture text-white">
       <motion.header
@@ -121,6 +90,8 @@ const Userpage = ({ user }: IUserPageprops) => {
           alt="banner"
           fill
           className="lg:hidden absolute object-cover "
+          sizes="150px"
+          priority // Adicione essa propriedade para priorizar o carregamento
         />
         <motion.div
           variants={fadeIn("up", 0.6)}
@@ -136,6 +107,7 @@ const Userpage = ({ user }: IUserPageprops) => {
                 alt="User image"
                 className="absolute rounded-full object-cover border-accent border-[4px] "
                 fill
+                sizes="(width: 150px)"
               />
             </div>
             <div>
@@ -155,7 +127,6 @@ const Userpage = ({ user }: IUserPageprops) => {
           </div>
         </motion.div>
       </motion.header>
-      {user && <p>{initialUser?.name!}</p>}
     </section>
   );
 };

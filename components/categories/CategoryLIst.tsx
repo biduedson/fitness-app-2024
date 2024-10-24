@@ -10,8 +10,6 @@ import { Prisma } from "@prisma/client";
 import ExerciseList from "../exercices/components/ExerciseList";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-import MobileExercisesGroup from "../MobileExercisesGroup";
-import SwiperNavCategoryButtons from "../SwiperNavCategoryButtons";
 import CategoryItem from "./CategoryItem";
 
 interface CategoryListProps {
@@ -45,7 +43,6 @@ const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
     img: string;
     component: ReactElement;
   }[] = [];
-
   categoryAndExercises.map((category) => {
     exercicesAndComponent.push({
       img: category.imageUrl!,
@@ -122,39 +119,12 @@ const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
                   categoryName={category.name}
                   component={category.component}
                   img={category.img}
+                  key={index}
                 />
               </div>
             );
           })}
         </motion.div>
-
-        <div className="  lg:flex w-full h-[700px] hidden flex-col my-2   lg:mt-0">
-          {/*Desktop*/}
-          <Swiper className="h-full w-[1024px] relative mt-[124px]  ">
-            {exercicesAndComponent.map((category, index) => {
-              return (
-                <SwiperSlide key={index}>
-                  <MobileExercisesGroup
-                    img={category.img}
-                    categoryName={category.name}
-                    handleComponentClick={() => {
-                      setComponent(category.component!);
-                    }}
-                    component={category.component!}
-                  />
-                </SwiperSlide>
-              );
-            })}
-            <SwiperNavCategoryButtons
-              quantitySlides={exercicesAndComponent}
-              containerStyles={`absolute flex items-center top-[55%]  left-[14%] h-[30px] w-[auto] gap-2                    
-                 z-20 flex justify-between  `}
-              btnStyles="border border-accent text-white w-[66px] h-[66px] rounded-full flex 
-                 justify-center items-center hover:bg-accent transition-all duration-300"
-              iconStyles="text-2xl"
-            />
-          </Swiper>
-        </div>
       </div>
     </div>
   );

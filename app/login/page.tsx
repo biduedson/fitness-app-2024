@@ -14,6 +14,9 @@ const page = () => {
   const handleSignInFacebook = async () => {
     await signIn("facebook", { callbackUrl: "/" });
   };
+  const handleSignInInstagran = async () => {
+    await signIn("instagram", { callbackUrl: "/" });
+  };
   return (
     <motion.section
       variants={fadeIn("down", 0.4)}

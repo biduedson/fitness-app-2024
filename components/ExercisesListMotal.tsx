@@ -8,14 +8,12 @@ import MobileNavCloseModalFooter from "./MobileNavCloseModalFooter";
 interface ExerciseModalListProps {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  imageUrl: string;
   categoryName: string;
   component: ReactElement;
 }
 function ExercisesListMotal({
   openModal,
   setOpenModal,
-  imageUrl,
   categoryName,
   component,
 }: ExerciseModalListProps) {
