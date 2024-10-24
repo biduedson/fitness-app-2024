@@ -1,22 +1,15 @@
 "use client";
 import React, { ReactElement, useState } from "react";
-import MobileExercisesGroup from "../MobileExercisesGroup";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-import Image from "next/image";
 import ExercisesListMotal from "../ExercisesListMotal";
 
 interface CategoryButtonProps {
-  img: string;
   categoryName: string;
   component: ReactElement;
 }
 
-const MyCategoryButton = ({
-  img,
-  categoryName,
-  component,
-}: CategoryButtonProps) => {
+const MyCategoryButton = ({ categoryName, component }: CategoryButtonProps) => {
   const [openModal, setOpenModel] = useState(false);
 
   return (
@@ -39,7 +32,6 @@ const MyCategoryButton = ({
         openModal={openModal}
         setOpenModal={setOpenModel}
         categoryName={categoryName}
-        imageUrl={img}
       />
     </>
   );

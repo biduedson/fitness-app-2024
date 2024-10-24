@@ -1,11 +1,9 @@
 "use client";
 import React, { ReactElement, useState } from "react";
 import { Prisma } from "@prisma/client";
-import ExerciseList from "../exercices/components/ExerciseList";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import Image from "next/image";
-import CategoryItem from "./CategoryItem";
 import MyCategoryButton from "./MyCategoryButton";
 import MyExerciseList from "../exercices/components/MyExescisesList";
 
