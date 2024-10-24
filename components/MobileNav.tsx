@@ -82,7 +82,7 @@ const MobileNav = ({
           </div>
         </motion.div>
       )}
-      <div className="w-full mt-[50px] ">
+      <div className="w-full  ">
         <motion.div
           variants={fadeIn("up", 0.2)}
           initial="hidden"
