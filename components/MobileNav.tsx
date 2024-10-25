@@ -9,6 +9,16 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import { useRouter } from "next/navigation";
 
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 const MobileNav = ({
   contaynerStyle,
   closeNav,

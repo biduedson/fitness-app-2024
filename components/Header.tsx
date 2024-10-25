@@ -37,10 +37,6 @@ const Header = () => {
     fixed max-w-[1920px] top-0  w-full bg-primary-200 h-[100px] transition-all z-50 shadow-lg  shadow-primary-300`}
     >
       <div className="container mx-auto h-full flex items-center justify-between">
-        {/* logo */}
-        <Link href="">
-          <Image src={"/assets/img/logo.png"} width={117} height={55} alt="" />
-        </Link>
         {/* mobile nav - hidden on large diveces*/}
         <MobileNav
           closeNav={() => setOpenNav(!openNav)}
@@ -65,12 +61,19 @@ const Header = () => {
 
         {/*avatar login user*/}
         {data?.user && (
-          <UserProfile
-            imageUrl={data.user.image as string}
-            openNav={openNav}
-            setOpenNav={setOpenNav}
-          />
+          <>
+            <UserProfile
+              imageUrl={data.user.image as string}
+              openNav={openNav}
+              setOpenNav={setOpenNav}
+            />
+          </>
         )}
+
+        {/* logo */}
+        <Link href="/">
+          <Image src={"/assets/img/logo.png"} width={117} height={55} alt="" />
+        </Link>
         <button
           className="text-white lg:hidden"
           onClick={() => setOpenNav(!openNav)}
