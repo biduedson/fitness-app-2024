@@ -7,6 +7,7 @@ import InstagramProvider from "next-auth/providers/instagram";
 
 import { Adapter } from "next-auth/adapters"
 import GoogleProvider from 'next-auth/providers/google'
+import { GymAdmin, Student } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(db) as Adapter,
@@ -32,26 +33,22 @@ export const authOptions: AuthOptions = {
   },
   
     callbacks: {
-    async session({ session, user }) {
-      // Fazendo a consulta para buscar o relacionamento `student`
-      const userWithStudent = await db.user.findUnique({
-        where: { id: user.id },
-        include: {
-          student: true, // Incluir o relacionamento student
-          gymAdmin:true,
-        },
-      });
-
-      // Adiciona os dados de `student` na sessão do usuário
-      session.user = {
-        ...session.user,
-        id: user.id,
-        student: userWithStudent?.student || null, // Incluindo o campo student na sessão
-        gymAdmin: userWithStudent?.gymAdmin || null
-      };
-
-      return session;
-    },
+  async session({ session, token }) {
+    // Adiciona os dados do token à sessão
+    session.user.id = token.id as string; // Armazena o ID do usuário na sessão
+    session.user.student = token.student as Student || null; // Armazena os dados do student na sessão
+    session.user.gymAdmin = token.gymAdmin as GymAdmin || null; // Armazena os dados do gymAdmin na sessão
+    return session;
   },
+  async jwt({ token, user }) {
+    // Se o usuário estiver presente, adiciona os dados ao token
+    if (user) {
+      token.id = user.id as string; // Armazena o ID do usuário no token
+      token.student = user.student || null; // Armazena os dados do student no token
+      token.gymAdmin = user.gymAdmin || null; // Armazena os dados do gymAdmin no token
+    }
+    return token;
+  },
+},
   secret: process.env.NEXTAUTH_SECRET,
 }
