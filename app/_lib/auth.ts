@@ -27,11 +27,8 @@ export const authOptions: AuthOptions = {
   })
     ],
     
-    session: {
-    strategy: "jwt", // Define a estratégia de sessão como JWT
-    maxAge: 30 * 24 * 60 * 60, // Define a duração da sessão para 30 dias (em segundos)
-  },
-  
+    
+
    callbacks: {
     
   async session({ session, token, user }) {
