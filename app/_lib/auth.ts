@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
      if (userWithDetails) {
         session.user = {
           ...session.user,
-          id: userWithDetails.id,
+          id: userWithDetails.id as string ,
           student: userWithDetails.student || null,
           gymAdmin: userWithDetails.gymAdmin || null,
         };
