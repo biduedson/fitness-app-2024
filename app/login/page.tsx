@@ -53,8 +53,8 @@ const page = () => {
           <Image
             src="/assets/img/google.png"
             alt="google icon"
-            width={30}
-            height={30}
+            width={40}
+            height={40}
           />
           <span
             className="w-[200px] text-[18px] font-semibold"
@@ -71,11 +71,27 @@ const page = () => {
           <Image
             src="/assets/img/fabebookIcon.png"
             alt="google icon"
+            width={45}
+            height={45}
+          />
+          <span className="w-[200px] text-[18px] font-semibold">
+            Continue com facebook
+          </span>
+        </button>
+
+        <button
+          className="w-full sm:w-[400px]  h-[60px] rounded-[40px] flex items-center  justify-center gap-8 
+         text-white border-white border-[1px]"
+          onClick={handleSignInInstagran}
+        >
+          <Image
+            src="/assets/img/instagramIcon.png"
+            alt="google icon"
             width={35}
             height={35}
           />
           <span className="w-[200px] text-[18px] font-semibold">
-            Continue com facebook
+            Continue com instagram
           </span>
         </button>
       </motion.div>
