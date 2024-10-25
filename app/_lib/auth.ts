@@ -27,7 +27,9 @@ export const authOptions: AuthOptions = {
   })
     ],
     
-     
+     session: {
+    strategy: "database",
+  },
 
    callbacks: {
     async session({ session, user }) {
