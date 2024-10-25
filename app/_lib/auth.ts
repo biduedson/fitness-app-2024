@@ -44,7 +44,7 @@ export const authOptions: AuthOptions = {
         student: userWithDetails?.student || null,
         gymAdmin: userWithDetails?.gymAdmin || null,
       };
-
+console.log("Session User:", session.user); // Debugging linha
       return session;
     },
   },
