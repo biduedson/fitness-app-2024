@@ -12,17 +12,16 @@ const page = () => {
   const router = useRouter();
 
   // Redireciona para a home se o usuário já estiver logado
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/"); // Redireciona para a página inicial
-    }
-  }, [status, router]);
 
   const handleSignInGoogle = async () => {
-    await signIn("google");
+    await signIn("google", {
+      callbackUrl: "https://fitness-app-2024.vercel.app",
+    });
   };
   const handleSignInFacebook = async () => {
-    await signIn("facebook");
+    await signIn("facebook", {
+      callbackUrl: "https://fitness-app-2024.vercel.app",
+    });
   };
   const handleSignInInstagran = async () => {
     await signIn("instagram", {
