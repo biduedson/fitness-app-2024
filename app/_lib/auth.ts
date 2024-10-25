@@ -27,9 +27,7 @@ export const authOptions: AuthOptions = {
   })
     ],
     
-     session: {
-    strategy: "jwt",
-  },
+     
 
    callbacks: {
     async session({ session, user }) {
