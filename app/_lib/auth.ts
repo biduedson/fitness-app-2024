@@ -32,8 +32,16 @@ export const authOptions: AuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // Define a duração da sessão para 30 dias (em segundos)
   },
   
-    callbacks: {
-  async session({ session, token }) {
+   callbacks: {
+    
+  async session({ session, token, user }) {
+    const userWithStudent = await db.user.findUnique({
+        where: { id: user.id },
+        include: {
+          student: true, // Incluir o relacionamento student
+          gymAdmin:true,
+        },
+      });
     // Adiciona os dados do token à sessão
     session.user.id = token.id as string; // Armazena o ID do usuário na sessão
     session.user.student = token.student as Student || null; // Armazena os dados do student na sessão
@@ -41,11 +49,18 @@ export const authOptions: AuthOptions = {
     return session;
   },
   async jwt({ token, user }) {
+    const userWithStudent = await db.user.findUnique({
+        where: { id: user.id },
+        include: {
+          student: true, // Incluir o relacionamento student
+          gymAdmin:true,
+        },
+      });
     // Se o usuário estiver presente, adiciona os dados ao token
     if (user) {
       token.id = user.id as string; // Armazena o ID do usuário no token
-      token.student = user.student || null; // Armazena os dados do student no token
-      token.gymAdmin = user.gymAdmin || null; // Armazena os dados do gymAdmin no token
+      token.student = userWithStudent?.student || null; // Armazena os dados do student no token
+      token.gymAdmin = userWithStudent?.gymAdmin|| null; // Armazena os dados do gymAdmin no token
     }
     return token;
   },
