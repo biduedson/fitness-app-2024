@@ -5,17 +5,27 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 const page = () => {
+  const { data: session } = useSession();
   const router = useRouter();
+
+  // Redireciona para a home se o usuário já estiver logado
+  useEffect(() => {
+    if (session) {
+      router.push("/"); // Redireciona para a página inicial
+    }
+  }, [session, router]);
+
   const handleSignInGoogle = async () => {
-    await signIn("google", { callbackUrl: "/" });
+    await signIn("google");
   };
   const handleSignInFacebook = async () => {
-    await signIn("facebook", { callbackUrl: "/" });
+    await signIn("facebook");
   };
   const handleSignInInstagran = async () => {
-    await signIn("instagram", { callbackUrl: "/" });
+    await signIn("instagram");
   };
   return (
     <motion.section
