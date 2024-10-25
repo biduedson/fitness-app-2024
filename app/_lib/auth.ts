@@ -41,12 +41,16 @@ export const authOptions: AuthOptions = {
         include: { student: true, gymAdmin: true },
       });
 
-      session.user = {
-        ...session.user,
-        id: userWithDetails?.id ,
-        student: userWithDetails?.student || null,
-        gymAdmin: userWithDetails?.gymAdmin || null,
-      };
+     if (userWithDetails) {
+        session.user = {
+          ...session.user,
+          id: userWithDetails.id,
+          student: userWithDetails.student || null,
+          gymAdmin: userWithDetails.gymAdmin || null,
+        };
+      } else {
+        console.warn("User details not found for user id:", user.id);
+      }
 console.log("Session User:", session.user); // Debugging linha
       return session;
     },
