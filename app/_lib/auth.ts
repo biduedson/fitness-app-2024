@@ -27,40 +27,26 @@ export const authOptions: AuthOptions = {
   })
     ],
     
-    
+     session: {
+    strategy: "jwt",
+  },
 
    callbacks: {
-    
-  async session({ session, token, user }) {
-    const userWithStudent = await db.user.findUnique({
+    async session({ session, user }) {
+      const userWithDetails = await db.user.findUnique({
         where: { id: user.id },
-        include: {
-          student: true, // Incluir o relacionamento student
-          gymAdmin:true,
-        },
+        include: { student: true, gymAdmin: true },
       });
-    // Adiciona os dados do token à sessão
-    session.user.id = user.id as string; // Armazena o ID do usuário na sessão
-    session.user.student = userWithStudent?.student  || null; // Armazena os dados do student na sessão
-    session.user.gymAdmin = userWithStudent?.gymAdmin  || null; // Armazena os dados do gymAdmin na sessão
-    return session;
+
+      session.user = {
+        ...session.user,
+        id: user.id,
+        student: userWithDetails?.student || null,
+        gymAdmin: userWithDetails?.gymAdmin || null,
+      };
+
+      return session;
+    },
   },
-  async jwt({ token, user }) {
-    const userWithStudent = await db.user.findUnique({
-        where: { id: user.id },
-        include: {
-          student: true, // Incluir o relacionamento student
-          gymAdmin:true,
-        },
-      });
-    // Se o usuário estiver presente, adiciona os dados ao token
-    if (user) {
-      token.id = user.id as string; // Armazena o ID do usuário no token
-      token.student = userWithStudent?.student || null; // Armazena os dados do student no token
-      token.gymAdmin = userWithStudent?.gymAdmin|| null; // Armazena os dados do gymAdmin no token
-    }
-    return token;
-  },
-},
   secret: process.env.NEXTAUTH_SECRET,
 }
