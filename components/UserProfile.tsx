@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import { IoCaretDownOutline } from "react-icons/io5";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { FaChevronRight } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
+
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
@@ -67,10 +69,10 @@ const UserProfile = ({
             <SheetHeader className="bg-accent w-full flex items-center justify-center h-[60px] rounded-t-md px-4  ">
               <SheetTitle className=" text-white">Profile</SheetTitle>
             </SheetHeader>
-            <div className="w-full h-[120px] p-2 ">
-              <div className="flex items-center w-full h-[80px] rounded-md shadow-md p-2 hover:bg-slate-100">
-                <div className="flex  items-center gap-2 ">
-                  <div className="relative w-[60px] h-[60px] ">
+            <div className="w-full h-[220px] p-2 ">
+              <div className="flex items-center  justify-center w-full h-full rounded-md shadow-md p-2 hover:bg-slate-100">
+                <div className="flex flex-col  items-center gap-2 ">
+                  <div className="relative w-[120px] h-[120px] ">
                     <Image
                       src={data?.user.image as string}
                       alt="User"
@@ -79,6 +81,9 @@ const UserProfile = ({
                     />
                   </div>
                   <p>{data?.user.name}</p>
+                  <p className="text-accent font-semibold">
+                    {data?.user.email}
+                  </p>
                 </div>
               </div>
             </div>
@@ -155,6 +160,28 @@ const UserProfile = ({
                   <FaChevronRight className="flex justify-self-end" />
                 </div>
               </div>
+              {data?.user.gymAdmin && (
+                <div
+                  className="w-full p-1 cursor-pointer "
+                  onClick={() => signOut({ callbackUrl: "/userControl" })}
+                >
+                  <div
+                    className="flex items-center justify-between w-full h-[60px] rounded-md 
+               p-2 hover:bg-slate-100"
+                  >
+                    <div className="flex  items-center gap-2">
+                      <p
+                        className=" h-[50px] w-[50px] text-[28px]  bg-slate-300 flex 
+                  items-center justify-center rounded-full"
+                      >
+                        <FaUserGroup />
+                      </p>
+                      <p>Controle de usuarios</p>
+                    </div>
+                    <FaChevronRight className="flex justify-self-end" />
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
         </SheetContent>

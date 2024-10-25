@@ -40,8 +40,7 @@ const MobileNav = ({
     { name: "planos", target: "prices", offset: -40, href: null },
     { name: "depoimentos", target: "testimonial", offset: 0, href: null },
     { name: "blog", target: "blog", offset: 0, href: null },
-    { name: "Exercícios", target: "", offset: -40, href: "/exercises" },
-    { name: "Meus Exercícios", target: "", offset: 0, href: "/myexercises" },
+
     {
       name: data?.user.student ? "logout" : "login",
       target: "",
@@ -111,16 +110,10 @@ const MobileNav = ({
                 spy
                 onClick={link.href ? () => route.push(link.href) : closeNav}
                 activeClass={
-                  ["Exercícios", "Meus Exercícios", "login", "logout"].includes(
-                    link.name
-                  )
-                    ? "inative"
-                    : "active"
+                  ["login", "logout"].includes(link.name) ? "inative" : "active"
                 }
                 className={
-                  ["Exercícios", "Meus Exercícios", "login", "logout"].includes(
-                    link.name
-                  )
+                  ["login", "logout"].includes(link.name)
                     ? " flex items-center justify-center w-[180px] cursor-pointer text-[18px] rounded-2xl border-accent border-[1px] p-2 "
                     : "cursor-pointer hover:text-accent transition-all text-[18px]"
                 }
