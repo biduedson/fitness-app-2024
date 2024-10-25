@@ -8,9 +8,9 @@ import CardUserDashbord from "./components/CardUserDashbord";
 
 import { redirect } from "next/navigation";
 
-async function Dashboard() {
+const page = async () => {
   const data = await getServerSession(authOptions);
-  console.log(data);
+  console.log(data?.user.gymAdmin);
   /*if (!data?.user) {
     redirect("/login");
   }*/
@@ -36,6 +36,6 @@ async function Dashboard() {
     );
   }
   return <CardUserDashbord users={dataUsers} />;
-}
+};
 
-export default Dashboard;
+export default page;
