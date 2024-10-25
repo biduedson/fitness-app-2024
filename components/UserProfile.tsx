@@ -140,26 +140,7 @@ const UserProfile = ({
                   <FaChevronRight className="flex justify-self-end" />
                 </div>
               </div>
-              <div
-                className="w-full p-1 cursor-pointer "
-                onClick={() => signOut({ callbackUrl: "/" })}
-              >
-                <div
-                  className="flex items-center justify-between w-full h-[60px] rounded-md 
-               p-2 hover:bg-slate-100"
-                >
-                  <div className="flex  items-center gap-2">
-                    <p
-                      className=" h-[50px] w-[50px] text-[28px]  bg-slate-300 flex 
-                  items-center justify-center rounded-full"
-                    >
-                      <LiaSignOutAltSolid />
-                    </p>
-                    <p>Sair</p>
-                  </div>
-                  <FaChevronRight className="flex justify-self-end" />
-                </div>
-              </div>
+
               {data?.user.gymAdmin && (
                 <div
                   className="w-full p-1 cursor-pointer "
@@ -182,6 +163,26 @@ const UserProfile = ({
                   </div>
                 </div>
               )}
+              <div
+                className="w-full p-1 cursor-pointer "
+                onClick={() => signOut({ callbackUrl: "/" })}
+              >
+                <div
+                  className="flex items-center justify-between w-full h-[60px] rounded-md 
+               p-2 hover:bg-slate-100"
+                >
+                  <div className="flex  items-center gap-2">
+                    <p
+                      className=" h-[50px] w-[50px] text-[28px]  bg-slate-300 flex 
+                  items-center justify-center rounded-full"
+                    >
+                      <LiaSignOutAltSolid />
+                    </p>
+                    <p>Sair</p>
+                  </div>
+                  <FaChevronRight className="flex justify-self-end" />
+                </div>
+              </div>
             </div>
           </motion.div>
         </SheetContent>
