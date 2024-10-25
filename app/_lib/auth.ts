@@ -32,32 +32,19 @@ export const authOptions: AuthOptions = {
   },
 
    callbacks: {
-    
-    async jwt({ token, user }) {
-
-      const userWithStudent = await db.user.findUnique({
+    async session({ session, user }) {
+      const userWithDetails = await db.user.findUnique({
         where: { id: user.id },
-        include: {
-          student: true, // Incluir o relacionamento student
-          gymAdmin:true,
-        },
+        include: { student: true, gymAdmin: true },
       });
-      // Adiciona dados ao token JWT
-      if (userWithStudent) {
-        token.id = userWithStudent.id;
-        token.student = userWithStudent.student || null;
-        token.gymAdmin = userWithStudent.gymAdmin || null;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      // Adiciona dados da sessão com base no JWT
+
       session.user = {
         ...session.user,
-        id: token.id as string ,
-        student: token.student as Student,
-        gymAdmin: token.gymAdmin as GymAdmin,
+        id: user.id,
+        student: userWithDetails?.student || null,
+        gymAdmin: userWithDetails?.gymAdmin || null,
       };
+
       return session;
     },
   },
