@@ -25,7 +25,9 @@ const page = () => {
     await signIn("facebook");
   };
   const handleSignInInstagran = async () => {
-    await signIn("instagram" { callbackUrl: "https://fitness-app-2024.vercel.app" });
+    await signIn("instagram", {
+      callbackUrl: "https://fitness-app-2024.vercel.app",
+    });
   };
   return (
     <motion.section
