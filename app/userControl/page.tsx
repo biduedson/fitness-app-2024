@@ -10,10 +10,11 @@ import { redirect } from "next/navigation";
 
 async function Dashboard() {
   const data = await getServerSession(authOptions);
-  if (!data?.user) {
+  console.log(data);
+  /*if (!data?.user) {
     redirect("/login");
-  }
-  if (!data?.user?.gymAdmin) {
+  }*/
+  if (!data?.user.gymAdmin) {
     return (
       <div className=" w-full h-[100vh] text-white flex justify-center items-center ">
         Não Autorizado
