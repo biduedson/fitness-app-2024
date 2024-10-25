@@ -43,9 +43,9 @@ export const authOptions: AuthOptions = {
         },
       });
     // Adiciona os dados do token à sessão
-    session.user.id = token.id as string; // Armazena o ID do usuário na sessão
-    session.user.student = token.student as Student || null; // Armazena os dados do student na sessão
-    session.user.gymAdmin = token.gymAdmin as GymAdmin || null; // Armazena os dados do gymAdmin na sessão
+    session.user.id = user.id as string; // Armazena o ID do usuário na sessão
+    session.user.student = userWithStudent?.student  || null; // Armazena os dados do student na sessão
+    session.user.gymAdmin = userWithStudent?.gymAdmin  || null; // Armazena os dados do gymAdmin na sessão
     return session;
   },
   async jwt({ token, user }) {
