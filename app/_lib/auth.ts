@@ -43,7 +43,7 @@ export const authOptions: AuthOptions = {
 
       session.user = {
         ...session.user,
-        id: user.id,
+        id: userWithDetails?.id ,
         student: userWithDetails?.student || null,
         gymAdmin: userWithDetails?.gymAdmin || null,
       };
