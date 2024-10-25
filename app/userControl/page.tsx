@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
+  console.log(data);
   const dataUsers = await db.user.findMany({
     include: {
       student: true,
