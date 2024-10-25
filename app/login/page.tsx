@@ -8,12 +8,12 @@ import { fadeIn } from "@/lib/variants";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 const page = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   // Redireciona para a home se o usuário já estiver logado
   useEffect(() => {
-    if (session) {
+    if (status === "authenticated") {
       router.push("/"); // Redireciona para a página inicial
     }
   }, [session, router]);
