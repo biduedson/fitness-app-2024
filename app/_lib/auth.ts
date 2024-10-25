@@ -25,7 +25,35 @@ export const authOptions: AuthOptions = {
     
   })
     ],
-    
+    session: {
+    strategy: "jwt", // Usar JWT para ambientes serverless
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET, // Certifique-se de ter um segredo definido
+  },
+    // Configuração de cookies
+   
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+        secure: process.env.NODE_ENV === "production", // Somente cookies seguros em produção
+      },
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
+
     callbacks: {
     async session({ session, user }) {
       // Fazendo a consulta para buscar o relacionamento `student`
@@ -41,7 +69,7 @@ export const authOptions: AuthOptions = {
       session.user = {
         ...session.user,
         id: user.id,
-        student: userWithStudent?.student, // Incluindo o campo student na sessão
+        student: userWithStudent?.student || null, // Incluindo o campo student na sessão
         gymAdmin: userWithStudent?.gymAdmin || null
       };
 
