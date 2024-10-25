@@ -33,6 +33,9 @@ export const authOptions: AuthOptions = {
 
    callbacks: {
     async session({ session, user }) {
+      if (!user){
+         return session;
+        } // Retorna a sessão sem modificação se `user` estiver ausente.
       const userWithDetails = await db.user.findUnique({
         where: { id: user.id },
         include: { student: true, gymAdmin: true },
