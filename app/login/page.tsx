@@ -16,7 +16,7 @@ const page = () => {
     if (status === "authenticated") {
       router.push("/"); // Redireciona para a página inicial
     }
-  }, [session, router]);
+  }, [status, router]);
 
   const handleSignInGoogle = async () => {
     await signIn("google");
