@@ -1,43 +1,59 @@
-"use server";
+"use client";
 
-import { getServerSession } from "next-auth";
-import React from "react";
-import { authOptions } from "../_lib/auth";
-import { db } from "../_lib/prisma";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 import CardUserDashbord from "./components/CardUserDashbord";
+import { notFound, redirect, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { Prisma, User } from "@prisma/client";
 
-import { redirect } from "next/navigation";
-
-const page = async () => {
-  const data = await getServerSession(authOptions);
-  console.log(data);
-  const dataUsers = await db.user.findMany({
+interface IUsers {
+  users: Prisma.UserGetPayload<{
     include: {
-      student: true,
-      gymAdmin: true,
-    },
-  });
+      student: true;
+      gymAdmin: true;
+    };
+  }>[];
+}
 
-  console.log(data?.user.gymAdmin);
-  /*if (!data?.user) {
-    redirect("/login");
-  }*/
-  if (!data?.user.gymAdmin) {
-    return (
-      <div className=" w-full h-[100vh] text-white flex justify-center items-center ">
-        Não Autorizado
-      </div>
-    );
+const fetcher = (url: string): Promise<IUsers> =>
+  fetch(url).then((res) => res.json());
+
+const page = () => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  if (!session?.user) {
+    return router.push("/login");
   }
 
-  if (!dataUsers) {
+  if (!session?.user.gymAdmin) {
+    return notFound();
+  }
+
+  const { data: initialUser, error } = useSWR<IUsers>(() => {
+    if (status === "authenticated" && session?.user.gymAdmin) {
+      return `/api/user`;
+    }
+    return null;
+  }, fetcher);
+
+  const [usersData, setUsersData] = useState<IUsers | null>(initialUser!);
+
+  useEffect(() => {
+    if (initialUser) {
+      setUsersData(initialUser);
+    }
+  }, [initialUser]);
+
+  if (usersData?.users?.length === 0) {
     return (
       <div className=" w-full h-[100vh] text-white flex justify-center items-center ">
         Voce não tem usuarios cadastradas . Consulte o administrador do sistema.
       </div>
     );
   }
-  return <CardUserDashbord users={dataUsers} />;
+  return <CardUserDashbord users={usersData?.users!} />;
 };
 
 export default page;
