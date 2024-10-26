@@ -24,7 +24,7 @@ const fetcher = (url: string): Promise<IUsers> =>
 const page = () => {
   const { data: session, status } = useSession();
 
-  if (!session?.user.gymAdmin) {
+  /*if (!session?.user.gymAdmin) {
     return (
       <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
         <span className="animate-pulse text-[20px]">
@@ -33,7 +33,7 @@ const page = () => {
         <span>Não autorizado</span>
       </div>
     );
-  }
+  }*/
 
   const { data: initialUser, error } = useSWR<IUsers>(() => {
     if (status === "authenticated" && session?.user.gymAdmin) {
