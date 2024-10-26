@@ -37,7 +37,7 @@ const page = () => {
 
   const { data: initialUser, error } = useSWR<IUsers>(() => {
     if (status === "authenticated" && session?.user.gymAdmin) {
-      return `/api/user`;
+      return `/api/users`;
     }
     return null;
   }, fetcher);
