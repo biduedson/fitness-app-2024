@@ -43,6 +43,7 @@ const page = () => {
   useEffect(() => {
     if (initialUser) {
       setUsersData(initialUser);
+      console.log(initialUser);
     }
   }, [initialUser]);
 
