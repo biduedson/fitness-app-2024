@@ -30,7 +30,7 @@ const page = () => {
         <span className="animate-pulse text-[20px]">
           <GoBlocked />
         </span>
-        <span>Loading...</span>
+        <span>Não autorizado</span>
       </div>
     );
   }
