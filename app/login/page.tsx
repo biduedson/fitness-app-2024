@@ -11,6 +11,12 @@ const page = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    if (session?.user) {
+      router.push("/");
+    }
+  }, [session]);
+
   // Redireciona para a home se o usuário já estiver logado
 
   const handleSignInGoogle = async () => {

@@ -1,5 +1,5 @@
 "use client";
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoCaretDownOutline } from "react-icons/io5";
@@ -144,7 +144,7 @@ const UserProfile = ({
               {data?.user.gymAdmin && (
                 <div
                   className="w-full p-1 cursor-pointer "
-                  onClick={() => signOut({ callbackUrl: "/userControl" })}
+                  onClick={() => router.push("/userControl")}
                 >
                   <div
                     className="flex items-center justify-between w-full h-[60px] rounded-md 

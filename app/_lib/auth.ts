@@ -12,6 +12,7 @@ export const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      // Verifique se o redirect URI está configurado corretamente no console do Google
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
@@ -22,39 +23,31 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string,
     }),
   ],
-  
-  session: {
-    strategy: "database",
-  },
-  
+
   callbacks: {
-    async signIn({ user, account, profile }) {
-      // Aqui você pode adicionar lógica de verificação, se necessário
-      return true; // Permite o login
-    },
-    
     async session({ session, user }) {
-      if (!user) {
-        return session;
-      } // Retorna a sessão sem modificação se `user` estiver ausente.
+      try {
+        // Inclui detalhes adicionais do usuário na sessão
+        const userWithDetails = await db.user.findUnique({
+          where: { id: user.id },
+          include: { student: true, gymAdmin: true },
+        });
 
-      const userWithDetails = await db.user.findUnique({
-        where: { id: user.id },
-        include: { student: true, gymAdmin: true },
-      });
-
-      if (userWithDetails) {
-        session.user = {
-          ...session.user,
-          id: userWithDetails.id,
-          student: userWithDetails.student || null,
-          gymAdmin: userWithDetails.gymAdmin || null,
-        };
-      } else {
-        console.warn("User details not found for user id:", user.id);
+        if (userWithDetails) {
+          session.user = {
+            ...session.user,
+            id: user.id,
+            student: userWithDetails.student,
+            gymAdmin: userWithDetails.gymAdmin,
+          };
+        } else {
+          console.warn("User details not found for user id:", user.id);
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
       }
 
-      console.log("Session User:", session.user); // Debugging linha
+      console.log("Session User:", session.user); // Linha de depuração
       return session;
     },
   },
