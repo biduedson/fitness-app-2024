@@ -55,7 +55,7 @@ const page = async () => {
     <>
       {data?.user.student ? (
         <section
-          className="relative w-full h-[100vh] flex flex-col justify-between bg-primary-300   "
+          className="relative w-full h-[100vh] flex flex-col justify-between bg-primary-300 "
           id="my-exercises"
         >
           <div className=" absolute top-2 left-2">

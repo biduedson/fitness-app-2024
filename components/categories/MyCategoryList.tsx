@@ -102,8 +102,8 @@ const MyCategoryLIst = ({
         </motion.h2>
       </div>
       <div
-        className="grid grid-cols-3  gap-3 lg:flexx lg:items-centerr py-4 px-4 
-          pt-8 lg:justify-betweenn lg:hidden
+        className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr py-4 px-4 
+          lg:justify-betweenn lg:hidden
           "
       >
         {exercicesAndComponent.map((category, index) => {
