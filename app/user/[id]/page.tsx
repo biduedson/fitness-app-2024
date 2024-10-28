@@ -19,9 +19,8 @@ const Userpage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  if (!session?.user.gymAdmin) {
-    return notFound();
-  }
+  console.log(session?.user.gymAdmin ? "administrador" : "Usuario comum");
+
   const { data: initialUser, error } = useSWR<User>(() => {
     if (status === "authenticated" && session?.user.gymAdmin) {
       return `/api/user/${id}`;
@@ -35,7 +34,7 @@ const Userpage = () => {
     if (initialUser) {
       setUserData(initialUser);
     }
-  }, [initialUser]);
+  }, [initialUser, session]);
 
   const updadteUser = async (updatedData: Partial<User>) => {
     try {
@@ -50,7 +49,20 @@ const Userpage = () => {
       console.error(error);
     }
   };
+  if (status === "loading") {
+    return (
+      <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
+        <span className=" animate-spin text-[20px]">
+          <AiOutlineLoading3Quarters />
+        </span>
+        <span className=" animate-pulse">Loading...</span>
+      </div>
+    );
+  }
 
+  if (status === "unauthenticated" || !session?.user.gymAdmin) {
+    return notFound();
+  }
   if (!userData) {
     return (
       <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
