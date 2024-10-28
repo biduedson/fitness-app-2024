@@ -12,7 +12,7 @@ const page = async () => {
   if (!data?.user.student) {
     return (
       <section
-        className=" w-full flex min-h-screen justify-center items-center bg-primary-300 px-4 lg:px-0"
+        className=" w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0"
         id="my-exercises"
       >
         <h4 className="h4 text-white text-center">
