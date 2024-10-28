@@ -97,8 +97,8 @@ const MyCategoryLIst = ({
           className="h2 flex flex-col   w-[350px] sm:w-[380px] sm:text-[40px]
              text-center mb-8 text-accent le leading-[1.1] mt-4 border-white border-y-[1px] "
         >
-          <span className="text-[50px] sm:text-[70px] mb-2">exercícios</span>
-          <span className="text-[30px] sm:text-[40px] mb-2">favoritos</span>
+          <span className="text-[40px] sm:text-[70px] mb-2">exercícios</span>
+          <span className="text-[20px] sm:text-[40px] mb-2">favoritos</span>
         </motion.h2>
       </div>
       <div
