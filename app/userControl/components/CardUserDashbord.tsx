@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
+import SearchUser from "./SearchUser";
 
 export interface ICardUserDashbordProps {
   users: Prisma.UserGetPayload<{
@@ -29,7 +30,6 @@ export interface ICardUserDashbordProps {
 }
 
 const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredUsers, setFilteredUsers] =
     useState<ICardUserDashbordProps["users"]>(users);
 
@@ -91,23 +91,7 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
       </motion.div>
 
       <div className=" hidden w-full h-[100%] text-white sm:flex flex-col justify-center items-center px-4 bg-black_texture">
-        <motion.div
-          variants={fadeIn("down", 0.4)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="  w-full h-[60px] flex items-center justify-center gap-2 bg-transparent z-50  px-6  text-white"
-        >
-          <Input
-            type="text"
-            placeholder="Buscar usuarios"
-            className="w-full h-[40px] border-accent border-[2px] text-black text-[20px] placeholder:text-accent placeholder:text-center bg-white"
-            onChange={handleInputChange}
-          />
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white text-[20px] ">
-            <BsSearch />
-          </div>
-        </motion.div>
+        <SearchUser handleInputChange={() => handleInputChange} />
         <Table>
           <TableHeader>
             <TableRow>
@@ -158,23 +142,7 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
           <span className="text-[50px] sm:text-[70px] mb-2">Controle</span>
           <span className="text-[30px] sm:text-[40px] mb-2">de usuários</span>
         </motion.h2>
-        <motion.div
-          variants={fadeIn("down", 0.4)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="  w-full h-[60px] flex items-center justify-center gap-2 bg-transparent z-50  px-6  text-white"
-        >
-          <Input
-            type="text"
-            placeholder="Buscar por nome ou email"
-            className="w-full h-[40px] border-accent border-[2px] text-black text-[20px] placeholder:text-accent placeholder:text-center bg-white"
-            onChange={handleInputChange}
-          />
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white text-[20px] ">
-            <BsSearch />
-          </div>
-        </motion.div>
+        <SearchUser handleInputChange={handleInputChange} />
         <div className="w-full h-[530px] grid grid-cols-2  gap-4 p-6  overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
           {filteredUsers.map((user, index) => {
             return (
