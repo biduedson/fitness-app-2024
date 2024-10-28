@@ -8,12 +8,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import UserProfile from "@/components/UserProfile";
 import { fadeIn } from "@/lib/variants";
 import { Prisma } from "@prisma/client";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface ICardUserDashbordProps {
   users: Prisma.UserGetPayload<{
@@ -25,7 +27,12 @@ export interface ICardUserDashbordProps {
 }
 
 const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredUsers, setFilteredUsers] =
+    useState<ICardUserDashbordProps["users"]>(users);
+
   const router = useRouter();
+  const { data } = useSession();
   const handleUserRouterClick = (id: string) => {
     router.push(`/user/${id}`);
   };
@@ -52,7 +59,26 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
   }, []);
 
   return (
-    <div className="w-full h-[100vh] flex flex-col justify-between">
+    <div className="relative w-full h-[100vh] flex flex-col justify-between bg-black_texture">
+      {data?.user && (
+        <div className=" absolute top-2 left-2">
+          <UserProfile imageUrl={data?.user.image!} />
+        </div>
+      )}
+      <motion.div
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className=" relative w-full  h-[200px] sm:h-[300px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
+      >
+        <Image
+          src="/assets/img/bannerExercisePage.png"
+          alt="banner"
+          fill
+          className="absolute object-cover rounded-b-[]"
+        />
+      </motion.div>
       <div className=" hidden w-full h-[100%] text-white sm:flex justify-center items-center px-4 bg-black_texture">
         <Table>
           <TableHeader>
@@ -91,7 +117,7 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="w-full h-[100vh]  bg-black_texture sm:hidden overflow-y-hidden"
+        className="w-full h-[100vh]  bg-black_texture sm:hidden overflow-y-hidden "
       >
         <motion.h2
           variants={fadeIn("up", 0.6)}
@@ -104,11 +130,11 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
           <span className="text-[50px] sm:text-[70px] mb-2">Controle</span>
           <span className="text-[30px] sm:text-[40px] mb-2">de usuários</span>
         </motion.h2>
-        <div className="w-full h-full grid grid-cols-2  gap-4 p-8 overflow-y-scroll [&::-webkit-scrollbar]:hidden">
+        <div className="w-full h-[600px] grid grid-cols-2  gap-4 p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
           {users.map((user) => {
             return (
               <div
-                className=" w-full h-[314px] flex flex-col justify-between border-accent border-[1px] rounded-lg  bg-white cursor-pointer"
+                className=" w-full h-[254px] flex flex-col justify-between border-accent border-[1px] rounded-lg  bg-white cursor-pointer "
                 onClick={() => handleUserRouterClick(user.id)}
                 key={user.id}
               >
