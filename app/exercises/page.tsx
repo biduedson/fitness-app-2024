@@ -7,6 +7,7 @@ import { db } from "@/app/_lib/prisma";
 
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
 import CategoryLIst from "@/components/categories/CategoryLIst";
+import UserProfile from "@/components/UserProfile";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
@@ -46,9 +47,14 @@ const page = async () => {
   return (
     <>
       <section
-        className=" w-full  h-[100vh] flex flex-col justify-betweenr bg-primary-300  lg:px-0"
+        className="relative w-full  h-[100vh] flex flex-col justify-betweenr bg-primary-300  lg:px-0"
         id="exercises"
       >
+        {data.user && (
+          <div className=" absolute top-2 left-2">
+            <UserProfile imageUrl={data.user.image!} />
+          </div>
+        )}
         <CategoryLIst id="s" categoryAndExercises={categoryExercises} />
         <MobileNavHomeFooter />
       </section>

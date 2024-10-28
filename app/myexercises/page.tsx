@@ -4,6 +4,7 @@ import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
 import MyCategoryLIst from "@/components/categories/MyCategoryList";
+import UserProfile from "@/components/UserProfile";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
@@ -54,9 +55,13 @@ const page = async () => {
     <>
       {data?.user.student ? (
         <section
-          className=" w-full h-[100vh] flex flex-col justify-between bg-primary-300   "
+          className="relative w-full h-[100vh] flex flex-col justify-between bg-primary-300   "
           id="my-exercises"
         >
+          <div className=" absolute top-2 left-2">
+            <UserProfile imageUrl={data.user.image!} />
+          </div>
+
           <MyCategoryLIst
             id="s"
             categoryAndMyExercises={categoryAndMyExercises}

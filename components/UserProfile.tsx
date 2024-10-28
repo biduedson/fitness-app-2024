@@ -19,17 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-const UserProfile = ({
-  imageUrl,
-  name,
-  openNav,
-  setOpenNav,
-}: {
-  imageUrl: string;
-  name?: string;
-  openNav?: boolean;
-  setOpenNav?: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const UserProfile = ({ imageUrl }: { imageUrl: string }) => {
   const { data } = useSession();
   const [openProfile, setOpenProfile] = useState(false);
   const router = useRouter();
