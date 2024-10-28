@@ -8,6 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { BsSearch } from "react-icons/bs";
+import { Input } from "@/components/ui/input";
 import UserProfile from "@/components/UserProfile";
 import { fadeIn } from "@/lib/variants";
 import { Prisma } from "@prisma/client";
@@ -15,7 +17,7 @@ import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 export interface ICardUserDashbordProps {
   users: Prisma.UserGetPayload<{
@@ -35,6 +37,14 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
   const { data } = useSession();
   const handleUserRouterClick = (id: string) => {
     router.push(`/user/${id}`);
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const filterUsers = users.filter(
+      (user) => user.name?.includes(value) || user.email?.includes(value)
+    );
+    setFilteredUsers(filterUsers);
   };
   useEffect(() => {
     if (!window.mutationObserverListeners) {
@@ -79,7 +89,25 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
           className="absolute object-cover rounded-b-[]"
         />
       </motion.div>
-      <div className=" hidden w-full h-[100%] text-white sm:flex justify-center items-center px-4 bg-black_texture">
+
+      <div className=" hidden w-full h-[100%] text-white sm:flex flex-col justify-center items-center px-4 bg-black_texture">
+        <motion.div
+          variants={fadeIn("down", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="  w-full h-[60px] flex items-center justify-center gap-2 bg-transparent z-50  px-6  text-white"
+        >
+          <Input
+            type="text"
+            placeholder="Buscar usuarios"
+            className="w-full h-[40px] border-accent border-[2px] text-black text-[20px] placeholder:text-accent placeholder:text-center bg-white"
+            onChange={handleInputChange}
+          />
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white text-[20px] ">
+            <BsSearch />
+          </div>
+        </motion.div>
         <Table>
           <TableHeader>
             <TableRow>
@@ -89,7 +117,7 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => {
+            {filteredUsers.map((user) => {
               return (
                 <TableRow key={user.id}>
                   <TableCell className=" relative font-medium w-[80px] h-[100px]  p-2">
@@ -125,16 +153,33 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
           className="h2 flex flex-col   w-full sm:w-[380px] sm:text-[40px]
-             text-center mb-8 text-accent le leading-[1.1]  border-white border-b-[1px] "
+             text-center  text-accent le leading-[1.1]  border-white border-b-[1px] "
         >
           <span className="text-[50px] sm:text-[70px] mb-2">Controle</span>
           <span className="text-[30px] sm:text-[40px] mb-2">de usuários</span>
         </motion.h2>
-        <div className="w-full h-[600px] grid grid-cols-2  gap-4 p-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
-          {users.map((user) => {
+        <motion.div
+          variants={fadeIn("down", 0.4)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.2 }}
+          className="  w-full h-[60px] flex items-center justify-center gap-2 bg-transparent z-50  px-6  text-white"
+        >
+          <Input
+            type="text"
+            placeholder="Buscar por nome ou email"
+            className="w-full h-[40px] border-accent border-[2px] text-black text-[20px] placeholder:text-accent placeholder:text-center bg-white"
+            onChange={handleInputChange}
+          />
+          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white text-[20px] ">
+            <BsSearch />
+          </div>
+        </motion.div>
+        <div className="w-full h-[530px] grid grid-cols-2  gap-4 p-6  overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
+          {filteredUsers.map((user, index) => {
             return (
               <div
-                className=" w-full h-[254px] flex flex-col justify-between border-accent border-[1px] rounded-lg  bg-white cursor-pointer "
+                className=" w-full h-[244px]  flex flex-col justify-between  border-accent border-[1px] rounded-lg  bg-white cursor-pointer "
                 onClick={() => handleUserRouterClick(user.id)}
                 key={user.id}
               >
@@ -151,7 +196,7 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
                       />
                     </div>
                     <div className="flex flex-col gap2">
-                      <p className="text-accent text-center capitalize font-extrabold">
+                      <p className="text-accent text-center  font-extrabold">
                         {user.name}
                       </p>
                       <p className=" text-slate-500 text-[13px] font-extrabold">
