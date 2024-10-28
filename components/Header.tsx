@@ -62,11 +62,7 @@ const Header = () => {
         {/*avatar login user*/}
         {data?.user && (
           <>
-            <UserProfile
-              imageUrl={data.user.image as string}
-              openNav={openNav}
-              setOpenNav={setOpenNav}
-            />
+            <UserProfile imageUrl={data.user.image as string} />
           </>
         )}
 
