@@ -132,7 +132,7 @@ const Userpage = () => {
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: false, amount: 0.2 }}
-              className="w-full flex items-center justify-center border-b-[1px] border-white"
+              className="w-full flex items-center justify-center "
             >
               <div className="w-[250px] flex flex-col items-center">
                 <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
@@ -154,26 +154,28 @@ const Userpage = () => {
         viewport={{ once: false, amount: 0.2 }}
         className="w-full h-[400px] flex flex-col items-center justify-center gap-4 bg-transparent mt-2"
       >
-        <h4 className="w-full h4 font-oswald text-accent uppercase  text-center mt-4">
+        <h4 className="w-full h4 font-oswald text-accent uppercase border-y-[1px] border-white text-center mt-4">
           Controle de usuário
         </h4>
         <div className="w-full  flex flex-col gap-4 items-center justify-center px-4 ">
           <div className="bg-accent w-full  h-[50px] flex items-center  justify-between px-4 gap-2 text-sm  uppercase rounded-lg">
             <IoIosPersonAdd className="text-[40px] text-black" />
             <div className="w-full flex items-center justify-center">
-              <span>Adicionar usuário como aluno.</span>
+              <span className="text-center">Adicionar usuário como aluno.</span>
             </div>
           </div>
           <div className="bg-accent w-full h-[40px] flex items-center justify-between px-4 text-sm  uppercase rounded-lg">
             <MdPersonRemoveAlt1 className="text-[40px] text-black" />
             <div className="w-full flex items-center justify-center">
-              <span>Remover usuário como aluno.</span>
+              <span className="text-center">Remover usuário como aluno.</span>
             </div>
           </div>
           <div className="bg-accent w-full h-[40px] flex items-center  justify-between px-4 text-sm  uppercase rounded-lg">
             <RiAdminFill className="text-[40px] text-black" />
             <div className="w-full flex items-center justify-center">
-              <span>Adicinar usuário como Administrador.</span>
+              <span className="text-center">
+                Adicinar usuário como Administrador.
+              </span>
             </div>
           </div>
         </div>
