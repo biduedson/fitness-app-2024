@@ -127,38 +127,37 @@ const Userpage = () => {
                 sizes="(width: 150px)"
               />
             </div>
+            <motion.div
+              variants={fadeIn("down", 0.6)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+            >
+              <div className="w-[250px] flex flex-col items-center">
+                <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
+                  {userData?.name!}
+                </p>
+                <p className="text-[20px] lg:text-[12px] font-semibold text-white ">
+                  {userData?.email!}
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </motion.header>
-      <motion.div
-        variants={fadeIn("down", 0.6)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="mt-4"
-      >
-        <div className="w-[250px] flex flex-col items-center">
-          <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
-            {userData?.name!}
-          </p>
-          <p className="text-[20px] lg:text-[12px] font-semibold text-white ">
-            {userData?.email!}
-          </p>
-        </div>
-      </motion.div>
 
       <motion.div
         variants={fadeIn("up", 0.6)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="w-full h-[400px] bg-transparent"
+        className="w-full h-[400px] flex flex-col items-center justify-center gap-4 bg-transparent"
       >
         <p className="w-full text-[20px] lg:text-[12px] font-oswald text-accent  text-center mt-4">
           Nesta seção, você pode adicionar ou remover o usuário como aluno da
           academia ou como administrador do sistema.
         </p>
-        <div className="w-full h-full flex flex-col gap-4 items-center justify-center px-4 ">
+        <div className="w-full  flex flex-col gap-4 items-center justify-center px-4 ">
           <div className="bg-accent w-full  h-[50px] flex items-center  justify-between px-4 gap-2 text-sm  uppercase rounded-lg">
             <IoIosPersonAdd className="text-[40px] text-black" />
             <div className="w-full flex items-center justify-center">
