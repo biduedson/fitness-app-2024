@@ -52,7 +52,7 @@ const MyCategoryLIst = ({
       ) : (
         <>
           <div
-            className="  flex flex-col w-full justify-center items-center
+            className="  flex flex-col w-full  justify-center items-center
          px-4  mt-10  "
           >
             <motion.h2
@@ -102,7 +102,7 @@ const MyCategoryLIst = ({
         </motion.h2>
       </div>
       <div
-        className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr py-4 px-4 
+        className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr p-4 
           lg:justify-betweenn lg:hidden
           "
       >

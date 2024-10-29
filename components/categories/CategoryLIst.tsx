@@ -1,8 +1,5 @@
 "use client";
 import React, { ReactElement, useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 
 //components
@@ -37,7 +34,6 @@ interface CategoryListProps {
 
 const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
   const [component, setComponent] = useState<ReactElement>(<></>);
-  const [closeBtnSlider, setCloseBtnSlider] = useState(false);
   let exercicesAndComponent: {
     name: string;
     img: string;
@@ -108,7 +104,7 @@ const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr py-4 px-4 
+          className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr p-4 
           lg:justify-betweenn lg:hidden
           "
         >
