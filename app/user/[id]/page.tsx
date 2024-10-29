@@ -9,6 +9,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
+import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
+import { IoIosPersonAdd } from "react-icons/io";
+import { MdPersonRemoveAlt1 } from "react-icons/md";
+
+import { RiAdminFill } from "react-icons/ri";
 
 const fetcher = (url: string): Promise<User> =>
   fetch(url).then((res) => res.json());
@@ -82,7 +87,7 @@ const Userpage = () => {
   }
 
   return (
-    <section className="w-full h-[100vh] flex flex-col  items-center bg-black_texture text-white">
+    <section className="w-full h-[100vh] flex flex-col  items-center justify-between bg-black_texture text-white">
       <motion.header
         variants={fadeIn("down", 0.4)}
         initial="hidden"
@@ -122,23 +127,59 @@ const Userpage = () => {
                 sizes="(width: 150px)"
               />
             </div>
-            <div>
-              <div className="w-[250px] flex flex-col items-center">
-                <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
-                  {userData?.name!}
-                </p>
-                <p className="text-[20px] lg:text-[12px] font-semibold text-slate-400 ">
-                  {userData?.email!}
-                </p>
-                <p className="text-[20px] lg:text-[12px] font-oswald text-slate-400  text-center mt-4">
-                  Nesta seção, você pode adicionar ou remover o usuário como
-                  aluno da academia.
-                </p>
-              </div>
-            </div>
           </div>
         </motion.div>
       </motion.header>
+      <motion.div
+        variants={fadeIn("down", 0.6)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="mt-4"
+      >
+        <div className="w-[250px] flex flex-col items-center">
+          <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
+            {userData?.name!}
+          </p>
+          <p className="text-[20px] lg:text-[12px] font-semibold text-white ">
+            {userData?.email!}
+          </p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        variants={fadeIn("up", 0.6)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
+        className="w-full h-[400px] bg-transparent"
+      >
+        <p className="w-full text-[20px] lg:text-[12px] font-oswald text-accent  text-center mt-4">
+          Nesta seção, você pode adicionar ou remover o usuário como aluno da
+          academia ou como administrador do sistema.
+        </p>
+        <div className="w-full h-full flex flex-col gap-4 items-center justify-center px-4 ">
+          <div className="bg-accent w-full  h-[50px] flex items-center  justify-between px-4 gap-2 text-sm  uppercase rounded-lg">
+            <IoIosPersonAdd className="text-[40px] text-black" />
+            <div className="w-full flex items-center justify-center">
+              <span>Adicinar usuário como aluno.</span>
+            </div>
+          </div>
+          <div className="bg-accent w-full h-[40px] flex items-center justify-between px-4 text-sm  uppercase rounded-lg">
+            <MdPersonRemoveAlt1 className="text-[40px] text-black" />
+            <div className="w-full flex items-center justify-center">
+              <span>Remover usuário como aluno.</span>
+            </div>
+          </div>
+          <div className="bg-accent w-full h-[40px] flex items-center  justify-between px-4 text-sm  uppercase rounded-lg">
+            <RiAdminFill className="text-[40px] text-black" />
+            <div className="w-full flex items-center justify-center">
+              <span>Adicinar usuário como Administrador.</span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+      <MobileNavHomeFooter />
     </section>
   );
 };
