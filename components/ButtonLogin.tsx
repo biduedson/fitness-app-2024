@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import { signIn } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 const ButtonLogin = () => {
   const router = useRouter();

@@ -41,19 +41,25 @@ const Userpage = () => {
     }
   }, [initialUser, session]);
 
-  const updadteUser = async (updatedData: Partial<User>) => {
+  const addStudent = async (userId: string) => {
     try {
-      const response = await fetch(`/api/updateuser/${id}`, {
-        method: "PATCH",
+      const response = await fetch("/api/addstudent", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify({ userId }),
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserData(data);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Erro ao adicionar estudante:", error);
     }
   };
+
   if (status === "loading") {
     return (
       <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
