@@ -88,7 +88,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className=" relative text-sm text-white font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
+          className=" relative text-sm text-primary-300 font-semibold z-10 text-center w-[150px] h-[60px] sm:w-[200px] lg:w-[250px] rounded-b-lg
              bg-accent flex items-center justify-center "
         >
           {exercise.name!}

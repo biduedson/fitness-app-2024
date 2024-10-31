@@ -63,7 +63,7 @@ const ExerciseModal = ({
         </motion.p>
       )}
       <div className="w-full h-full flex flex-col gap-8 lg:flex-row items-center lg:w-[800px] lg:gap-4 mt-12  ">
-        <div className="relative w-[90%] h-[200px] sm:h-[400px] lg:w-[400px] lg:h-[400px]">
+        <div className="relative w-[90%] h-[250px] sm:h-[400px] lg:w-[400px] lg:h-[400px]">
           <Image
             src={imageUrl}
             alt={exerciseName}
