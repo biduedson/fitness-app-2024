@@ -17,7 +17,7 @@ function MyExerciseList({ exercises }: IExerciseListProps) {
 
   return (
     <div className="mt-6 p-4 ">
-      <div className="grid grid-cols-2 sm:grid-cols-3 flex-wrap gap-4 lg:h-full overflow-y-scroll  [&::-webkit-scrollbar]:hidden max-h-[640px]   ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 flex-wrap gap-4 lg:h-full overflow-y-scroll  [&::-webkit-scrollbar]:hidden max-h-[620px] md:max-h-[740px]  ">
         {myDataExercises.map((exercise, index) => {
           return (
             <MyExerciseItem
