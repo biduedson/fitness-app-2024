@@ -22,7 +22,13 @@ export async function GET(
     return NextResponse.json({ message: "Nao autorizado" }, { status: 401 });
   }
   try {
-    const user = await db.user.findUnique({ where: { id } });
+    const user = await db.user.findUnique({
+      where: { id },
+      include: {
+        student: true,
+        gymAdmin: true,
+      },
+    });
 
     if (!user) {
       return NextResponse.json(

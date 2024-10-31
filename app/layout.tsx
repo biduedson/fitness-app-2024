@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Oswald, Roboto } from "next/font/google";
 import "./globals.css";
 //components
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
+
 import AuthProvider from "@/app/_providers/auth";
 
 const oswald = Oswald({
@@ -34,6 +34,7 @@ export default function RootLayout({
         className={`${oswald.variable} ${roboto.variable} w-full max-w-[1920px] min-h-full mx-auto bg-primary-300 `}
       >
         <AuthProvider>{children}</AuthProvider>
+        <Toaster />
       </body>
     </html>
   );

@@ -97,8 +97,8 @@ const CardUserDashbord = ({ users }: ICardUserDashbordProps) => {
           className="h2 flex flex-col   w-full sm:w-[380px] sm:text-[40px]
              text-center  text-accent le leading-[1.1]  border-white border-b-[1px] "
         >
-          <span className="text-[40px] sm:text-[60px] mb-2">Controle</span>
-          <span className="text-[20px] sm:text-[30px] mb-2">de usuários</span>
+          <span className="text-[40px] sm:text-[60px] mb-2">usuários</span>
+          <span className="text-[20px] sm:text-[30px] mb-2">do sistema</span>
         </motion.h2>
         <SearchUser handleInputChange={handleInputChange} />
         <CardUserList users={filteredUsers} />

@@ -1,21 +1,29 @@
 "use client";
 import useSWR from "swr";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { Prisma, User } from "@prisma/client";
-import { MdArrowBackIos } from "react-icons/md";
+import { Prisma } from "@prisma/client";
 import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/variants";
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
-import { IoIosPersonAdd } from "react-icons/io";
-import { MdPersonRemoveAlt1 } from "react-icons/md";
 
-import { RiAdminFill } from "react-icons/ri";
+import AlertAddStudent from "../components/AlertAddStudent";
+import UserControlPanel from "../components/UserControlPanel";
+import UserControllerPageHeader from "../components/UserControllerPageHeader";
+import AlertDeleteStudent from "../components/AlertDeleteStudente";
+import AlertDialogAddGymAdmin from "../components/AlertDialogAddGymAdmin";
+import AlertGymAdminDelete from "../components/AlertGymAdminDelete";
 
-const fetcher = (url: string): Promise<User> =>
+interface IUserPageProps {
+  user: Prisma.UserGetPayload<{
+    include: {
+      student: true;
+      gymAdmin: true;
+    };
+  }>;
+}
+
+const fetcher = (url: string): Promise<IUserPageProps["user"]> =>
   fetch(url).then((res) => res.json());
 
 const Userpage = () => {
@@ -24,41 +32,31 @@ const Userpage = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  console.log(session?.user.gymAdmin ? "administrador" : "Usuario comum");
-
-  const { data: initialUser, error } = useSWR<User>(() => {
+  const { data: initialUser, error } = useSWR<IUserPageProps["user"]>(() => {
     if (status === "authenticated" && session?.user.gymAdmin) {
       return `/api/user/${id}`;
     }
     return null;
   }, fetcher);
 
-  const [userData, setUserData] = useState<User | null>(initialUser!);
-
+  const [userData, setUserData] = useState<IUserPageProps["user"] | null>(
+    initialUser!
+  );
+  const [isConfirmDialogOpen, setIsConfirmDialogOpen] =
+    useState<boolean>(false);
+  const [isConfirmDialogDeleteOpen, setIsConfirmDialogDeleteOpen] =
+    useState<boolean>(false);
+  const [isConfirmGymAdminDialogOpen, setIsConfirmGymAdminDialogOpen] =
+    useState<boolean>(false);
+  const [
+    isConfirmDialogGymAdminDeletOpen,
+    setIsConfirmDialogGymAdminDeletOpen,
+  ] = useState<boolean>(false);
   useEffect(() => {
     if (initialUser) {
       setUserData(initialUser);
     }
   }, [initialUser, session]);
-
-  const addStudent = async (userId: string) => {
-    try {
-      const response = await fetch("/api/addstudent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUserData(data);
-      }
-    } catch (error) {
-      console.error("Erro ao adicionar estudante:", error);
-    }
-  };
 
   if (status === "loading") {
     return (
@@ -94,99 +92,52 @@ const Userpage = () => {
 
   return (
     <section className="w-full h-[100vh] flex flex-col  items-center justify-between bg-black_texture text-white">
-      <motion.header
-        variants={fadeIn("down", 0.4)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className=" relative lg:bg-accent w-full h-[220px] "
-      >
-        <div
-          className="absolute top-4 left-4 w-[50px] h-[50px] rounded-full  bg-white/80 z-10 flex items-center 
-        justify-center text-[26px] text-accent font-bold"
-          onClick={() => router.back()}
-        >
-          <MdArrowBackIos />
-        </div>
-        <Image
-          src="/assets/img/bannerExercisePage.png"
-          alt="banner"
-          fill
-          className="lg:hidden absolute object-cover "
-          sizes="150px"
-          priority // Adicione essa propriedade para priorizar o carregamento
-        />
-        <motion.div
-          variants={fadeIn("up", 0.6)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="relative w-full flex  items-center"
-        >
-          <div className="absolute top-[140px] w-full flex flex-col items-center justify-center">
-            <div className="relative w-[150px] h-[150px] ">
-              <Image
-                src={userData?.image!}
-                alt="User image"
-                className="absolute rounded-full object-cover border-accent border-[4px] "
-                fill
-                sizes="(width: 150px)"
-              />
-            </div>
-            <motion.div
-              variants={fadeIn("down", 0.6)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.2 }}
-              className="w-full flex items-center justify-center "
-            >
-              <div className="w-[250px] flex flex-col items-center">
-                <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
-                  {userData?.name!}
-                </p>
-                <p className="text-[20px] lg:text-[12px] font-semibold text-white ">
-                  {userData?.email!}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.header>
+      <UserControllerPageHeader user={userData} />
 
-      <motion.div
-        variants={fadeIn("up", 0.6)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="w-full h-[400px] flex flex-col items-center justify-center gap-4 bg-transparent mt-2"
-      >
-        <h4 className="w-full h4 font-oswald text-accent uppercase border-y-[1px] border-white text-center mt-4">
-          Controle de usuário
-        </h4>
-        <div className="w-full  flex flex-col gap-4 items-center justify-center px-4 ">
-          <div className="bg-accent w-full  h-[50px] flex items-center  justify-between px-4 gap-2 text-sm  uppercase rounded-lg">
-            <IoIosPersonAdd className="text-[40px] text-black" />
-            <div className="w-full flex items-center justify-center">
-              <span className="text-center">Adicionar usuário como aluno.</span>
-            </div>
-          </div>
-          <div className="bg-accent w-full h-[40px] flex items-center justify-between px-4 text-sm  uppercase rounded-lg">
-            <MdPersonRemoveAlt1 className="text-[40px] text-black" />
-            <div className="w-full flex items-center justify-center">
-              <span className="text-center">Remover usuário como aluno.</span>
-            </div>
-          </div>
-          <div className="bg-accent w-full h-[40px] flex items-center  justify-between px-4 text-sm  uppercase rounded-lg">
-            <RiAdminFill className="text-[40px] text-black" />
-            <div className="w-full flex items-center justify-center">
-              <span className="text-center">
-                Adicinar usuário como Administrador.
-              </span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+      <UserControlPanel
+        user={userData}
+        setIsConfirmDialogOpen={() => setIsConfirmDialogOpen(true)}
+        setIsConfirmDeletedDialogOpen={() => setIsConfirmDialogDeleteOpen(true)}
+        setIsConfirmGymAdminDialogOpen={() =>
+          setIsConfirmGymAdminDialogOpen(true)
+        }
+        setIsConfirmDialogGymAdminDeletOpen={() =>
+          setIsConfirmDialogGymAdminDeletOpen(true)
+        }
+      />
+
       <MobileNavHomeFooter />
+
+      <AlertAddStudent
+        user={userData}
+        userId={userData.id}
+        setUserData={setUserData}
+        isConfirmDialogOpen={isConfirmDialogOpen}
+        setIsConfirmDialogOpen={setIsConfirmDialogOpen}
+      />
+      <AlertDeleteStudent
+        user={userData}
+        userId={userData.id}
+        setUserData={setUserData}
+        isConfirmDialogDeleteOpen={isConfirmDialogDeleteOpen}
+        setIsConfirmDialogDeleteOpen={setIsConfirmDialogDeleteOpen}
+      />
+      <AlertDialogAddGymAdmin
+        user={userData}
+        userId={userData.id}
+        setUserData={setUserData}
+        isConfirmGymAdminDialogOpen={isConfirmGymAdminDialogOpen}
+        setIsConfirmGymAdminDialogOpen={setIsConfirmGymAdminDialogOpen}
+      />
+      <AlertGymAdminDelete
+        user={userData}
+        userId={userData.id}
+        setUserData={setUserData}
+        isConfirmDialogGymAdminDeletOpen={isConfirmDialogGymAdminDeletOpen}
+        setIsConfirmDialogGymAdminDeletOpen={
+          setIsConfirmDialogGymAdminDeletOpen
+        }
+      />
     </section>
   );
 };

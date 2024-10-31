@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
-  console.log(data?.user.gymAdmin);
+
   if (!data?.user) {
     redirect("/login");
   }
@@ -21,6 +21,7 @@ const page = async () => {
       </div>
     );
   }
+
   const dataUsers = await db.user.findMany({
     include: {
       student: true,
