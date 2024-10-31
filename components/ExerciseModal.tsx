@@ -75,7 +75,7 @@ const ExerciseModal = ({
       )}
       <div className="w-full flex flex-col max-h-full justify-between lg:flex-row items-center lg:w-[800px] lg:gap-4 mt-12  ">
         <div className="w-full h-[300px] sm:h-[400px] flex  justify-center">
-          <div className="relative w-[90%] h-[250px] sm:h-[300px] lg:w-[400px] lg:h-[400px]">
+          <div className="relative w-[80%] h-[200px] sm:h-[300px] lg:w-[400px] lg:h-[400px]">
             <Image
               src={imageUrl}
               alt={exerciseName}
@@ -111,16 +111,16 @@ const ExerciseModal = ({
             className="w-full flex flex-col  bg-black_texture"
           >
             <div className="w-full flex flex-col items-center justify-center mt-2 px-4 border-y-white border-[1px]">
-              <p className=" text-[20px] uppercase text-accent text-center font-semibold  ">
+              <p className=" text-[18px] uppercase text-accent text-center font-semibold  ">
                 {exerciseName}
               </p>
             </div>
             <div className="relative px-4 h-auto overflow-y-scroll [&::-webkit-scrollbar]:hidden">
-              <p className="text-[#DDDDE1] text-[18px] font-semibold text-left py-4">
+              <p className="text-[#DDDDE1] text-[16px] font-semibold text-left py-4">
                 Descrição:
               </p>
-              <div className="w-full h-[210px] my-2  overflow-y-scroll [&::-webkit-scrollbar]:hidden">
-                <p className="text-white text-[18px] font-semibold text-justify">
+              <div className="w-full h-[180px] my-2  overflow-y-scroll [&::-webkit-scrollbar]:hidden">
+                <p className="text-white text-[14px] font-semibold text-justify">
                   {description}
                 </p>
               </div>
