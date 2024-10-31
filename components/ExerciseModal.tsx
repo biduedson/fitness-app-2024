@@ -133,14 +133,14 @@ const ExerciseModal = ({
                     </span>
                   </div>
                 </SheetTrigger>
-                <SheetContent className="w-full  bg-white shadow-md shadow-accent">
+                <SheetContent className="w-full  bg-white shadow-md shadow-accent ">
                   <SheetHeader>
                     <SheetTitle>
                       <motion.div
                         variants={fadeIn("down", 0.1)}
                         initial="hidden"
                         whileInView={"show"}
-                        className="h-[80px] mt-12  bg-black_texture rounded-lg flex items-center justify-center"
+                        className="h-[80px] mt-6  bg-black_texture rounded-lg flex items-center justify-center"
                       >
                         <h2 className="h2  text-center text-accent ">
                           Diretrizes para Aumento de Massa Magra
@@ -148,7 +148,7 @@ const ExerciseModal = ({
                       </motion.div>
                     </SheetTitle>
                   </SheetHeader>
-                  <div className=" w-full h-[700px] mt-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
+                  <div className=" w-full h-[650px] sm:h-[900px] mt-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden  ">
                     <MuscleGainGuide />
                   </div>
                 </SheetContent>

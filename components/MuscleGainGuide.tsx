@@ -7,7 +7,7 @@ const MuscleGainGuide = () => {
       variants={fadeIn("up", 0.1)}
       initial="hidden"
       whileInView={"show"}
-      className="p-5 bg-gray-50 rounded-lg shadow-md text-white bg-black_texture  shadow-accent  my-8"
+      className="p-5 bg-gray-50 rounded-lg shadow-md text-white bg-black_texture  shadow-accent my-8"
     >
       <div className="mb-6">
         <h3 className="text-xl font-semibold text-accent">1. Iniciantes</h3>
