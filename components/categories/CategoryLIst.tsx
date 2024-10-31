@@ -67,26 +67,26 @@ const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
     setComponent(component);
   };
   return (
-    <div className="w-full h-full bg-black_texture bg-cover ">
+    <motion.div
+      variants={fadeIn("up", 0.4)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.2 }}
+      className="w-full h-full bg-black_texture bg-cover "
+    >
       {/*mobile*/}
-      <div className="flex w-full   flex-col mb-2 lg:mt-0">
-        <motion.div
-          variants={fadeIn("down", 0.4)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className=" relative w-full  h-[200px] sm:h-[300px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom"
-        >
+      <div className="flex w-full   flex-col mb-2 lg:mt-0 ">
+        <div className=" relative w-full  h-[200px] sm:h-[300px]  py-4  lg:hidden rounded-b-xl clip-custom-bottom">
           <Image
             src="/assets/img/bannerExercisePage.png"
             alt="banner"
             fill
             className="absolute object-cover rounded-b-[]"
           />
-        </motion.div>
+        </div>
         <div className="flex items-center justify-center w-full">
           <motion.h2
-            variants={fadeIn("up", 0.6)}
+            variants={fadeIn("down", 0.6)}
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: false, amount: 0.2 }}
@@ -110,19 +110,25 @@ const CategoryLIst = ({ id, categoryAndExercises }: CategoryListProps) => {
         >
           {exercicesAndComponent.map((category, index) => {
             return (
-              <div className="w-full h-full flex items-center justify-center">
+              <motion.div
+                variants={fadeIn("up", 0.2 * index)}
+                initial="hidden"
+                whileInView={"show"}
+                viewport={{ once: false, amount: 0.2 }}
+                className="w-full h-full flex items-center justify-center"
+              >
                 <CategoryItem
                   categoryName={category.name}
                   component={category.component}
                   img={category.img}
                   key={index}
                 />
-              </div>
+              </motion.div>
             );
           })}
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -95,21 +95,21 @@ const ExerciseModal = ({
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: false, amount: 0.2 }}
-            className="w-full h-full flex flex-col justify-between  bg-[#202023] rounded-t-[30px] mt-2 "
+            className="w-full h-full flex flex-col justify-between  bg-black_texture rounded-t-[30px] mt-2 "
           >
             <div className="relative px-4">
               <div className="w-full flex flex-col items-center justify-center ">
                 <p className="text-[#DDDDE1] text-[18px] font-semibold text-left ">
                   {exerciseName}
                 </p>
-                <p className="text-[#81809E] text-[16px] font-semibold text-left ">
+                <p className="text-white text-[16px] font-semibold text-left ">
                   3x12 Repetições
                 </p>
               </div>
               <p className="text-[#DDDDE1] text-[18px] font-semibold text-left py-4">
                 Descrição:
               </p>
-              <p className="text-[#81809E] text-[18px] font-semibold text-justify">
+              <p className="text-white text-[18px] font-semibold text-justify">
                 {description}
               </p>
             </div>

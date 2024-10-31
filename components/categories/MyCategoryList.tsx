@@ -75,7 +75,7 @@ const MyCategoryLIst = ({
   return (
     <div className="w-full h-full  bg-black_texture " id={id}>
       <motion.div
-        variants={fadeIn("down", 0.4)}
+        variants={fadeIn("up", 0.4)}
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
@@ -90,7 +90,7 @@ const MyCategoryLIst = ({
       </motion.div>
       <div className="flex items-center justify-center w-full">
         <motion.h2
-          variants={fadeIn("up", 0.6)}
+          variants={fadeIn("down", 0.6)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
@@ -101,22 +101,32 @@ const MyCategoryLIst = ({
           <span className="text-[20px] sm:text-[40px] mb-2">favoritos</span>
         </motion.h2>
       </div>
-      <div
+      <motion.div
+        variants={fadeIn("up", 0.4)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.2 }}
         className="h-[400px] grid grid-cols-3 gap-3 overflow-y-scroll  lg:items-centerr p-4 
-          lg:justify-betweenn lg:hidden
+          lg:justify-betweenn lg:hidden 
           "
       >
         {exercicesAndComponent.map((category, index) => {
           return (
-            <div className="w-full h-full flex items-center justify-center">
+            <motion.div
+              variants={fadeIn("up", 0.2 * index)}
+              initial="hidden"
+              whileInView={"show"}
+              viewport={{ once: false, amount: 0.2 }}
+              className="w-full h-full flex items-center justify-center "
+            >
               <MyCategoryButton
                 categoryName={category.name}
                 component={category.component}
               />
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </div>
   );
 };
