@@ -4,8 +4,19 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { FaHeart, FaHome } from "react-icons/fa";
 import { TbArrowBack } from "react-icons/tb";
-
+import { FiChevronsDown } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import MuscleGainGuide from "./MuscleGainGuide";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface ExerciseModalProps {
   opemModal: boolean;
@@ -97,21 +108,46 @@ const ExerciseModal = ({
             viewport={{ once: false, amount: 0.2 }}
             className="w-full h-full flex flex-col justify-between  bg-black_texture rounded-t-[30px] mt-2 "
           >
-            <div className="relative px-4">
-              <div className="w-full flex flex-col items-center justify-center ">
-                <p className="text-[#DDDDE1] text-[18px] font-semibold text-left ">
-                  {exerciseName}
-                </p>
-                <p className="text-white text-[16px] font-semibold text-left ">
-                  3x12 Repetições
-                </p>
-              </div>
+            <div className="w-full flex flex-col items-center justify-center mt-2 ">
+              <p className=" text-[18px] uppercase text-accent text-center font-semibold  ">
+                {exerciseName}
+              </p>
+            </div>
+            <div className="relative px-4 h-[400px] overflow-y-scroll [&::-webkit-scrollbar]:hidden">
               <p className="text-[#DDDDE1] text-[18px] font-semibold text-left py-4">
                 Descrição:
               </p>
               <p className="text-white text-[18px] font-semibold text-justify">
                 {description}
               </p>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <div className="w-full flex items-center justify-center h-[40px] bg-accent my-4 rounded-lg">
+                    <span className="text-white text-center uppercase font-semibold">
+                      click aqui para dicas
+                    </span>
+                  </div>
+                </SheetTrigger>
+                <SheetContent className="w-full  bg-white shadow-md shadow-accent">
+                  <SheetHeader>
+                    <SheetTitle>
+                      <motion.div
+                        variants={fadeIn("down", 0.1)}
+                        initial="hidden"
+                        whileInView={"show"}
+                        className="h-[80px] mt-12  bg-black_texture rounded-lg flex items-center justify-center"
+                      >
+                        <h2 className="h2  text-center text-accent ">
+                          Diretrizes para Aumento de Massa Magra
+                        </h2>
+                      </motion.div>
+                    </SheetTitle>
+                  </SheetHeader>
+                  <div className=" w-full h-[700px] mt-4 overflow-y-scroll [&::-webkit-scrollbar]:hidden ">
+                    <MuscleGainGuide />
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
 
             <div className="relative w-full flex flex-col gap-4 py-4 mb-8">
