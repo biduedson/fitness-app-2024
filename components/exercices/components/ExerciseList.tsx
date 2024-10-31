@@ -16,7 +16,7 @@ function ExerciseList({ exercises }: IExerciseListProps) {
       viewport={{ once: false, amount: 0.2 }}
       className=" mt-6 p-4  "
     >
-      <div className="grid grid-cols-2 sm:grid-cols-3 flex-wrap gap-4 lg:h-full overflow-y-scroll  [&::-webkit-scrollbar]:hidden max-h-[640px] md:max-h-[740px]   ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 flex-wrap gap-4 lg:h-full overflow-y-scroll  [&::-webkit-scrollbar]:hidden max-h-[620px] md:max-h-[740px]   ">
         {dataExercises.map((exercise, index) => {
           return <ExerciseItem key={index} exercise={exercise} />;
         })}
