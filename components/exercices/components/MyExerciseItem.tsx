@@ -89,22 +89,6 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
           className="absolute inset-0 bg-black opacity-30 cursor-pointer"
           onClick={() => setOpemModal(!openModal)}
         ></div>
-
-        {data?.user && (
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: false, amount: 0.2 }}
-            className="absolute right-2 top-2 flex h-6 w-6 sm:h-7 sm:w-7 lg:h-9 lg:w-9 cursor-pointer  items-center justify-center rounded-full  bg-gray-500 hover:bg-gray-700 "
-            onClick={() => {
-              setMessageVisible(!messageVisible);
-              handleFavoriteClick();
-            }}
-          >
-            <MdDeleteForever className="text-primary-300 lg:h-[22px] lg:w-[22px]lg:h-[22px] lg:w-[22px]" />
-          </motion.div>
-        )}
       </motion.div>
       <motion.p
         variants={fadeIn("up", 0.3)}
