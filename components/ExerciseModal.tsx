@@ -42,7 +42,7 @@ const EnhancedExerciseModal = ({
       } flex items-center justify-center`}
     >
       <div className="relative w-full max-w-2xl h-[85vh] bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="relative w-full h-1/2">
+        <div className="relative w-full  h-[40%] sm:h-1/2">
           <Image
             src={imageUrl}
             alt={exerciseName}
@@ -67,7 +67,7 @@ const EnhancedExerciseModal = ({
           <h2 className="text-2xl text-accent font-bold text-center mb-2">
             {exerciseName}
           </h2>
-          <div className="w-full max-h-[150px] sm:max-h-[300px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden mb-4 ">
+          <div className="w-full max-h-[130px] sm:max-h-[400px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden mb-4 ">
             <p className="text-gray-600 text-justify ">{description}</p>
           </div>
 
