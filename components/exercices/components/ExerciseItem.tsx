@@ -11,10 +11,10 @@ import ExerciseModal from "@/components/ExerciseModal";
 
 const ExerciseItem = ({ exercise }: IExerciseItemProps) => {
   const { data } = useSession();
-  const [favorite, setFavorite] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
   const [messageVisible, setMessageVisible] = useState<boolean>(false);
-  const [openModal, setOpemModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   /*para evitar varias renderizações, se  usa  o useeffect para antes de carregar  
 a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
@@ -23,7 +23,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
       const favoritedExercise = exercise.favoriteByStudents.some(
         (favorite) => favorite.student.userId === data.user.id!
       );
-      setFavorite(favoritedExercise);
+      setIsFavorite(favoritedExercise);
     }
   }, [data, exercise.favoriteByStudents]);
 
@@ -38,7 +38,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
     }
     try {
       const response = await toggleFavoriteExercise(data.user.id, exercise.id);
-      setFavorite(!favorite);
+      setIsFavorite(!isFavorite);
       setMessageFavorited(response.message);
     } catch (error) {
       setMessageFavorited("Erro ao adicionar aos favoritos");
@@ -48,18 +48,18 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
   return (
     <>
       <ExerciseModal
-        opemModal={openModal}
+        isOpen={isOpen}
         imageUrl={exercise.imageUrl as string}
         exerciseName={exercise.name}
         description={exercise.description}
-        setOpenModal={setOpemModal}
-        favorite={favorite}
+        setIsOpen={setIsOpen}
+        isFavorite={isFavorite}
         favoriteClick={() => {
           setMessageVisible(!messageVisible);
           handleFavoriteClick();
         }}
-        setMessageVisible={setMessageVisible}
-        messageVisible={messageVisible}
+        //setMessageVisible={setMessageVisible}
+        // messageVisible={messageVisible}
       />
       <div key={exercise.id}>
         <motion.div
@@ -80,7 +80,7 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
 
           <div
             className="absolute inset-0 bg-black opacity-30 cursor-pointer"
-            onClick={() => setOpemModal(!openModal)}
+            onClick={() => setIsOpen(!isOpen)}
           ></div>
         </motion.div>
         <motion.p

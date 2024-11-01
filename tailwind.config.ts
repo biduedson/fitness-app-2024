@@ -25,6 +25,7 @@ const config: Config = {
   		oswald: 'var(--font-oswald)',
   		roboto: 'var(--font-roboto)'
   	},
+	
   	backgroundImage: {
   		hero: 'url(/assets/img/hero/bg.png)',
   		membership: 'url(/assets/img/membership/bg.jpg)',
@@ -36,6 +37,10 @@ const config: Config = {
   		'outline-white': '1px 1px 0 #d4000d, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff'
   	},
   	extend: {
+		fontSize: {
+        'clamp-lg': 'clamp(1.5rem, 3vw, 2rem)',
+        'clamp-md': 'clamp(1rem, 2vw, 1.2rem)',
+      },
   		colors: {
   			primary: {
   				100:'#484848',
