@@ -67,7 +67,9 @@ const EnhancedExerciseModal = ({
           <h2 className="text-2xl text-accent font-bold text-center mb-2">
             {exerciseName}
           </h2>
-          <p className="text-gray-600 text-justify mb-4">{description}</p>
+          <div className="w-full max-h-[150px] sm:max-h-[300px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden mb-4 ">
+            <p className="text-gray-600 text-justify ">{description}</p>
+          </div>
 
           <Sheet>
             <SheetTrigger asChild>
