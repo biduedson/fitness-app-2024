@@ -69,7 +69,7 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="relative h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[250px] lg:h-[250px] Xxl:w-[200px] Xxl:h-[200px] rounded-lg overflow-hidden"
+          className="relative h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[200px] lg:h-[200px] Xxl:w-[180px] xl:h-[200px] xl:w-[180px] Xxl:h-[200px] rounded-lg overflow-hidden"
         >
           <Image
             src={exercise.imageUrl!}
