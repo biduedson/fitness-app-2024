@@ -7,8 +7,6 @@ import { authOptions } from "../_lib/auth";
 import Image from "next/image";
 import { db } from "../_lib/prisma";
 
-const data = await getServerSession(authOptions);
-
 const studentId = data?.user.student?.id;
 const categoryAndMyExercises = await db.exerciseCategory.findMany({
   include: {
@@ -39,7 +37,9 @@ const categoryAndMyExercises = await db.exerciseCategory.findMany({
   },
 });
 
-const Page = () => {
+const Page = async () => {
+  const data = await getServerSession(authOptions);
+
   if (!data?.user.student) {
     return (
       <section
