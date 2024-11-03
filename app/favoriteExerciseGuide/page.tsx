@@ -7,38 +7,37 @@ import { authOptions } from "../_lib/auth";
 import Image from "next/image";
 import { db } from "../_lib/prisma";
 
-const studentId = data?.user.student?.id;
-const categoryAndMyExercises = await db.exerciseCategory.findMany({
-  include: {
-    exercises: {
-      where: {
-        favoriteByStudents: {
-          some: {
-            studentId: studentId, // Filtrar pelo studentId específico
+const Page = async () => {
+  const data = await getServerSession(authOptions);
+  const studentId = data?.user.student?.id;
+  const categoryAndMyExercises = await db.exerciseCategory.findMany({
+    include: {
+      exercises: {
+        where: {
+          favoriteByStudents: {
+            some: {
+              studentId: studentId, // Filtrar pelo studentId específico
+            },
           },
         },
-      },
-      include: {
-        category: true,
-        favoriteByStudents: {
-          where: {
-            studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
-          },
-          include: {
-            student: {
-              include: {
-                user: true,
+        include: {
+          category: true,
+          favoriteByStudents: {
+            where: {
+              studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
+            },
+            include: {
+              student: {
+                include: {
+                  user: true,
+                },
               },
             },
           },
         },
       },
     },
-  },
-});
-
-const Page = async () => {
-  const data = await getServerSession(authOptions);
+  });
 
   if (!data?.user.student) {
     return (
