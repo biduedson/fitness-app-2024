@@ -7,7 +7,7 @@ import { db } from "@/app/_lib/prisma";
 
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
 import CategoryLIst from "@/components/categories/CategoryLIst";
-import UserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/profile/UserProfile";
 
 const page = async () => {
   const data = await getServerSession(authOptions);

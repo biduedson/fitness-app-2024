@@ -2,7 +2,7 @@
 
 import { useMediaQuery } from "react-responsive";
 import { Link as ScrollLink } from "react-scroll";
-import UserProfile from "./UserProfile";
+import UserProfile from "./profile/UserProfile";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { motion } from "framer-motion";

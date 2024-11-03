@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { useSession } from "next-auth/react";
-import UserProfile from "./UserProfile";
+import UserProfile from "./profile/UserProfile";
 import ButtonLogin from "./ButtonLogin";
 
 const Header = () => {

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaHome } from "react-icons/fa";
-import UserProfile from "./UserProfile";
+import UserProfile from "./profile/UserProfile";
 
 const ExercisesHeader = ({ title }: { title: string }) => {
   const { data } = useSession();

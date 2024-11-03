@@ -2,7 +2,7 @@
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
 import Image from "next/image";
 
-import UserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/profile/UserProfile";
 import { fadeIn } from "@/lib/variants";
 import { Prisma } from "@prisma/client";
 import { motion } from "framer-motion";

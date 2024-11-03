@@ -4,7 +4,7 @@ import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
 import MyCategoryLIst from "@/components/categories/MyCategoryList";
-import UserProfile from "@/components/UserProfile";
+import UserProfile from "@/components/profile/UserProfile";
 
 const page = async () => {
   const data = await getServerSession(authOptions);
