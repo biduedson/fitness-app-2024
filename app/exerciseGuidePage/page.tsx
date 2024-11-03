@@ -6,18 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import { db } from "../_lib/prisma";
 
-const exerciseCategories = [
-  "Abdômen",
-  "Antebraço",
-  "Costas",
-  "Pernas",
-  "Peito",
-  "Ombros",
-  "Bíceps",
-  "Tríceps",
-];
-const data = await getServerSession(authOptions);
-
 // Busca as categorias de exercícios e seus exercícios associados do banco de dados
 const categoryExercises = await db.exerciseCategory.findMany({
   include: {
@@ -39,6 +27,7 @@ const categoryExercises = await db.exerciseCategory.findMany({
 });
 
 // Verifica se o usuário é um aluno autorizado
+const data = await getServerSession(authOptions);
 
 const ExerciseGuidePage = () => {
   if (!data?.user.student) {
