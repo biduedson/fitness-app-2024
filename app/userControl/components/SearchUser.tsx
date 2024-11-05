@@ -1,32 +1,22 @@
-import { Input } from "@/components/ui/input";
-import { fadeIn } from "@/lib/variants";
-import { Prisma } from "@prisma/client";
-import { motion } from "framer-motion";
-import { ChangeEvent } from "react";
-import { BsSearch } from "react-icons/bs";
+// src/components/SearchUser.tsx
+"use client";
+
+import React from "react";
 
 interface ISearchUserProps {
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
 const SearchUser = ({ handleInputChange }: ISearchUserProps) => {
   return (
-    <motion.div
-      variants={fadeIn("down", 0.4)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.2 }}
-      className="  w-full h-[60px] flex items-center justify-center gap-2 bg-transparent z-50  px-6  text-white"
-    >
-      <Input
+    <div className="w-full max-w-md mb-4">
+      <input
         type="text"
-        placeholder="Buscar por nome ou email"
-        className="w-full h-[40px] border-accent border-[2px] text-black text-[20px] placeholder:text-accent placeholder:text-center bg-white"
         onChange={handleInputChange}
+        placeholder="Buscar por nome ou email..."
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-accent"
       />
-      <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-accent text-white text-[20px] ">
-        <BsSearch />
-      </div>
-    </motion.div>
+    </div>
   );
 };
 

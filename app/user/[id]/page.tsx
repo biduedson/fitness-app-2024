@@ -6,13 +6,8 @@ import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import MobileNavHomeFooter from "@/components/MobileNavHomeFooter";
-
-import AlertAddStudent from "../components/AlertAddStudent";
 import UserControlPanel from "../components/UserControlPanel";
 import UserControllerPageHeader from "../components/UserControllerPageHeader";
-import AlertDeleteStudent from "../components/AlertDeleteStudente";
-import AlertDialogAddGymAdmin from "../components/AlertDialogAddGymAdmin";
-import AlertGymAdminDelete from "../components/AlertGymAdminDelete";
 
 interface IUserPageProps {
   user: Prisma.UserGetPayload<{
@@ -42,16 +37,7 @@ const Userpage = () => {
   const [userData, setUserData] = useState<IUserPageProps["user"] | null>(
     initialUser!
   );
-  const [isConfirmDialogOpen, setIsConfirmDialogOpen] =
-    useState<boolean>(false);
-  const [isConfirmDialogDeleteOpen, setIsConfirmDialogDeleteOpen] =
-    useState<boolean>(false);
-  const [isConfirmGymAdminDialogOpen, setIsConfirmGymAdminDialogOpen] =
-    useState<boolean>(false);
-  const [
-    isConfirmDialogGymAdminDeletOpen,
-    setIsConfirmDialogGymAdminDeletOpen,
-  ] = useState<boolean>(false);
+
   useEffect(() => {
     if (initialUser) {
       setUserData(initialUser);
@@ -59,87 +45,48 @@ const Userpage = () => {
   }, [initialUser, session]);
 
   if (status === "loading") {
-    return (
-      <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
-        <span className=" animate-spin text-[20px]">
-          <AiOutlineLoading3Quarters />
-        </span>
-        <span className=" animate-pulse">Loading...</span>
-      </div>
-    );
+    return <LoadingScreen message="Carregando..." />;
   }
 
   if (status === "unauthenticated" || !session?.user.gymAdmin) {
     return notFound();
   }
+
   if (!userData) {
-    return (
-      <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
-        <span className=" animate-spin text-[20px]">
-          <AiOutlineLoading3Quarters />
-        </span>
-        <span className=" animate-pulse">Loading...</span>
-      </div>
-    );
+    return <LoadingScreen message="Carregando informações do usuário..." />;
   }
+
   if (error) {
-    return (
-      <div className=" w-full h-[100vh] flex gap-1 items-center justify-center bg-black_texture text-white ">
-        <span className="text-[20px]">Erro: {error}</span>
-      </div>
-    );
+    return <ErrorScreen message={`Erro: ${error}`} />;
   }
 
   return (
-    <section className="w-full h-[100vh] flex flex-col  items-center justify-between bg-black_texture text-white">
-      <UserControllerPageHeader user={userData} />
-
-      <UserControlPanel
-        user={userData}
-        setIsConfirmDialogOpen={() => setIsConfirmDialogOpen(true)}
-        setIsConfirmDeletedDialogOpen={() => setIsConfirmDialogDeleteOpen(true)}
-        setIsConfirmGymAdminDialogOpen={() =>
-          setIsConfirmGymAdminDialogOpen(true)
-        }
-        setIsConfirmDialogGymAdminDeletOpen={() =>
-          setIsConfirmDialogGymAdminDeletOpen(true)
-        }
-      />
-
+    <section className=" relative flex flex-col items-center  justify-center min-h-screen bg-gray-900 text-white sm:px-6 lg:px-8">
+      <div className="w-full h-[100vh]  flex flex-col items-center justify-around">
+        <UserControllerPageHeader user={userData} />
+        <div className="flex flex-col items-center w-full mt-4 px-4">
+          <UserControlPanel user={userData} setUserData={setUserData} />
+        </div>
+      </div>
       <MobileNavHomeFooter />
-
-      <AlertAddStudent
-        user={userData}
-        userId={userData.id}
-        setUserData={setUserData}
-        isConfirmDialogOpen={isConfirmDialogOpen}
-        setIsConfirmDialogOpen={setIsConfirmDialogOpen}
-      />
-      <AlertDeleteStudent
-        user={userData}
-        userId={userData.id}
-        setUserData={setUserData}
-        isConfirmDialogDeleteOpen={isConfirmDialogDeleteOpen}
-        setIsConfirmDialogDeleteOpen={setIsConfirmDialogDeleteOpen}
-      />
-      <AlertDialogAddGymAdmin
-        user={userData}
-        userId={userData.id}
-        setUserData={setUserData}
-        isConfirmGymAdminDialogOpen={isConfirmGymAdminDialogOpen}
-        setIsConfirmGymAdminDialogOpen={setIsConfirmGymAdminDialogOpen}
-      />
-      <AlertGymAdminDelete
-        user={userData}
-        userId={userData.id}
-        setUserData={setUserData}
-        isConfirmDialogGymAdminDeletOpen={isConfirmDialogGymAdminDeletOpen}
-        setIsConfirmDialogGymAdminDeletOpen={
-          setIsConfirmDialogGymAdminDeletOpen
-        }
-      />
     </section>
   );
 };
 
 export default Userpage;
+
+// Componentes de tela de erro e carregamento para reaproveitamento
+const LoadingScreen = ({ message }: { message: string }) => (
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 to-black text-white">
+    <div className="flex flex-col items-center">
+      <AiOutlineLoading3Quarters className="animate-spin text-5xl" />
+      <span className="animate-pulse text-lg mt-2">{message}</span>
+    </div>
+  </div>
+);
+
+const ErrorScreen = ({ message }: { message: string }) => (
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 to-black text-white">
+    <span className="text-lg">{message}</span>
+  </div>
+);

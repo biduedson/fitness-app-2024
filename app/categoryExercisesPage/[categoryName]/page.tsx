@@ -63,7 +63,7 @@ const CategoryExercisesPage = () => {
       <div
         onClick={() => route.replace("/exerciseGuidePage")}
         className="absolute top-4 left-4 flex cursor-pointer items-center justify-center right-2 text-[20px] text-black bg-slate-300 rounded-full w-12 h-12
-          hover:text-red-500 transition-colors duration-200 z-50"
+          hover:text-red-500 transition-colors duration-200 z-10 "
       >
         <MdOutlineArrowBackIos />
       </div>

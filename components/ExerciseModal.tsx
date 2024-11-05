@@ -38,7 +38,9 @@ const EnhancedExerciseModal = ({
       animate={{ opacity: isOpen ? 1 : 0 }}
       transition={{ duration: 0.3 }}
       className={`${
-        isOpen ? "fixed z-50 inset-0 bg-black bg-opacity-60" : "hidden"
+        isOpen
+          ? "fixed z-50 inset-0 h-[100vh] bg-black bg-opacity-60 "
+          : "hidden"
       } flex items-center justify-center`}
     >
       <div className="relative w-full flex- flex-col justify-between max-w-2xl h-[85vh] bg-white rounded-lg shadow-lg overflow-hidden">

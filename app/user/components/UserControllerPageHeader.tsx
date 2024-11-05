@@ -1,9 +1,8 @@
-import { fadeIn } from "@/lib/variants";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { MdArrowBackIos } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Prisma } from "@prisma/client";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/variants";
 
 interface IUserControllerPageHeaderProps {
   user: Prisma.UserGetPayload<{
@@ -13,67 +12,77 @@ interface IUserControllerPageHeaderProps {
     };
   }>;
 }
+
 const UserControllerPageHeader = ({ user }: IUserControllerPageHeaderProps) => {
   const router = useRouter();
 
   return (
     <motion.header
-      variants={fadeIn("down", 0.4)}
+      variants={fadeIn("down", 0.6)}
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
-      className=" relative lg:bg-accent w-full h-[220px] "
+      className=" w-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 text-white"
     >
-      <div
-        className="absolute top-4 left-4 w-[50px] h-[50px] rounded-full  bg-white/80 z-10 flex items-center 
-        justify-center text-[26px] text-accent font-bold"
-        onClick={() => router.back()}
-      >
-        <MdArrowBackIos />
+      <div className="absolute md:hidden top-0 w-full h-[300px] overflow-hidden rounded-lg shadow-lg">
+        <Image
+          src="/assets/img/bannerExercisePage.png"
+          alt="User Banner"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-60"
+        />
       </div>
-      <Image
-        src="/assets/img/bannerExercisePage.png"
-        alt="banner"
-        fill
-        className="lg:hidden absolute object-cover "
-        sizes="150px"
-        priority // Adicione essa propriedade para priorizar o carregamento
-      />
-      <motion.div
-        variants={fadeIn("up", 0.6)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="relative w-full flex  items-center"
-      >
-        <div className="absolute top-[140px] w-full flex flex-col items-center justify-center">
-          <div className="relative w-[150px] h-[150px] ">
+      {/* Versão para dispositivos móveis */}
+      <div className="absolute  w-full top-4 md:hidden flex flex-col gap-4 items-center justify-center h-[300px] sm:h-[350px] p-4">
+        <div className="relative w-32 h-32 overflow-hidden rounded-full shadow-lg">
+          <Image
+            src={user?.image || "/assets/img/default-avatar.png"}
+            alt="User Avatar"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-90 rounded-full border-white border-[2px]"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center bg-white rounded-lg opacity-90 p-2">
+          <h1 className=" text-xl font-semibold text-center text-red-500">
+            {user?.name || "Nome do Usuário"}
+          </h1>
+          <p className="text-sm  mt-1 text-center text-primary-300">
+            {user?.email || "email@exemplo.com"}
+          </p>
+        </div>
+      </div>
+
+      {/* Versão para desktop */}
+      <div className="hidden md:flex flex-col items-center justify-center h-[300px] relative text-center p-8">
+        <div className="absolute inset-0 w-full h-[300px] overflow-hidden rounded-lg shadow-lg">
+          <Image
+            src="/assets/img/bannerExercisePage.png"
+            alt="User Banner"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-60"
+          />
+        </div>
+        <div className="absolute flex flex-col items-center w-3/5 max-w-lg p-6 bg-white rounded-lg shadow-xl bg-opacity-90">
+          <div className="relative w-24 h-24 overflow-hidden rounded-full shadow-lg">
             <Image
-              src={user?.image!}
-              alt="User image"
-              className="absolute rounded-full object-cover border-accent border-[4px] "
-              fill
-              sizes="(width: 150px)"
+              src={user?.image || "/assets/img/default-avatar.png"}
+              alt="User Avatar"
+              layout="fill"
+              objectFit="cover"
+              className="opacity-90 rounded-full"
             />
           </div>
-          <motion.div
-            variants={fadeIn("down", 0.6)}
-            initial="hidden"
-            whileInView={"show"}
-            viewport={{ once: false, amount: 0.2 }}
-            className="w-full flex items-center justify-center "
-          >
-            <div className="w-[250px] flex flex-col items-center">
-              <p className=" text-[28px] lg:text-[18px] font-semibold text-accent ">
-                {user?.name!}
-              </p>
-              <p className="text-[20px] lg:text-[12px] font-semibold text-white ">
-                {user?.email!}
-              </p>
-            </div>
-          </motion.div>
+          <h1 className="text-3xl font-semibold text-red-500">
+            {user?.name || "Nome do Usuário"}
+          </h1>
+          <p className="text-lg text-primary-300 mt-2">
+            {user?.email || "email@exemplo.com"}
+          </p>
         </div>
-      </motion.div>
+      </div>
     </motion.header>
   );
 };

@@ -81,6 +81,7 @@ const UserProfile = ({ imageUrl }: { imageUrl: string }) => {
               <MenuItem
                 label="Controle de usuários"
                 iconComponent={<FaUserGroup />}
+                onclick={() => router.push("/userControl")}
               />
             )}
             <MenuItem

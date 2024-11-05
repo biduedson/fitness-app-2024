@@ -1,3 +1,6 @@
+// src/components/CardUserItem.tsx
+"use client";
+
 import { Prisma } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -13,41 +16,32 @@ interface ICardProps {
 
 const CardUserItem = ({ user }: ICardProps) => {
   const router = useRouter();
+
   const handleUserRouterClick = () => {
     router.push(`/user/${user.id}`);
   };
+
   return (
     <div
-      className=" w-full h-[244px]  flex flex-col justify-between  border-accent border-[1px] rounded-lg  bg-white cursor-pointer "
+      className="bg-white shadow-lg rounded-lg p-6 text-center cursor-pointer transition-transform transform hover:scale-105"
       onClick={handleUserRouterClick}
-      key={user.id}
     >
-      <div className=" relative bg-accent bg- w-full h-[120px]">
-        <div className="absolute top-[50px] w-full flex flex-col items-center justify-center ">
-          <div className="relative w-[120px] h-[120px]   ">
-            <Image
-              src={user.image!}
-              alt="user image"
-              fill
-              className="absolute object-cover rounded-full border-white border-[4px]"
-              priority
-              sizes="(width: 120px) "
-            />
-          </div>
-          <div className="flex flex-col gap2">
-            <p className="text-accent text-center  font-extrabold">
-              {user.name}
-            </p>
-            <p className=" text-slate-500 text-[13px] font-extrabold">
-              {user.email}
-            </p>
-          </div>
-        </div>
+      <div className="relative w-24 h-24 mx-auto mb-4">
+        <Image
+          src={user.image!}
+          alt="User Image"
+          fill
+          className="rounded-full object-cover border-4 border-accent"
+        />
       </div>
-      <div className=" w-full flex items-center justify-center h-[30px] bg-accent rounded-b-lg">
-        <p className=" text-white capitalize font-extrabold text-center">
-          {user.student ? "Aluno" : "Não aluno"}
-        </p>
+      <h3 className="text-xl font-bold text-accent">{user.name}</h3>
+      <p className="text-gray-600 text-sm">{user.email}</p>
+      <div
+        className={`mt-4 px-4 py-1 rounded-full text-white font-semibold ${
+          user.student ? "bg-green-500" : "bg-red-500"
+        }`}
+      >
+        {user.student ? "Aluno" : "Não aluno"}
       </div>
     </div>
   );

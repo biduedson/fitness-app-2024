@@ -30,7 +30,8 @@ const config: Config = {
   		hero: 'url(/assets/img/hero/bg.png)',
   		membership: 'url(/assets/img/membership/bg.jpg)',
   		login: 'url(/assets/img/muscle.png)',
-  		black_texture: 'url(/assets/img/black_texture.jpg)'
+  		black_texture: 'url(/assets/img/black_texture.jpg)',
+		'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
   	},
   	textShadow: {
   		'outline-red': '2px 2px 0 #d4000d, -2px -2px 0 #d4000d, 2px -2px 0 #d4000d, -2px 2px 0 #d4000d',
