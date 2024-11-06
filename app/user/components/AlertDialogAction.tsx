@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import {
   AlertDialog,
@@ -26,6 +27,7 @@ interface AlertDialogActionProps {
   setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
   actionType: ActionType;
   emptyErrorMessage?: string;
+  setLoadingButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AlertAction = ({
@@ -35,14 +37,58 @@ const AlertAction = ({
   setUserData,
   user,
   actionType,
+  setLoadingButton,
 }: AlertDialogActionProps) => {
+  let actionUrl: string;
+  let actionMethod: string;
+  let actionMessage: string;
+  let dialogTitle: string;
+  let dialogDescription: string;
+  let nameButtonAction: string;
+
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
-  const actionUrl =
-    actionType === "addStudent" ? "/api/addstudent" : "/api/deletestudent";
-  const actionMethod = actionType === "addStudent" ? "POST" : "DELETE";
-  const actionMessage = actionType === "addStudent" ? "adicionado" : "removido";
+  switch (actionType) {
+    case "addStudent":
+      actionUrl = "/api/addstudent";
+      actionMethod = "POST";
+      nameButtonAction = "Liberar";
+      actionMessage = "Acesso os exercícios liberado.";
+      dialogTitle = "Deseja liberar o acesso aos exercícios ?";
+      dialogDescription =
+        " Ao finalizar, o usuário terá o acesso ao guia de exercícios liberado";
+      break;
+    case "deleteStudent":
+      actionUrl = "/api/deletestudent";
+      actionMethod = "DELETE";
+      nameButtonAction = "Bloquear";
+      actionMessage = "Acesso os exercícios bloqueado.";
+      dialogTitle = "Deseja bloquear o acesso aos exercícios ?";
+      dialogDescription =
+        " Ao finalizar, o usuário terá o acesso ao guia de exercícios bloqueado";
+      break;
+    case "addGymAdmin":
+      actionUrl = "/api/addgymadmin";
+      actionMethod = "POST";
+      nameButtonAction = "Adicionar";
+      actionMessage = "Administrador adicionado.";
+      dialogTitle = "Deseja adicionar como administrador?";
+      dialogDescription = " Ao finalizar, o usuário sera administrador.";
+
+      break;
+    case "deleteGymAdmin":
+      actionUrl = "/api/deletegymadmin";
+      actionMethod = "DELETE";
+      nameButtonAction = "Remover";
+      actionMessage = "Administrador excluido.";
+      dialogTitle = "Deseja remover este administrador?";
+      dialogDescription =
+        " Ao finalizar, o usuário não sera mais  administrador.";
+
+      break;
+  }
 
   const handleAction = async () => {
+    setLoadingButton(true);
     setIsSubmitLoading(true);
     try {
       const response = await fetch(actionUrl, {
@@ -54,48 +100,49 @@ const AlertAction = ({
       if (response.ok) {
         const updatedUser = await response.json();
         setUserData(updatedUser);
-        toast(`Usuário ${actionMessage} com sucesso.`);
+        toast(actionMessage);
       } else {
         toast.error(`Erro ao ${actionMessage} usuário.`);
         console.error(`Erro ao ${actionMessage} usuário:`, response);
       }
     } catch (error) {
-      toast.error(`Erro ao ${actionMessage} usuário.`);
+      toast.error(actionMessage);
       console.error(`Erro ao ${actionMessage} usuário:`, error);
     } finally {
       setIsSubmitLoading(false);
+      setLoadingButton(false);
       setIsDialogOpen(false);
+      console.log(user);
     }
   };
 
   return (
     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <AlertDialogContent className="bg-black_texture">
+      <AlertDialogContent className="bg-gray-800">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-accent sm:text-center">
-            Deseja {actionType === "addStudent" ? "Adicionar" : "Remover"} este
-            usuário?
+          <AlertDialogTitle className="text-red-600 sm:text-center">
+            {dialogTitle!}
           </AlertDialogTitle>
           <AlertDialogDescription className="text-[16px] text-white sm:text-center">
-            Ao finalizar, o usuário será {actionMessage}.
+            {dialogDescription!}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className="text-accent"
+            className="text-black  hover:bg-slate-800 hover:text-white"
             onClick={() => setIsDialogOpen(false)}
           >
             Cancelar
           </AlertDialogCancel>
           <AlertDialogAction
-            className="bg-accent"
+            className="bg-blue-500"
             onClick={handleAction}
             disabled={isSubmitLoading}
           >
             {isSubmitLoading && (
               <Loader2 className="mr-2 h-4 w-4 animate-spin text-white" />
             )}
-            {actionType === "addStudent" ? "Adicionar" : "Remover"}
+            {nameButtonAction!}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

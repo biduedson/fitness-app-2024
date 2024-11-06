@@ -65,7 +65,7 @@ const Userpage = () => {
       <div className="w-full h-[100vh]  flex flex-col items-center justify-around">
         <UserControllerPageHeader user={userData} />
         <div className="flex flex-col items-center w-full mt-4 px-4">
-          <UserControlPanel user={userData} setUserData={setUserData} />
+          <UserControlPanel user={userData} />
         </div>
       </div>
       <MobileNavHomeFooter />

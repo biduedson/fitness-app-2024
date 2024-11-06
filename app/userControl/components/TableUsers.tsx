@@ -106,7 +106,7 @@ const TableUsers = ({ users }: ITableUsersProps) => {
             {filteredUsers.map((user) => (
               <TableRow
                 key={user.id}
-                className="hover:bg-gray-800 transition-colors"
+                className="hover:bg-gray-800 transition-colors "
               >
                 <TableCell className="p-4">
                   <div className="relative w-20 h-20 rounded-full overflow-hidden">

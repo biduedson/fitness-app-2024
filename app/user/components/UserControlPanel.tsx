@@ -1,3 +1,4 @@
+"use client";
 import { fadeIn } from "@/lib/variants";
 import { Prisma } from "@prisma/client";
 import { motion } from "framer-motion";
@@ -9,6 +10,9 @@ import AlertAction from "./AlertDialogAction";
 import { ActionType } from "../types/userTypes";
 import { TbArrowBack } from "react-icons/tb";
 import { FaHome } from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import ActionButton from "@/components/ActionButton";
+
 import { useRouter } from "next/navigation";
 
 interface UserControlPanelProps {
@@ -18,15 +22,16 @@ interface UserControlPanelProps {
       gymAdmin: true;
     };
   }>;
-  setUserData: React.Dispatch<
-    React.SetStateAction<UserControlPanelProps["user"] | null>
-  >;
 }
 
-const UserControlPanel = ({ user, setUserData }: UserControlPanelProps) => {
+const UserControlPanel = ({ user }: UserControlPanelProps) => {
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
   const [actionType, setActionType] = useState<ActionType>("");
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const router = useRouter();
+  const [userData, setUserData] = useState<
+    UserControlPanelProps["user"] | null
+  >(user);
 
   const handleOpenDialog = (type: ActionType) => {
     setActionType(type);
@@ -46,47 +51,58 @@ const UserControlPanel = ({ user, setUserData }: UserControlPanelProps) => {
         <h4 className="text-lg font-semibold text-gray-300 uppercase mb-3 text-center">
           Controle de Usuário
         </h4>
-        <div className="w-full flex flex-col gap-3">
-          {!user.student && (
-            <ActionButton
-              onClick={() => handleOpenDialog("addStudent")}
-              icon={<IoIosPersonAdd className="text-3xl text-white" />}
-              label="Adicionar como aluno"
-              bgColor="bg-blue-500"
-            />
-          )}
-          {user.student && (
-            <ActionButton
-              onClick={() => handleOpenDialog("deleteStudent")}
-              icon={<MdPersonRemoveAlt1 className="text-3xl text-white" />}
-              label="Remover como aluno"
-              bgColor="bg-red-500"
-            />
-          )}
-          {!user.gymAdmin && (
-            <ActionButton
-              onClick={() => handleOpenDialog("addGymAdmin")}
-              icon={<RiAdminFill className="text-3xl text-white" />}
-              label="Adicionar como Administrador"
-              bgColor="bg-green-500"
-            />
-          )}
-          {user.gymAdmin && (
-            <ActionButton
-              onClick={() => handleOpenDialog("deleteGymAdmin")}
-              icon={<RiAdminFill className="text-3xl text-white" />}
-              label="Remover como Administrador"
-              bgColor="bg-yellow-500"
-            />
-          )}
-        </div>
+        {loadingButton ? (
+          <div className="w-full flex flex-col gap-3">
+            <div className=" w-full h-[50%] flex items-center justify-center gap-2 text-[20px] animate-pulse ">
+              <AiOutlineLoading3Quarters className="animate-spin" /> Alterando
+              usuário...
+            </div>
+          </div>
+        ) : (
+          <div className="w-full flex flex-col gap-3">
+            {!userData?.student && (
+              <ActionButton
+                onClick={() => handleOpenDialog("addStudent")}
+                icon={<IoIosPersonAdd className="text-3xl text-white" />}
+                label="Adicionar como aluno"
+                bgColor="bg-blue-500"
+              />
+            )}
+            {userData?.student && (
+              <ActionButton
+                onClick={() => handleOpenDialog("deleteStudent")}
+                icon={<MdPersonRemoveAlt1 className="text-3xl text-white" />}
+                label="Remover como aluno"
+                bgColor="bg-red-500"
+              />
+            )}
+            {!userData?.gymAdmin && (
+              <ActionButton
+                onClick={() => handleOpenDialog("addGymAdmin")}
+                icon={<RiAdminFill className="text-3xl text-white" />}
+                label="Adicionar como Administrador"
+                bgColor="bg-green-500"
+              />
+            )}
+            {userData?.gymAdmin && (
+              <ActionButton
+                onClick={() => handleOpenDialog("deleteGymAdmin")}
+                icon={<RiAdminFill className="text-3xl text-white" />}
+                label="Remover como Administrador"
+                bgColor="bg-yellow-500"
+              />
+            )}
+          </div>
+        )}
+
         <AlertAction
-          user={user}
+          user={userData!}
           userId={user.id}
           actionType={actionType}
           isDialogOpen={isDialogOpen}
           setIsDialogOpen={() => setIsDialogOpen(false)}
           setUserData={setUserData}
+          setLoadingButton={setLoadingButton}
         />
       </motion.div>
 
@@ -101,40 +117,49 @@ const UserControlPanel = ({ user, setUserData }: UserControlPanelProps) => {
         <h4 className="text-2xl font-bold text-gray-300 uppercase mb-6 text-center border-b border-gray-500 pb-3">
           Controle de Usuário
         </h4>
-        <div className="w-full flex flex-col gap-4 items-center ">
-          {!user.student && (
-            <ActionButton
-              onClick={() => handleOpenDialog("addStudent")}
-              icon={<IoIosPersonAdd className="text-4xl text-white " />}
-              label="Liberar acesso aos exercícios"
-              bgColor="bg-blue-500"
-            />
-          )}
-          {user.student && (
-            <ActionButton
-              onClick={() => handleOpenDialog("deleteStudent")}
-              icon={<MdPersonRemoveAlt1 className="text-4xl text-white" />}
-              label="bloquear acesso aos exercícios"
-              bgColor="bg-red-500"
-            />
-          )}
-          {!user.gymAdmin && (
-            <ActionButton
-              onClick={() => handleOpenDialog("addGymAdmin")}
-              icon={<RiAdminFill className="text-4xl text-white" />}
-              label="cadastrar Administrador"
-              bgColor="bg-green-500"
-            />
-          )}
-          {user.gymAdmin && (
-            <ActionButton
-              onClick={() => handleOpenDialog("deleteGymAdmin")}
-              icon={<RiAdminFill className="text-4xl text-white" />}
-              label="bloquear Administrador"
-              bgColor="bg-yellow-500"
-            />
-          )}
-        </div>
+        {loadingButton ? (
+          <div className="w-full h-full flex flex-col gap-3">
+            <div className=" w-full h-full flex items-center justify-center gap-2 text-[20px] animate-pulse">
+              <AiOutlineLoading3Quarters className="animate-spin" /> Salvando
+              informações...
+            </div>
+          </div>
+        ) : (
+          <div className="w-full flex flex-col gap-3">
+            {!userData?.student && (
+              <ActionButton
+                onClick={() => handleOpenDialog("addStudent")}
+                icon={<IoIosPersonAdd className="text-3xl text-white" />}
+                label="Liberar acesso aos exercícios "
+                bgColor="bg-blue-500"
+              />
+            )}
+            {userData?.student && (
+              <ActionButton
+                onClick={() => handleOpenDialog("deleteStudent")}
+                icon={<MdPersonRemoveAlt1 className="text-3xl text-white" />}
+                label="bloquear acesso aos exercícios"
+                bgColor="bg-red-500"
+              />
+            )}
+            {!userData?.gymAdmin && (
+              <ActionButton
+                onClick={() => handleOpenDialog("addGymAdmin")}
+                icon={<RiAdminFill className="text-3xl text-white" />}
+                label="Adicionar como Administrador"
+                bgColor="bg-green-500"
+              />
+            )}
+            {userData?.gymAdmin && (
+              <ActionButton
+                onClick={() => handleOpenDialog("deleteGymAdmin")}
+                icon={<RiAdminFill className="text-3xl text-white" />}
+                label="Remover como Administrador"
+                bgColor="bg-yellow-500"
+              />
+            )}
+          </div>
+        )}
         <AlertAction
           user={user}
           userId={user.id}
@@ -142,6 +167,7 @@ const UserControlPanel = ({ user, setUserData }: UserControlPanelProps) => {
           isDialogOpen={isDialogOpen}
           setIsDialogOpen={() => setIsDialogOpen(false)}
           setUserData={setUserData}
+          setLoadingButton={setLoadingButton}
         />
         <motion.div
           variants={fadeIn("up", 0.4)}
@@ -176,28 +202,6 @@ const UserControlPanel = ({ user, setUserData }: UserControlPanelProps) => {
         </motion.div>
       </motion.div>
     </>
-  );
-};
-
-const ActionButton = ({
-  onClick,
-  icon,
-  label,
-  bgColor,
-}: {
-  onClick: () => void;
-  icon: React.ReactNode;
-  label: string;
-  bgColor: string;
-}) => {
-  return (
-    <div
-      className={`${bgColor} w-full flex items-center  justify-between px-4 py-3 gap-2 text-sm uppercase rounded-lg cursor-pointer transition-transform transform hover:scale-105`}
-      onClick={onClick}
-    >
-      {icon}
-      <span className="text-white w-full text-center">{label}</span>
-    </div>
   );
 };
 

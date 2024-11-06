@@ -43,6 +43,7 @@ const config: Config = {
         'clamp-md': 'clamp(1rem, 2vw, 1.2rem)',
       },
   		colors: {
+			
   			primary: {
   				100:'#484848',
           200:'#151515',

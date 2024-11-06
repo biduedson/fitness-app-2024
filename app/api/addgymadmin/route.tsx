@@ -40,8 +40,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         userId: userId,
       },
     });
-
-    return NextResponse.json(newGymAdmin, { status: 201 });
+    const userUpdated = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        student: true,
+        gymAdmin: true,
+      },
+    });
+    return NextResponse.json(userUpdated, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "Erro interno do servidor" },
