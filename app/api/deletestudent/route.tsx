@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
@@ -50,6 +51,7 @@ export async function DELETE(req: NextRequest): Promise<NextResponse> {
         gymAdmin: true,
       },
     });
+    revalidatePath("/userControl");
     return NextResponse.json(userWithStudentDeleted, { status: 200 });
   } catch (error) {
     return NextResponse.json(

@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { MdMenu } from "react-icons/md";
 import { useSession } from "next-auth/react";
 import UserProfile from "./profile/UserProfile";
-import ButtonLogin from "./ButtonLogin";
 
 const Header = () => {
   const { data } = useSession();
@@ -50,6 +49,10 @@ const Header = () => {
             flex flex-col text-center gap-8 bg-primary-200 w-full 
             fixed left-0  text-base uppercase font-medium transition-all xl:hidden text-white`}
         />
+        {/* logo */}
+        <Link href="/">
+          <Image src={"/assets/img/logo.png"} width={117} height={55} alt="" />
+        </Link>
 
         {/* desktop nav - hidden on small diveces*/}
         <Nav
@@ -62,14 +65,9 @@ const Header = () => {
         {/*avatar login user*/}
         {data?.user && (
           <>
-            <UserProfile imageUrl={data.user.image as string} />
+            <UserProfile />
           </>
         )}
-
-        {/* logo */}
-        <Link href="/">
-          <Image src={"/assets/img/logo.png"} width={117} height={55} alt="" />
-        </Link>
         <button
           className="text-white lg:hidden"
           onClick={() => setOpenNav(!openNav)}

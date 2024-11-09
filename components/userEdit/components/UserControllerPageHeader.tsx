@@ -22,7 +22,7 @@ const UserControllerPageHeader = ({ user }: IUserControllerPageHeaderProps) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
-      className=" w-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 text-white"
+      className=" w-screen bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 text-white"
     >
       <div className="absolute md:hidden top-0 w-full h-[300px] overflow-hidden rounded-lg shadow-lg">
         <Image
@@ -32,26 +32,6 @@ const UserControllerPageHeader = ({ user }: IUserControllerPageHeaderProps) => {
           objectFit="cover"
           className="opacity-60"
         />
-      </div>
-      {/* Versão para dispositivos móveis */}
-      <div className="absolute  w-full top-4 md:hidden flex flex-col gap-4 items-center justify-center h-[300px] sm:h-[350px] p-4">
-        <div className="relative w-32 h-32 overflow-hidden rounded-full shadow-lg">
-          <Image
-            src={user?.image || "/assets/img/default-avatar.png"}
-            alt="User Avatar"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-90 rounded-full border-white border-[2px]"
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center bg-white rounded-lg opacity-90 p-2">
-          <h1 className=" text-xl font-semibold text-center text-red-500">
-            {user?.name || "Nome do Usuário"}
-          </h1>
-          <p className="text-sm  mt-1 text-center text-primary-300">
-            {user?.email || "email@exemplo.com"}
-          </p>
-        </div>
       </div>
 
       {/* Versão para desktop */}

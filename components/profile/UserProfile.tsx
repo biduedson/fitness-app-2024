@@ -18,7 +18,7 @@ import {
 import MenuItem from "./components/menuItem";
 import { useRouter } from "next/navigation";
 
-const UserProfile = ({ imageUrl }: { imageUrl: string }) => {
+const UserProfile = () => {
   const { data } = useSession();
   const router = useRouter();
 
@@ -27,7 +27,7 @@ const UserProfile = ({ imageUrl }: { imageUrl: string }) => {
       <SheetTrigger>
         <div className="relative w-[60px] h-[60px] ">
           <Image
-            src={imageUrl}
+            src={data?.user.image!}
             fill
             alt="UserImage"
             className="object-cover shadow-md z-50 rounded-full border-[2px] cursor-pointer bg-acc border-accent"

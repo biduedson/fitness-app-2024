@@ -8,6 +8,8 @@ import { db } from "../_lib/prisma";
 import CardUserDashbord from "./components/CardUserDashbord";
 import TableUsers from "./components/TableUsers";
 import { redirect } from "next/navigation";
+import UserProfile from "@/components/profile/UserProfile";
+import NavbarUser from "@/components/NavBarUser";
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
@@ -31,16 +33,24 @@ const DashboardPage = async () => {
   });
 
   return (
-    <section className="bg-black_texture min-h-screen p-6">
-      <h2 className="text-3xl font-bold text-accent text-center mb-10">
-        Dashboard de Usuários
-      </h2>
-      {/* Exibe a tabela em telas a partir de lg, caso contrário, exibe os cartões */}
+    <>
+      <section className=" relative bg-primary-300 min-h-screen p-6 lg:p-0  ">
+        <NavbarUser />
+        <div className="lg:hidden absolute top-4 left-4 z-50">
+          {" "}
+          <UserProfile />
+        </div>
 
-      <TableUsers users={users} />
+        <h2 className="text-2xl sm:text-3xl font-bold text-accent text-center mb-10 lg:mb-2">
+          Dashboard de Usuários
+        </h2>
+        {/* Exibe a tabela em telas a partir de lg, caso contrário, exibe os cartões */}
 
-      <CardUserDashbord users={users} />
-    </section>
+        <TableUsers users={users} />
+
+        <CardUserDashbord />
+      </section>
+    </>
   );
 };
 

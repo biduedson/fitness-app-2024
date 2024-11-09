@@ -19,13 +19,6 @@ const Nav = ({ containerStyles }: { containerStyles: string }) => {
     { name: "planos", target: "prices", offset: -40 },
     { name: "depoimentos", target: "testimonial", offset: 0 },
     { name: "blog", target: "blog", offset: 0 },
-    { name: "Exercícios", target: "", offset: -40 },
-    { name: "Meus Exercícios", target: "", offset: -40 },
-    {
-      name: data?.user.student ? "logout" : "login",
-      target: "login",
-      offset: -40,
-    },
   ];
 
   return (
@@ -39,20 +32,7 @@ const Nav = ({ containerStyles }: { containerStyles: string }) => {
             smooth
             spy
             onClick={() => handleRoute(link.name)}
-            activeClass={
-              ["Exercícios", "Meus Exercícios", "login", "logout"].includes(
-                link.name
-              )
-                ? "inative"
-                : "active"
-            }
-            className={
-              ["Exercícios", "Meus Exercícios", "login", "logout"].includes(
-                link.name
-              )
-                ? " flex items-center justify-center w-[170px] cursor-pointer  bg-accent p-2 rounded-md"
-                : "cursor-pointer hover:text-accent transition-all"
-            }
+            className=" flex items-center justify-center  cursor-pointer   "
           >
             {link.name}
           </ScrollLink>

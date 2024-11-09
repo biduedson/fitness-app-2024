@@ -2,6 +2,7 @@ import { authOptions } from "@/app/_lib/auth";
 import { db } from "@/app/_lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const { userId } = await req.json();
@@ -50,6 +51,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         gymAdmin: true,
       },
     });
+    revalidatePath("/userControl");
 
     return NextResponse.json(userUpdated, { status: 201 });
   } catch (error) {

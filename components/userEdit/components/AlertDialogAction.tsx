@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UsersContext } from "@/app/_context/userContext";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,7 +15,8 @@ import {
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { Prisma } from "@prisma/client";
-import { ActionType } from "../types/userTypes";
+import { ActionType } from "../userEditTypes/userTypes";
+import { revalidatePath } from "next/cache";
 
 interface AlertDialogActionProps {
   userId: string;
@@ -39,6 +42,8 @@ const AlertAction = ({
   actionType,
   setLoadingButton,
 }: AlertDialogActionProps) => {
+  const { dataUsers, setDataUsers } = useContext(UsersContext) ?? {};
+
   let actionUrl: string;
   let actionMethod: string;
   let actionMessage: string;
@@ -100,6 +105,12 @@ const AlertAction = ({
       if (response.ok) {
         const updatedUser = await response.json();
         setUserData(updatedUser);
+        setDataUsers?.((prevUser) =>
+          (prevUser ?? []).map((user) =>
+            user.id === updatedUser.id ? { ...updatedUser } : user
+          )
+        );
+
         toast(actionMessage);
       } else {
         toast.error(`Erro ao ${actionMessage} usuário.`);
@@ -112,13 +123,12 @@ const AlertAction = ({
       setIsSubmitLoading(false);
       setLoadingButton(false);
       setIsDialogOpen(false);
-      console.log(user);
     }
   };
 
   return (
     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <AlertDialogContent className="bg-gray-800">
+      <AlertDialogContent className="bg-gray-800 ">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-red-600 sm:text-center">
             {dialogTitle!}

@@ -1,5 +1,5 @@
 export type ActionType =
-""
+  | ""
   | "addStudent"
   | "deleteStudent"
   | "addGymAdmin"
