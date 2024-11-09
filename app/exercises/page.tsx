@@ -52,7 +52,7 @@ const page = async () => {
       >
         {data.user && (
           <div className=" absolute top-2 left-2">
-            <UserProfile imageUrl={data.user.image!} />
+            <UserProfile />
           </div>
         )}
         <CategoryLIst id="s" categoryAndExercises={categoryExercises} />

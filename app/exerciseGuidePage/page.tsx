@@ -47,7 +47,7 @@ const ExerciseGuidePage = async () => {
   return (
     <section className="relative bg-black_texture h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
       <div className="absolute top-2 left-2">
-        <UserProfile imageUrl={data.user.image!} />
+        <UserProfile />
       </div>
       <div className="flex-1 py-10 px-5 md:px-20">
         <div className="mb-10">

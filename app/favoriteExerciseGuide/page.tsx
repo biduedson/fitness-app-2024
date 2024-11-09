@@ -55,7 +55,7 @@ const Page = async () => {
   return (
     <section className="relative bg-black_texture h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
       <div className="absolute top-12 left-6">
-        <UserProfile imageUrl={data.user.image!} />
+        <UserProfile />
       </div>
       <div className="flex-1 py-10 px-4 md:px-20 Xxl:px-4">
         <div className="relative w-full h-[30%] md:h-[40%] mb-10">

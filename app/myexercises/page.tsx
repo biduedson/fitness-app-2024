@@ -59,7 +59,7 @@ const page = async () => {
           id="my-exercises"
         >
           <div className=" absolute top-2 left-2">
-            <UserProfile imageUrl={data.user.image!} />
+            <UserProfile />
           </div>
 
           <MyCategoryLIst
