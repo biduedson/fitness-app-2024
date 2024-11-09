@@ -52,9 +52,7 @@ const ExercisesHeader = ({ title }: { title: string }) => {
         {data?.user.student && (
           <div className="flex gap-4 items-center">
             <div className="flex flex-col items-center">
-              {data?.user && (
-                <UserProfile imageUrl={data.user.image as string} />
-              )}
+              {data?.user && <UserProfile />}
             </div>
           </div>
         )}
