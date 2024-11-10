@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import Image from "next/image";
 import { db } from "../_lib/prisma";
+import NavbarUser from "@/components/NavBarUser";
 
 const Page = async () => {
   const data = await getServerSession(authOptions);
@@ -53,11 +54,12 @@ const Page = async () => {
   }
 
   return (
-    <section className="relative bg-black_texture h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
-      <div className="absolute top-12 left-6">
+    <section className="relative bg-primary-300 h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
+      <NavbarUser />
+      <div className="lg:hidden absolute top-2 left-2">
         <UserProfile />
       </div>
-      <div className="flex-1 py-10 px-4 md:px-20 Xxl:px-4">
+      <div className="flex-1 py-4 px-5 md:px-20 ">
         <div className="relative w-full h-[30%] md:h-[40%] mb-10">
           <Image
             src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
@@ -66,15 +68,15 @@ const Page = async () => {
             className="absolute object-cover rounded-lg shadow-lg"
           />
         </div>
-        <h2 className="text-4xl text-accent font-bold text-center mb-10">
+        <h2 className="text-4xl text-red-600 font-bold text-center mb-10">
           Guia de Exercícios favoritos
         </h2>
         <div className="w-full pb-10 sm:pb-0 h-[400px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden">
-          <div className="grid grid-cols-1 pb-10 sm:pb-0 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 pb-10 sm:pb-0 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
             {categoryAndMyExercises.map((category) => (
               <FavoriteexerciseCategoryCard
                 key={category.id}
-                title={category.name}
+                categoryName={category.name}
               />
             ))}
           </div>

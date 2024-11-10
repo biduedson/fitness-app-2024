@@ -1,18 +1,23 @@
 // src/components/ExerciseCategoryCard.tsx
+"use client";
+
+import { useRouter } from "next/navigation";
 
 interface ExerciseCategoryCardProps {
-  title: string;
+  categoryName: string;
 }
+const FavoriteexerciseCategoryCard = ({
+  categoryName,
+}: ExerciseCategoryCardProps) => {
+  const router = useRouter();
 
-const FavoriteexerciseCategoryCard: React.FC<ExerciseCategoryCardProps> = ({
-  title,
-}) => {
   return (
     <div
       className="bg-gray-800 rounded-lg shadow-lg p-6 text-center 
-    transition-transform transform hover:scale-105 hover:bg-accent  cursor-pointer"
+    transition-transform transform hover:scale-105 hover:bg-red-600  cursor-pointer"
+      onClick={() => router.push(`/favoriteexercises/${categoryName}`)}
     >
-      <h3 className="text-xl font-bold text-white">{title}</h3>
+      <h3 className="text-xl font-bold text-white">{categoryName}</h3>
     </div>
   );
 };

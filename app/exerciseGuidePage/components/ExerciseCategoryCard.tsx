@@ -12,7 +12,7 @@ const ExerciseCategoryCard = ({ categoryName }: ExerciseCategoryCardProps) => {
   return (
     <div
       className="bg-gray-800 rounded-lg shadow-lg p-6 text-center 
-    transition-transform transform hover:scale-105 hover:bg-accent  cursor-pointer"
+    transition-transform transform hover:scale-105 hover:bg-red-600  cursor-pointer"
       onClick={() => router.push(`/categoryExercisesPage/${categoryName}`)}
     >
       <h3 className="text-xl font-bold text-white">{categoryName}</h3>

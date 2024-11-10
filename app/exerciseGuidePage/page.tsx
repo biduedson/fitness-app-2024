@@ -5,6 +5,7 @@ import ExerciseCategoryCard from "./components/ExerciseCategoryCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import { db } from "../_lib/prisma";
+import NavbarUser from "@/components/NavBarUser";
 
 // Busca as categorias de exercícios e seus exercícios associados do banco de dados
 const categoryExercises = await db.exerciseCategory.findMany({
@@ -45,11 +46,12 @@ const ExerciseGuidePage = async () => {
   }
 
   return (
-    <section className="relative bg-black_texture h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
-      <div className="absolute top-2 left-2">
+    <section className="relative bg-primary-300 h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
+      <NavbarUser />
+      <div className="lg:hidden absolute top-2 left-2">
         <UserProfile />
       </div>
-      <div className="flex-1 py-10 px-5 md:px-20">
+      <div className="flex-1 py-4 px-5 md:px-20">
         <div className="mb-10">
           <img
             src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
@@ -57,7 +59,7 @@ const ExerciseGuidePage = async () => {
             className="w-full h-64 object-cover rounded-lg shadow-lg"
           />
         </div>
-        <h2 className="text-4xl text-accent font-bold text-center mb-10">
+        <h2 className="text-4xl text-red-600 font-bold text-center mb-10">
           Guia de Exercícios
         </h2>
         <div className="w-full h-[400px]  overflow-y-scroll  [&::-webkit-scrollbar]:hidden">

@@ -13,12 +13,8 @@ import { TbArrowBack } from "react-icons/tb";
 import { FaHome } from "react-icons/fa";
 import {
   AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 interface IUserEditeProps {

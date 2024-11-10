@@ -9,31 +9,73 @@ import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
 import ExerciseModal from "@/components/ExerciseModal";
 import { fadeIn } from "@/lib/variants";
 import { truncateText } from "@/app/util/truncateText";
+import { Prisma } from "@prisma/client";
 
-const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
+interface FavoriteExerciseCardProps {
+  exercise: Prisma.ExerciseGetPayload<{
+    include: {
+      category: true;
+      favoriteByStudents: {
+        include: {
+          student: {
+            include: {
+              user: true;
+            };
+          };
+        };
+      };
+    };
+  }>;
+  exercises: Prisma.ExerciseGetPayload<{
+    include: {
+      category: true;
+      favoriteByStudents: {
+        include: {
+          student: {
+            include: {
+              user: true;
+            };
+          };
+        };
+      };
+    };
+  }>[];
+  setExercices: React.Dispatch<
+    React.SetStateAction<FavoriteExerciseCardProps["exercises"]>
+  >;
+}
+
+const FavoriteExerciseCard = ({
+  exercise,
+  exercises,
+  setExercices,
+}: FavoriteExerciseCardProps) => {
   const { data } = useSession();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
   const [messageVisible, setMessageVisible] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  /*para evitar varias renderizações, se  usa  o useeffect para antes de carregar  
+a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
   useEffect(() => {
-    if (data?.user.student) {
-      const favoritedExercise = exercise.favoriteByStudents?.some(
-        (favorite) => favorite.studentId === data.user.student?.id!
-      );
+    if (data?.user) {
       console.log(data.user.id);
-      console.log(data.user.student.id);
+      const favoritedExercise = exercise.favoriteByStudents?.some(
+        (favorite) => favorite.student.userId === data.user.id!
+      );
       setIsFavorite(favoritedExercise);
     }
   }, [data, exercise.favoriteByStudents]);
+  const [openModal, setOpemModal] = useState(false);
 
   const handleFavoriteClick = async () => {
     if (!data?.user?.id) {
-      setMessageFavorited("Efetue o login para favoritar exercício");
+      setMessageFavorited("Efetue  o login para favoritar exercício");
       return;
     }
-    if (!data?.user?.student) {
+    if (data?.user?.student === null || undefined) {
       setMessageFavorited("Apenas alunos podem favoritar exercícios.");
       return;
     }
@@ -41,12 +83,22 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
       const response = await toggleFavoriteExercise(data.user.id, exercise.id);
       setIsFavorite(!isFavorite);
       setMessageFavorited(response.message);
+      if (response.removed === true) {
+        removedFavoriteFunction!(exercise.id);
+      }
     } catch (error) {
       setMessageFavorited("Erro ao adicionar aos favoritos");
       console.log("erro");
     }
   };
+  const removedFavoriteFunction = (exerciseId: string) => {
+    // Filtra o array, removendo o exercício com o ID correspondente do array
+    const updatedExercises = exercises.filter(
+      (exercise) => exercise.id !== exerciseId
+    );
 
+    setExercices(updatedExercises);
+  };
   return (
     <>
       <ExerciseModal
@@ -138,4 +190,4 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
   );
 };
 
-export default ExerciseCard;
+export default FavoriteExerciseCard;

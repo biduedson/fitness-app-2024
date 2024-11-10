@@ -33,7 +33,7 @@ const NavbarUser = () => {
           Todos os Exercícios
         </button>
         <button
-          onClick={() => router.push("/favoriteExercises")}
+          onClick={() => router.push("/favoriteExerciseGuide")}
           className="hover:text-gray-300 transition"
         >
           Exercícios Favoritos
