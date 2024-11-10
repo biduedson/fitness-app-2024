@@ -76,6 +76,7 @@ const UserProfile = () => {
             <MenuItem
               label="Exercícios favoritos"
               iconSrc="/assets/img/favoriteExercise.png"
+              onclick={() => router.push("/favoriteExerciseGuide")}
             />
             {data?.user.gymAdmin && (
               <MenuItem
