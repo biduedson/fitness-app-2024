@@ -81,9 +81,11 @@ const EnhancedExerciseModal = ({
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>Diretrizes para Aumento de Massa Magra</SheetTitle>
+                <SheetTitle className="mt-8">
+                  Diretrizes para Aumento de Massa Magra
+                </SheetTitle>
               </SheetHeader>
-              <div className="p-4 overflow-y-scroll max-h-[80vh]">
+              <div className="p-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden max-h-[80vh]">
                 <MuscleGainGuide />
               </div>
             </SheetContent>

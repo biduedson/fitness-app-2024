@@ -7,6 +7,7 @@ import { authOptions } from "../_lib/auth";
 import Image from "next/image";
 import { db } from "../_lib/prisma";
 import NavbarUser from "@/components/NavBarUser";
+import CategoryFooterNav from "@/components/CategoryFooterNav";
 
 const Page = async () => {
   const data = await getServerSession(authOptions);
@@ -59,8 +60,16 @@ const Page = async () => {
       <div className="lg:hidden absolute top-2 left-2">
         <UserProfile />
       </div>
+      <div className="relative w-full h-[30%] md:h-[40%] lg:hidden mb-10">
+        <Image
+          src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
+          alt="Guia de Exercícios"
+          layout="fill"
+          className="absolute object-cover rounded-lg shadow-lg"
+        />
+      </div>
       <div className="flex-1 py-4 px-5 md:px-20 ">
-        <div className="relative w-full h-[30%] md:h-[40%] mb-10">
+        <div className="hidden relative w-full h-[30%] md:h-[40%] lg:flex mb-10">
           <Image
             src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
             alt="Guia de Exercícios"
@@ -81,6 +90,9 @@ const Page = async () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="w-full h-auto lg:hidden">
+        <CategoryFooterNav />
       </div>
     </section>
   );

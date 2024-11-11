@@ -29,7 +29,6 @@ const CategoryList = ({ exercises, categoryName }: CategoryListProps) => {
   const router = useRouter();
   const [dataExercises, setDataExercises] = useState(exercises); // Estado para armazenar os exercícios
   const [isLoading, setIsLoading] = useState(true); // Estado de carregamento
-  console.log(exercises);
   useEffect(() => {
     // Simula um carregamento para mostrar a transição
     setIsLoading(false);
@@ -39,7 +38,7 @@ const CategoryList = ({ exercises, categoryName }: CategoryListProps) => {
     <div className="relative min-h-screen px-4 py-8 bg-primary-300">
       <div
         onClick={() => router.replace("/favoriteExerciseGuide")}
-        className="absolute top-4 left-4 flex cursor-pointer items-center justify-center text-black bg-slate-300 rounded-full w-12 h-12"
+        className="absolute z-50 top-4 left-4 flex cursor-pointer items-center justify-center text-black bg-slate-300 rounded-full w-12 h-12"
       >
         <MdOutlineArrowBackIos />
       </div>
