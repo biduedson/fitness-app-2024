@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { IoCaretDownOutline } from "react-icons/io5";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { FaUserGroup } from "react-icons/fa6";
+import { GiMuscleUp } from "react-icons/gi";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
@@ -77,6 +78,11 @@ const UserProfile = () => {
               label="Exercícios favoritos"
               iconSrc="/assets/img/favoriteExercise.png"
               onclick={() => router.push("/favoriteExerciseGuide")}
+            />
+            <MenuItem
+              label="Guia de dieta e treino"
+              iconComponent={<GiMuscleUp className="text-2xl" />}
+              onclick={() => router.push("/MuscleGainGuidePage")}
             />
             {data?.user.gymAdmin && (
               <MenuItem

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 import React from "react";
+import { GoArrowRight } from "react-icons/go";
 
 interface MenuItemProps {
   label: string;
@@ -22,8 +23,11 @@ const MenuItem = ({
   logout,
 }: MenuItemProps) => {
   return (
-    <div className="w-full p-1 cursor-pointer" onClick={onclick}>
-      <div className="flex items-center justify-between w-full h-[60px] rounded-md p-2 hover:bg-slate-100">
+    <div
+      className="w-full p-1 cursor-pointer lg:hover:animate-pulse"
+      onClick={onclick}
+    >
+      <div className="flex items-center justify-between w-full h-[60px] rounded-md p-2 hover:bg-slate-100  ">
         <div className="flex items-center gap-2">
           <div className="h-[50px] w-[50px] bg-slate-300 flex items-center justify-center rounded-full">
             {iconSrc ? (
@@ -41,7 +45,7 @@ const MenuItem = ({
           </div>
           <p>{label}</p>
         </div>
-        <FaChevronRight className="flex justify-self-end" />
+        <GoArrowRight className="flex justify-self-end text-2xl" />
       </div>
     </div>
   );
