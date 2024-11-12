@@ -54,6 +54,41 @@ const membershipData = [
     ],
   },
   {
+    title: "Trimestral",
+    price: 289.99,
+    periodos: "semestral",
+    benefits: [
+      {
+        icon: FaCheck,
+        text: "Includes membership",
+      },
+      {
+        icon: FaCheck,
+        text: "Access to all gym facilities",
+      },
+      {
+        icon: FaCheck,
+        text: "Diet plan included",
+      },
+      {
+        icon: FaCheck,
+        text: "Health and fitness tips",
+      },
+      {
+        icon: FaCheck,
+        text: "Monday-Fridayu gym, access",
+      },
+      {
+        icon: FaCheck,
+        text: "Full access to everything",
+      },
+      {
+        icon: MdClose,
+        text: "No additional amenities",
+      },
+    ],
+  },
+  {
     title: "Semestral",
     price: 499.99,
     periodos: "semestral",
@@ -88,6 +123,7 @@ const membershipData = [
       },
     ],
   },
+
   {
     title: "anual",
     price: 899.99,

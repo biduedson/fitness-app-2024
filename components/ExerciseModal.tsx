@@ -31,6 +31,11 @@ const EnhancedExerciseModal = ({
   isFavorite,
 }: EnhancedExerciseModalProps) => {
   const router = useRouter();
+  const series = [
+    { level: "Iniciante", sets: 3, reps: 10 },
+    { level: "Intermediário", sets: 4, reps: 12 },
+    { level: "Avançado", sets: 5, reps: 15 },
+  ];
 
   return (
     <motion.div
@@ -65,31 +70,30 @@ const EnhancedExerciseModal = ({
           </div>
         </div>
 
-        <div className="p-6 flex-1 overflow-y-auto">
+        <div className="p-6 flex-1  ">
           <h2 className="text-2xl text-accent font-bold text-center mb-2">
             {exerciseName}
           </h2>
-          <div className="w-full max-h-[130px] sm:h-[600px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden mb-4 ">
-            <p className="text-gray-600 text-justify ">{description}</p>
-          </div>
-
-          <Sheet>
-            <SheetTrigger asChild>
-              <button className="w-full bg-accent text-white font-semibold py-2 rounded-md">
-                Veja mais dicas
-              </button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle className="mt-8">
-                  Diretrizes para Aumento de Massa Magra
-                </SheetTitle>
-              </SheetHeader>
-              <div className="p-2 overflow-y-scroll [&::-webkit-scrollbar]:hidden max-h-[80vh]">
-                <MuscleGainGuide />
+          <div className="w-full max-h-[300px] flex flex-col  justify-between overflow-y-scroll   [&::-webkit-scrollbar]:hidden">
+            <div className="w-full max-h-[130px] sm:h-[600px]  mb-4 ">
+              <p className="text-gray-600 text-justify ">{description}</p>
+            </div>
+            <div className="bg-gray-100 p-4 rounded-md shadow-md mb-4">
+              <h3 className="text-xl text-accent font-semibold mb-2">
+                Séries e Repetições
+              </h3>
+              <div className="space-y-3 ">
+                {series.map((item, index) => (
+                  <div key={index} className="flex flex-col mb-2">
+                    <span className="text-lg font-semibold">{item.level}</span>
+                    <span className="text-gray-700">
+                      {item.sets} séries de {item.reps} repetições
+                    </span>
+                  </div>
+                ))}
               </div>
-            </SheetContent>
-          </Sheet>
+            </div>
+          </div>
         </div>
 
         <div className="absolute bottom-0 w-full bg-gray-200 py-3 flex justify-around items-center">

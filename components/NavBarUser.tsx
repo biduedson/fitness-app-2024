@@ -47,10 +47,16 @@ const NavbarUser = () => {
           </button>
         )}
         <button
-          onClick={async () => await signOut({ callbackUrl: "/" })}
+          onClick={async () => router.push("/MuscleGainGuidePage")}
           className="hover:text-gray-300 transition"
         >
-          Sair
+          Guia de dieta e treino
+        </button>
+        <button
+          onClick={async () => router.push("/")}
+          className="hover:text-gray-300 transition"
+        >
+          Início
         </button>
       </div>
 

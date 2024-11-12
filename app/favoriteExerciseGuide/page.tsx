@@ -8,6 +8,7 @@ import Image from "next/image";
 import { db } from "../_lib/prisma";
 import NavbarUser from "@/components/NavBarUser";
 import CategoryFooterNav from "@/components/CategoryFooterNav";
+import Footer from "@/components/Footer";
 
 const Page = async () => {
   const data = await getServerSession(authOptions);
@@ -55,8 +56,10 @@ const Page = async () => {
   }
 
   return (
-    <section className="relative bg-primary-300 h-[100vh] flex flex-col overflow-y-hidden [&::-webkit-scrollbar]:hidden">
-      <NavbarUser />
+    <section className="relative bg-primary-300 h-[100vh] flex flex-col overflow-y-hidden lg:overflow-y-scroll  lg:mt-24 [&::-webkit-scrollbar]:hidden">
+      <div className="fixed top-0 z-50 hidden lg:flex w-screen ">
+        <NavbarUser />
+      </div>
       <div className="lg:hidden absolute top-2 left-2">
         <UserProfile />
       </div>
@@ -65,7 +68,7 @@ const Page = async () => {
           src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
           alt="Guia de Exercícios"
           layout="fill"
-          className="absolute object-cover rounded-lg shadow-lg"
+          className="absolute object-cover rounded-lg shadow-lg "
         />
       </div>
       <div className="flex-1 py-4 px-5 md:px-20 ">
@@ -80,8 +83,8 @@ const Page = async () => {
         <h2 className="text-4xl text-red-600 font-bold text-center mb-10">
           Guia de Exercícios favoritos
         </h2>
-        <div className="w-full pb-10 sm:pb-0 h-[400px] overflow-y-scroll  [&::-webkit-scrollbar]:hidden">
-          <div className="grid grid-cols-1 pb-10 sm:pb-0 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
+        <div className="w-full pb-10 sm:pb-0 h-[400px] overflow-y-scroll lg:mb-40 [&::-webkit-scrollbar]:hidden">
+          <div className="grid grid-cols-1 pb-10 sm:pb-0 sm:grid-cols-2 md:grid-cols-3 gap-6  ">
             {categoryAndMyExercises.map((category) => (
               <FavoriteexerciseCategoryCard
                 key={category.id}
@@ -93,6 +96,9 @@ const Page = async () => {
       </div>
       <div className="w-full h-auto lg:hidden">
         <CategoryFooterNav />
+      </div>
+      <div className="min-w-screen hidden lg:flex flex-col">
+        <Footer />
       </div>
     </section>
   );

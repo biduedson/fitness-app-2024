@@ -3,7 +3,6 @@ import { fadeIn } from "@/lib/variants";
 import Image from "next/image";
 import { ReactElement } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import MobileNavCloseModalFooter from "./MobileNavCloseModalFooter";
 
 interface ExerciseModalListProps {
   openModal: boolean;
@@ -48,8 +47,6 @@ function ExercisesListMotal({
         >
           {component}
         </motion.div>
-
-        <MobileNavCloseModalFooter onclick={() => setOpenModal(!openModal)} />
       </div>
     </motion.div>
   );
