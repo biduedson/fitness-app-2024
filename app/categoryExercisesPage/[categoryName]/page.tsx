@@ -62,7 +62,7 @@ const CategoryExercisesPage = () => {
     <div className=" relastive min-h-screen px-4 py-8 Xxl:py-2 bg-primary-300">
       <div
         onClick={() => route.replace("/exerciseGuidePage")}
-        className="absolute top-4 left-4 flex cursor-pointer items-center justify-center right-2 text-[20px] text-black bg-slate-300 rounded-full w-12 h-12
+        className="absolute top-4 left-4 flex cursor-pointer items-center  justify-center right-2 text-[20px] text-black bg-slate-300 rounded-full w-12 h-12
           hover:text-red-600 transition-colors duration-200 z-10 "
       >
         <MdOutlineArrowBackIos />
