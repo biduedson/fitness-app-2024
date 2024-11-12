@@ -91,7 +91,7 @@ const TableUsers = ({ users }: ITableUsersProps) => {
         <SearchUser handleInputChange={handleInputChange} />
 
         {/* Seção de Totais em Card */}
-        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-2">
           <div className="bg-blue-600 p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
             <p>Usuários:</p>
             <span className="font-bold text-xl">{totalUser}</span>

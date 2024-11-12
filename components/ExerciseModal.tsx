@@ -2,14 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaHeart, FaShareAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import MuscleGainGuide from "./MuscleGainGuide";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
 interface EnhancedExerciseModalProps {
   isOpen: boolean;

@@ -37,15 +37,11 @@ const DashboardPage = async () => {
       <section className=" relative bg-primary-300 min-h-screen p-6 lg:p-0  ">
         <NavbarUser />
         <div className="lg:hidden absolute top-4 left-4 z-50">
-          {" "}
           <UserProfile />
         </div>
-
-        <h2 className="text-2xl sm:text-3xl font-bold text-accent text-center mb-10 lg:mb-2">
+        <h2 className="text-xl sm:text-3xl font-bold text-accent text-center mb-10 lg:mb-2 ">
           Dashboard de Usuários
         </h2>
-        {/* Exibe a tabela em telas a partir de lg, caso contrário, exibe os cartões */}
-
         <TableUsers users={users} />
 
         <CardUserDashbord />
