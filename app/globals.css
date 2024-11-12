@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-@layer base{
-  
-  body{
-    @apply font-roboto  ;
+@layer base {
+  body {
+    @apply font-roboto;
   }
   :root {
     --background: 0 0% 100%;
@@ -79,43 +76,48 @@
     -webkit-text-stroke: 1px #d4000d; /* Define a cor da borda aqui */
   }
 }
-  h1,h2,h3,h4,h5,h6{
-    @apply  font-oswald font-bold uppercase;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-oswald font-bold uppercase;
+}
 
-  .h1{
-    @apply text-white text-7xl sm:text-[50px] text-[60px] lg:text-[128px] tracking-[-3px]
-  }
+.h1 {
+  @apply text-white text-7xl sm:text-[50px] text-[60px] lg:text-[128px] tracking-[-3px];
+}
 
-  .h2{
-    @apply text-[26px] lg:text-[36px]
-  }
+.h2 {
+  @apply text-[26px] lg:text-[36px];
+}
 
-  .h3{
-    @apply text-[32px]
-  }
+.h3 {
+  @apply text-[32px];
+}
 
-  .h4{
-    @apply text-[26px]
-  }
+.h4 {
+  @apply text-[26px];
+}
 
-  .h5{
-    @apply text-[22px]
-  }
+.h5 {
+  @apply text-[22px];
+}
 
-  .active{
-    @apply text-accent;
-  }
+.active {
+  @apply text-accent;
+}
 .shadow-inner-smoke {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   /* Ajuste os valores acima para obter o efeito desejado */
 }
-  /* swiper pagination styles*/
-  .swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
-  .swiper-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
-    @apply bg-accent; 
-  }
-  @layer base {
+/* swiper pagination styles*/
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  @apply bg-accent;
+}
+@layer base {
   * {
     @apply border-border;
   }

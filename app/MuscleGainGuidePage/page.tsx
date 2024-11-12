@@ -9,45 +9,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { useSession } from "next-auth/react";
 import NavbarUser from "@/components/NavBarUser";
-
-const levelCard = [
-  {
-    title: "Iniciantes",
-    description:
-      "Para quem está começando, é essencial focar na técnica e construir uma base sólida de musculatura. Os treinos para iniciantes devem ser voltados para o aprendizado correto dos movimentos e aumento gradual de força e resistência.",
-    details: [
-      "Séries: 2 a 3 séries por exercício",
-      "Repetições: 8 a 12 por série",
-      "Frequência: 2 a 3 vezes por semana",
-      "Foco em exercícios compostos que ativam grandes grupos musculares",
-    ],
-    colors: "from-gray-700 to-gray-800",
-  },
-  {
-    title: "Intermediários",
-    description:
-      "Para quem já tem experiência, o nível intermediário busca o desenvolvimento contínuo de força e aumento de massa muscular. Neste nível, é fundamental trabalhar a carga progressiva e a variação de exercícios para estimular os músculos.",
-    details: [
-      "Séries: 3 a 4 séries por exercício",
-      "Repetições: 6 a 12 por série, dependendo do objetivo",
-      "Frequência: 3 a 5 vezes por semana",
-      "Introdução de variações de exercícios e aumento gradual de carga",
-    ],
-    colors: "from-gray-800 to-gray-900",
-  },
-  {
-    title: "Avançados",
-    description:
-      "Para atletas avançados, o foco é maximizar a hipertrofia e a força muscular através de técnicas avançadas de treinamento, periodização e maior frequência de treino. Este nível exige disciplina e planejamento rigoroso.",
-    details: [
-      "Séries: 4 a 6 séries por exercício",
-      "Repetições: 1 a 6 para força máxima e 6 a 12 para hipertrofia",
-      "Frequência: 4 a 6 vezes por semana",
-      "Uso de métodos avançados, como drop sets, supersets e periodização",
-    ],
-    colors: "from-gray-700 to-gray-800",
-  },
-];
+import { levelCard } from "../_constants/constants";
 
 const MuscleGainGuidePage = () => {
   const router = useRouter();

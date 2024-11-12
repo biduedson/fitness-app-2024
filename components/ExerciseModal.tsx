@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaHeart, FaShareAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { levelCardExercise } from "@/app/_constants/constants";
 
 interface EnhancedExerciseModalProps {
   isOpen: boolean;
@@ -12,39 +13,6 @@ interface EnhancedExerciseModalProps {
   favoriteClick?: () => void;
   isFavorite?: boolean;
 }
-
-const levelCard = [
-  {
-    title: "Iniciantes",
-    description:
-      "Para quem está começando, é essencial focar na técnica e construir uma base sólida de musculatura. Os treinos para iniciantes devem ser voltados para o aprendizado correto dos movimentos e aumento gradual de força e resistência.",
-    details: [
-      "Séries: 2 a 3 séries por exercício",
-      "Repetições: 8 a 12 por série",
-    ],
-    colors: "from-blue-500 to-blue-700", // Cor ajustada para o nível Iniciantes
-  },
-  {
-    title: "Intermediários",
-    description:
-      "Para quem já tem experiência, o nível intermediário busca o desenvolvimento contínuo de força e aumento de massa muscular. Neste nível, é fundamental trabalhar a carga progressiva e a variação de exercícios para estimular os músculos.",
-    details: [
-      "Séries: 3 a 4 séries por exercício",
-      "Repetições: 6 a 12 por série, dependendo do objetivo",
-    ],
-    colors: "from-green-500 to-green-700", // Cor ajustada para o nível Intermediário
-  },
-  {
-    title: "Avançados",
-    description:
-      "Para atletas avançados, o foco é maximizar a hipertrofia e a força muscular através de técnicas avançadas de treinamento, periodização e maior frequência de treino. Este nível exige disciplina e planejamento rigoroso.",
-    details: [
-      "Séries: 4 a 6 séries por exercício",
-      "Repetições: 1 a 6 para força máxima e 6 a 12 para hipertrofia",
-    ],
-    colors: "from-red-500 to-red-700", // Cor ajustada para o nível Avançado
-  },
-];
 
 const EnhancedExerciseModal = ({
   isOpen,
@@ -68,7 +36,7 @@ const EnhancedExerciseModal = ({
           : "hidden"
       } flex items-center justify-center`}
     >
-      <div className="relative w-full flex-col justify-between max-w-2xl h-[85vh] bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="relative w-full flex-col justify-between max-w-2xl h-[85vh] lg:h-[90vh] bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="relative w-full  h-[40%] sm:h-1/2">
           <Image
             src={imageUrl}
@@ -94,18 +62,18 @@ const EnhancedExerciseModal = ({
           <h2 className="text-2xl text-accent font-bold text-center mb-2">
             {exerciseName}
           </h2>
-          <div className="w-full max-h-[300px] flex flex-col justify-between overflow-y-scroll [&::-webkit-scrollbar]:hidden">
+          <div className="w-full max-h-[300px] lg:max-h-[220px] flex flex-col justify-between overflow-y-scroll [&::-webkit-scrollbar]:hidden">
             <div className="w-full max-h-[130px] sm:h-[600px] mb-4">
               <p className="text-gray-600 text-justify">{description}</p>
             </div>
 
             {/* Séries e Repetições com Descrição */}
-            <div className="bg-gray-100 p-4 rounded-md shadow-md mb-4">
+            <div className="bg-gray-100 p-4 rounded-md shadow-md mb-4 lg:mb-8">
               <h3 className="text-xl text-accent font-semibold mb-2">
                 Séries e Repetições
               </h3>
               <div className="space-y-3">
-                {levelCard.map((level, index) => (
+                {levelCardExercise.map((level, index) => (
                   <div
                     key={index}
                     className={`bg-gradient-to-r p-4 rounded-md shadow-md mb-4 text-white ${level.colors}`}

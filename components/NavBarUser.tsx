@@ -32,11 +32,25 @@ const NavbarUser = () => {
         >
           Todos os Exercícios
         </button>
+
         <button
           onClick={() => router.push("/favoriteExerciseGuide")}
           className="hover:text-gray-300 transition"
         >
           Exercícios Favoritos
+        </button>
+        <button
+          onClick={() => router.push("/aerobicExercises")}
+          className="hover:text-gray-300 transition"
+        >
+          Guia de exercícios aeróbicos
+        </button>
+
+        <button
+          onClick={async () => router.push("/MuscleGainGuidePage")}
+          className="hover:text-gray-300 transition"
+        >
+          Guia de dieta e treino
         </button>
         {data?.user.gymAdmin && (
           <button
@@ -46,12 +60,6 @@ const NavbarUser = () => {
             Controle de Usuários
           </button>
         )}
-        <button
-          onClick={async () => router.push("/MuscleGainGuidePage")}
-          className="hover:text-gray-300 transition"
-        >
-          Guia de dieta e treino
-        </button>
         <button
           onClick={async () => router.push("/")}
           className="hover:text-gray-300 transition"

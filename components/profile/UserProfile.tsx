@@ -6,6 +6,7 @@ import { IoCaretDownOutline } from "react-icons/io5";
 import { LiaSignOutAltSolid } from "react-icons/lia";
 import { FaUserGroup } from "react-icons/fa6";
 import { GiMuscleUp } from "react-icons/gi";
+import { MdElectricBike } from "react-icons/md";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
@@ -79,6 +80,12 @@ const UserProfile = () => {
               iconSrc="/assets/img/favoriteExercise.png"
               onclick={() => router.push("/favoriteExerciseGuide")}
             />
+            <MenuItem
+              label="Guia de exercícios aeróbicos"
+              iconComponent={<MdElectricBike className="text-2xl" />}
+              onclick={() => router.push("/aerobicExercises")}
+            />
+
             <MenuItem
               label="Guia de dieta e treino"
               iconComponent={<GiMuscleUp className="text-2xl" />}
