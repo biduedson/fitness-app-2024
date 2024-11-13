@@ -60,7 +60,7 @@ const CategoryExercisesPage = () => {
 
   return (
     <section className="w-full h-full relative overflow-hidden">
-      <div className=" fixed top-0   w-full mx-auto text-center bg-slate-100 shadow-xl transition-shadow py-2 ">
+      <div className="absolute top-0   w-full mx-auto text-center bg-slate-100 shadow-xl transition-shadow py-2 ">
         <motion.h1
           className="text-4xl font-bold  py-2 text-red-600 uppercase "
           initial={{ opacity: 0, y: -20 }}
