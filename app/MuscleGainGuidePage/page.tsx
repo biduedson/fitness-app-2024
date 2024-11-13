@@ -7,42 +7,43 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import { useSession } from "next-auth/react";
 import NavbarUser from "@/components/NavBarUser";
 import { levelCard } from "../_constants/constants";
+import LoadingScreen from "@/components/LoadingScreen";
+import useAuth from "../_hooks/useAuth";
 
 const MuscleGainGuidePage = () => {
   const router = useRouter();
-  const { data } = useSession();
+  const { isLoading, isAuthenticated, isStudent, logout } = useAuth();
 
-  if (!data?.user.student) {
+  if (isLoading) {
+    return <LoadingScreen message="Loading..." />;
+  }
+
+  if (!isAuthenticated || !isStudent) {
     return (
-      <section
-        className="w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0"
-        id="my-exercises"
-      >
+      <section className="w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0">
         <h4 className="h4 text-white text-center">
-          Somente alunos tem acesso a este conteúdo
+          Somente alunos têm acesso a este conteúdo
         </h4>
       </section>
     );
   }
   return (
     <>
-      <div className="fixed z-50 w-full h-auto hidden lg:flex ">
+      <div className="fixed z-50 w-full h-auto hidden lg:flex">
         <NavbarUser />
       </div>
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
         animate="show"
-        className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white font-sans relative "
+        className="min-h-screen bg-gradient-to-br bg-slate-100 text-white font-sans relative"
       >
         {/* Header Section */}
-        <section className="text-center relative overflow-y-scroll  [&::-webkit-scrollbar]:hidden ">
-          <motion.div className="w-full h-full" />
+        <section className="text-center relative overflow-y-scroll [&::-webkit-scrollbar]:hidden">
           <div className="w-full h-full lg:mt-16">
-            <div className="relative w-full h-[400px] opacity-70">
+            <div className="relative w-full h-[400px] opacity-90">
               <Image
                 src="/assets/img/bannerExercisePage.png"
                 alt="banner image"
@@ -53,7 +54,7 @@ const MuscleGainGuidePage = () => {
             </div>
           </div>
           <div className="w-full absolute top-10 left-0 lg:mt-16">
-            <h1 className="text-5xl font-extrabold text-white mb-6 animate-pulse">
+            <h1 className="text-5xl font-extrabold text-white mb-6 lg:animate-pulse">
               Guia Definitivo para Ganho de Massa Muscular
             </h1>
             <p className="text-xl max-w-2xl mx-auto text-gray-300 mb-6">
@@ -70,19 +71,23 @@ const MuscleGainGuidePage = () => {
         </section>
 
         {/* Levels Section */}
-        <section className="py-20 px-6 flex flex-col  space-y-16 sm:space-y-20 container mx-auto overflow-y-scroll  [&::-webkit-scrollbar]:hidden">
+        <section className="py-20 px-6  flex flex-col space-y-16  sm:space-y-20 container mx-auto overflow-y-scroll [&::-webkit-scrollbar]:hidden">
           {/* Level Card */}
-          <div className="w-full space-y-16">
+          {/* auto-rows-fr faz todos do grid tem a mesma altura asim como no items-stretch do flex */}
+          <div className=" gap-12   grid grid-cols-1 auto-rows-fr  Xxl:grid-cols-3  lg:grid-cols-2  ">
             {levelCard.map((level, idx) => (
               <motion.div
                 key={idx}
-                variants={fadeIn("up", 0.2 + idx * 0.1)}
-                className={`bg-gradient-to-r ${level.colors} rounded-xl p-10 shadow-lg relative overflow-hidden transform transition duration-500 hover:scale-105`}
+                variants={fadeIn("up", 0.4)}
+                initial="hidden"
+                whileInView={"show"}
+                viewport={{ once: false, amount: 0.2 }}
+                className={`bg-gradient-to-r ${level.colors} rounded-xl p-10  relative overflow-hidden transform transition duration-500 hover:scale-105 shadow-lg shadow-black`}
               >
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-3xl font-bold text-white mb-4 text-center">
                   {level.title}
                 </h2>
-                <p className="text-lg font-medium text-gray-300 mb-4">
+                <p className="text-lg font-medium text-gray-300 mb-4 text-justify">
                   {level.description}
                 </p>
                 <ul className="space-y-2 text-gray-400">
@@ -98,7 +103,10 @@ const MuscleGainGuidePage = () => {
           {/* Nutrition Tips Section */}
           <motion.div
             variants={fadeIn("up", 0.5)}
-            className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-10 shadow-lg relative overflow-hidden transform transition duration-500 hover:scale-105"
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.2 }}
+            className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-10 shadow-lg shadow-black relative overflow-hidden transform transition duration-500 hover:scale-105"
           >
             <h2 className="text-3xl font-bold text-white mb-4">
               Dicas de Alimentação para Ganho de Massa Magra
@@ -129,7 +137,10 @@ const MuscleGainGuidePage = () => {
           {/* Nutrition Tips for Weight Loss */}
           <motion.div
             variants={fadeIn("up", 0.6)}
-            className="bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl p-10 shadow-lg relative overflow-hidden transform transition duration-500 hover:scale-105"
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: false, amount: 0.2 }}
+            className="bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl p-10 shadow-lg shadow-black relative overflow-hidden transform transition duration-500 hover:scale-105"
           >
             <h2 className="text-3xl font-bold text-white mb-4">
               Dicas de Alimentação para Emagrecimento

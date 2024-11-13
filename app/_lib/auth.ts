@@ -47,13 +47,12 @@ export const authOptions: AuthOptions = {
         console.error("Error fetching user details:", error);
       }
 
-      console.log("Session User:", session.user); // Linha de depuração
       return session;
     },
   },
 
   secret: process.env.NEXTAUTH_SECRET,
-  
+
   // Ativa o modo debug para mais informações de log
   debug: true,
 };

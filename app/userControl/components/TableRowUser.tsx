@@ -35,7 +35,7 @@ const TableRowUser = ({ user, openEditUser }: ITableRowUser) => {
     }>
   ) => {
     if (user.gymAdmin) return "bg-purple-600";
-    return user.student ? "bg-yellow-600" : "bg-blue-600";
+    return user.student ? "bg-blue-500" : "bg-red-600";
   };
   const getUserType = (
     user: Prisma.UserGetPayload<{

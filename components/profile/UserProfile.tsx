@@ -101,7 +101,7 @@ const UserProfile = () => {
             <MenuItem
               label="Sair"
               iconComponent={<LiaSignOutAltSolid />}
-              logout={async () => await signOut({ callbackUrl: "/" })}
+              logout={() => signOut()}
             />
           </div>
         </motion.div>

@@ -27,7 +27,10 @@ const MenuItem = ({
       className="w-full p-1 cursor-pointer lg:hover:animate-pulse"
       onClick={onclick}
     >
-      <div className="flex items-center justify-between w-full h-[60px] rounded-md p-2 hover:bg-slate-100  ">
+      <div
+        className="flex items-center justify-between w-full h-[60px] rounded-md p-2 hover:bg-slate-100  "
+        onClick={logout}
+      >
         <div className="flex items-center gap-2">
           <div className="h-[50px] w-[50px] bg-slate-300 flex items-center justify-center rounded-full">
             {iconSrc ? (

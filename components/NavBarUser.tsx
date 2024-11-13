@@ -25,12 +25,12 @@ const NavbarUser = () => {
       </div>
 
       {/* Links do Menu (Visíveis em telas maiores) */}
-      <div className="hidden lg:flex space-x-8 items-center">
+      <div className="hidden lg:flex space-x-8 items-center ">
         <button
           onClick={() => router.push("/exerciseGuidePage")}
           className="hover:text-gray-300 transition"
         >
-          Todos os Exercícios
+          Exercícios
         </button>
 
         <button
@@ -43,14 +43,14 @@ const NavbarUser = () => {
           onClick={() => router.push("/aerobicExercises")}
           className="hover:text-gray-300 transition"
         >
-          Guia de exercícios aeróbicos
+          Aeróbicos
         </button>
 
         <button
           onClick={async () => router.push("/MuscleGainGuidePage")}
           className="hover:text-gray-300 transition"
         >
-          Guia de dieta e treino
+          Dieta e treino
         </button>
         {data?.user.gymAdmin && (
           <button
@@ -101,7 +101,7 @@ const NavbarUser = () => {
             <IoCaretDownOutline />
           </p>
         </div>
-        <p className="hidden lg:block">{data?.user.name}</p>
+        <p className="hidden lg:block  text-sm">{data?.user.name}</p>
       </div>
     </nav>
   );

@@ -6,6 +6,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 import AuthProvider from "@/app/_providers/auth";
+import { SessionProvider } from "next-auth/react";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -34,10 +35,13 @@ export default function RootLayout({
       <body
         className={`${oswald.variable} ${roboto.variable} w-full max-w-[1920px] min-h-full mx-auto bg-primary-300 `}
       >
-        <UsersProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </UsersProvider>
-        <Toaster />
+        <AuthProvider>
+          <UsersProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </UsersProvider>
+
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
