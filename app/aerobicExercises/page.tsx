@@ -7,8 +7,11 @@ import { aerobicExercises } from "../_constants/constants";
 import NavbarUser from "@/components/NavBarUser";
 import Footer from "@/components/Footer";
 import UserProfile from "@/components/profile/UserProfile";
+import useAuth from "../_hooks/useAuth";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function AerobicExercisesPage() {
+  const { isLoading, isAuthenticated, isStudent, logout } = useAuth();
   const [favorite, setFavorite] = useState<boolean[]>(
     new Array(aerobicExercises.length).fill(false)
   );
@@ -20,30 +23,57 @@ export default function AerobicExercisesPage() {
       return newFav;
     });
   };
-
+  if (isLoading) {
+    return <LoadingScreen message="Loading..." />;
+  }
+  if (!isAuthenticated || !isStudent) {
+    return (
+      <section className="w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0">
+        <h4 className="h4 text-white text-center">
+          Somente alunos têm acesso a este conteúdo
+        </h4>
+      </section>
+    );
+  }
   return (
-    <>
+    <div className="relative w-screen min-h-screen">
       <div className="fixed z-50 w-full h-auto hidden lg:flex ">
         <NavbarUser />
       </div>
-
-      <div className="relative flex flex-col items-center py-8 bg-gray-100 min-h-screen">
-        <div className=" flex w-full items-center justify-between px-4 lg:static p-2 lg:p-0  fixed top-0 z-50 bg-gray-100  shadow-slate-600 shadow-lg lg:z-10 lg:shadow-transparent ">
-          <div className="lg:hidden">
+      <section className="fixed top-0 w-full h-full z-50 lg:z-10 lg:relative text-center overflow-y-scroll [&::-webkit-scrollbar]:hidden shadow-lg shadow-slate-600">
+        <div className="w-full h-full lg:mt-16">
+          <div className="relative w-full h-[300px]  ">
+            <Image
+              src="/assets/img/bannerExercisePage.png"
+              alt="banner image"
+              layout="fill"
+              objectFit="cover"
+              className="absolute"
+            />
+          </div>
+          <div className="fixed  top-2 left-2 z-50 lg:hidden">
             <UserProfile />
           </div>
-
-          <div className="w-full flex items-center justify-center">
-            <h1 className="text-xl sm:text-4xl text-center font-bold text-red-600 lg:mt-24 py-4">
-              Guia de Exercícios Aeróbicos
-            </h1>
-          </div>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 Xxl:grid-cols-4 mt-20 lg:mt-0  max-w-5xl Xxl:max-w-full px-4">
+        <div className="w-full absolute top-10 left-0 lg:mt-16">
+          <h1 className=" text-4xl lg:text-5xl font-extrabold text-red-600 mb-6 lg:animate-pulse">
+            Guia de Exercícios Aeróbicos
+          </h1>
+          <p className="text-xl max-w-2xl mx-auto text-white mb-6">
+            Aumente seu desempenho com um plano de treino aeróbico
+            personalizado. Escolha o nível ideal e acompanhe seu progresso!
+          </p>
+        </div>
+      </section>
+      <div
+        className="relative flex flex-col items-center py-8 bg-gray-100 main-h-screen 
+       max-h-fit lg:h-auto overflow-y-scroll lg:overflow-y-hidden [&::-webkit-scrollbar]:hidden lg:max-h-screen mt-[300px] lg:mt-0 "
+      >
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 Xxl:grid-cols-4 mt-8 lg:mt-0  max-w-6xl Xxl:max-w-7xl px-4 my-4 ">
           {aerobicExercises.map((exercise, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative"
+              className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative lg:max-h-[700px]"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}
@@ -74,7 +104,9 @@ export default function AerobicExercisesPage() {
                 <h2 className="text-xl font-semibold text-red-600 mb-2">
                   {exercise.title}
                 </h2>
-                <p className="text-gray-600 mb-4">{exercise.description}</p>
+                <p className="text-gray-600 mb-4 xl:min-h-[130px]">
+                  {exercise.description}
+                </p>
 
                 <div className="space-y-2">
                   {exercise.details.map((detail, idx) => (
@@ -98,9 +130,12 @@ export default function AerobicExercisesPage() {
             </motion.div>
           ))}
         </div>
+
+        <Footer className="sm:hidden" />
       </div>
       {/* Footer Section */}
-      <Footer />
-    </>
+
+      <Footer className="hidden sm:block" />
+    </div>
   );
 }

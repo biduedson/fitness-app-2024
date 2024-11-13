@@ -15,6 +15,9 @@ import {
 import CustomButton from "./CustomButton";
 import { motion } from "framer-motion";
 
+interface FooterProps {
+  className?: string;
+}
 // Variantes de animação
 const footerContainerVariant = {
   hidden: {
@@ -44,9 +47,14 @@ const footerItem = {
   },
 };
 
-const Footer = () => {
+const Footer = ({ className }: FooterProps) => {
   return (
-    <footer className="bg-primary-200 pt-24" id="contato">
+    <footer
+      className={
+        className ? `${className} bg-primary-200 pt-24` : "bg-primary-200 pt-24"
+      }
+      id="contato"
+    >
       <div className="container mx-auto pb-24">
         <motion.div
           variants={footerContainerVariant}
