@@ -59,17 +59,10 @@ const CategoryExercisesPage = () => {
     : "";
 
   return (
-    <div className=" relastive min-h-screen px-4 py-8 Xxl:py-2 bg-primary-300">
-      <div
-        onClick={() => route.replace("/exerciseGuidePage")}
-        className="absolute top-4 left-4 flex cursor-pointer items-center  justify-center right-2 text-[20px] text-black bg-slate-300 rounded-full w-12 h-12
-          hover:text-red-600 transition-colors duration-200 z-10 "
-      >
-        <MdOutlineArrowBackIos />
-      </div>
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="w-full h-full relative overflow-hidden">
+      <div className=" fixed top-0   w-full mx-auto text-center bg-slate-100 shadow-xl transition-shadow py-2 ">
         <motion.h1
-          className="text-4xl font-bold  mb-6 text-red-600 uppercase"
+          className="text-4xl font-bold  py-2 text-red-600 uppercase "
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -77,50 +70,58 @@ const CategoryExercisesPage = () => {
           {decodedCategoryName}
         </motion.h1>
         <motion.p
-          className="text-lg text-gray-300 mb-10"
+          className="text-lg text-primary-300 bg-slate-100 "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          Explore todos os exercícios para{" "}
+          Explore todos os exercícios para
           <strong>{decodedCategoryName}</strong>
         </motion.p>
+        <div
+          onClick={() => route.push("/exerciseGuidePage")}
+          className="absolute top-4 left-4 flex cursor-pointer items-center  justify-center right-2 text-[20px] text-black bg-slate-300 rounded-full w-12 h-12
+          hover:text-red-600 transition-colors duration-200  "
+        >
+          <MdOutlineArrowBackIos />
+        </div>
       </div>
-
-      {isLoading ? (
-        <div className="flex justify-center items-center h-64">
-          <p className="text-gray-500 text-lg">Carregando exercícios...</p>
-        </div>
-      ) : dataExercises.length > 0 ? (
-        <div className="flex w-full h-full items-center">
-          <motion.div
-            className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(200px,300px))] max-h-[80vh] xxl:h-[70vh] max-w-5xl Xxl:max-w-7xl mx-auto overflow-y-scroll [&::-webkit-scrollbar]:hidden"
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.1,
+      <div className=" relastive min-h-screen px-4 py-8  bg-slate-100 mt-20 Xxl:py-4 ">
+        {isLoading ? (
+          <div className="flex justify-center items-center h-64">
+            <p className="text-gray-500 text-lg">Carregando exercícios...</p>
+          </div>
+        ) : dataExercises.length > 0 ? (
+          <div className="flex w-full h-full items-center">
+            <motion.div
+              className="grid gap-6 grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(200px,300px))] max-h-[80vh] xxl:h-[70vh] max-w-5xl Xxl:max-w-7xl mx-auto overflow-y-scroll [&::-webkit-scrollbar]:hidden"
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                  },
                 },
-              },
-            }}
-          >
-            {dataExercises.map((exercise, index) => (
-              <ExerciseCard key={index} exercise={exercise} />
-            ))}
-          </motion.div>
-        </div>
-      ) : (
-        <div className="text-center mt-20">
-          <p className="text-gray-500 text-lg">
-            Nenhum exercício encontrado para a categoria{" "}
-            <strong>{categoryName}</strong>.
-          </p>
-        </div>
-      )}
-    </div>
+              }}
+            >
+              {dataExercises.map((exercise, index) => (
+                <ExerciseCard key={index} exercise={exercise} />
+              ))}
+            </motion.div>
+          </div>
+        ) : (
+          <div className="text-center mt-20">
+            <p className="text-gray-500 text-lg">
+              Nenhum exercício encontrado para a categoria{" "}
+              <strong>{categoryName}</strong>.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

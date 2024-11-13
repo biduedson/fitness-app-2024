@@ -63,7 +63,7 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
       />
       <div
         key={exercise.id}
-        className="relative m-2 p-2 shadow-lg rounded-lg bg-white flex flex-col items-center justify-center hover:shadow-xl transition-shadow duration-200 ease-in-out"
+        className="relative m-2 p-2 shadow-lg rounded-lg bg-white flex flex-col items-center justify-center hover:shadow-slate-600 hover:shadow-xl transition-shadow duration-200 ease-in-out"
       >
         <button
           onClick={() => {

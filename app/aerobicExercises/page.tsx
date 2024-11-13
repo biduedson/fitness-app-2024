@@ -28,18 +28,22 @@ export default function AerobicExercisesPage() {
       </div>
 
       <div className="relative flex flex-col items-center py-8 bg-gray-100 min-h-screen">
-        <div className="lg:hidden absolute top-4 left-4 z-50">
-          <UserProfile />
-        </div>
-        <h1 className="text-lg sm:text-4xl text-center font-bold text-red-600 lg:mt-24 py-4">
-          Guia de Exercícios Aeróbicos
-        </h1>
+        <div className=" flex w-full items-center justify-between px-4 lg:static p-2 lg:p-0  fixed top-0 z-50 bg-gray-100  shadow-slate-600 shadow-lg lg:z-10 lg:shadow-transparent ">
+          <div className="lg:hidden">
+            <UserProfile />
+          </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 Xxl:grid-cols-4  max-w-5xl Xxl:max-w-full px-4">
+          <div className="w-full flex items-center justify-center">
+            <h1 className="text-xl sm:text-4xl text-center font-bold text-red-600 lg:mt-24 py-4">
+              Guia de Exercícios Aeróbicos
+            </h1>
+          </div>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 Xxl:grid-cols-4 mt-20 lg:mt-0  max-w-5xl Xxl:max-w-full px-4">
           {aerobicExercises.map((exercise, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-lg shadow-lg overflow-hidden relative"
+              className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.3 }}

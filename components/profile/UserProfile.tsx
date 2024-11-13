@@ -27,14 +27,14 @@ const UserProfile = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="relative w-[60px] h-[60px] ">
+        <div className="relative w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] ">
           <Image
             src={data?.user.image!}
             fill
             alt="UserImage"
             className="object-cover shadow-md z-50 rounded-full border-[2px] cursor-pointer bg-acc border-accent"
           />
-          <div className="absolute p-1 bottom-[-6px] left-8 bg-white flex items-center justify-center w-[20px] h-[20px] rounded-full z-50">
+          <div className="absolute p-1 bottom-[-6px] left-6 lg:left-8 bg-white flex items-center justify-center w-[15px] h-[15px] lg:w-[20px] lg:h-[20px] rounded-full z-50">
             <p className="bg-slate-300 rounded-full">
               <IoCaretDownOutline />
             </p>
