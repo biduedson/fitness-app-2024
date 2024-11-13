@@ -3,14 +3,12 @@
 
 import React, { useContext, useEffect } from "react";
 import { Prisma } from "@prisma/client";
-import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import SearchUser from "./SearchUser";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -75,7 +73,28 @@ const TableUsers = ({ users }: ITableUsersProps) => {
       seTtotalAdmins(() => dataUsers.filter((user) => user.gymAdmin).length);
     }
   }, [dataUsers]);
-
+  const totalUserCard = [
+    {
+      description: "Usuários",
+      value: totalUser,
+      color: "bg-blue-600",
+    },
+    {
+      description: "Usuários Encontrados:",
+      value: filteredUsers?.length,
+      color: "bg-green-600",
+    },
+    {
+      description: "Alunos:",
+      value: totalInTraining,
+      color: "bg-yellow-600",
+    },
+    {
+      description: "Administradores:",
+      value: totalAdmins,
+      color: "bg-purple-600",
+    },
+  ];
   if (!filteredUsers) {
     return <LoadingScreen message="Carregando Usuarios..." />;
   }
@@ -91,26 +110,19 @@ const TableUsers = ({ users }: ITableUsersProps) => {
         <SearchUser handleInputChange={handleInputChange} />
 
         {/* Seção de Totais em Card */}
+
         <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-2">
-          <div className="bg-blue-600 p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
-            <p>Usuários:</p>
-            <span className="font-bold text-xl">{totalUser}</span>
-          </div>
-          <div className="bg-green-600 p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
-            <p>Usuários Encontrados:</p>
-            <span className="font-bold text-xl">{filteredUsers.length}</span>
-          </div>
-          <div className="bg-yellow-600 p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
-            <p>Alunos da Academia:</p>
-            <span className="font-bold text-xl">{totalInTraining}</span>
-          </div>
-          <div className="bg-purple-600 p-4 rounded-lg shadow-lg flex flex-col items-center text-white">
-            <p>Administradores:</p>
-            <span className="font-bold text-xl">{totalAdmins}</span>
-          </div>
+          {totalUserCard.map((total) => (
+            <div
+              className={`${total.color} p-4 rounded-lg  flex flex-col items-center text-white shadow-lg shadow-slate-600`}
+            >
+              <p>{total.description}</p>
+              <span className="font-bold text-xl">{total.value}</span>
+            </div>
+          ))}
         </div>
 
-        <Table className="w-full max-w-5xl mx-auto bg-gray-900 text-white shadow-lg rounded-lg">
+        <Table className="w-full max-w-5xl mx-auto bg-gray-900 text-white shadow-lg shadow-slate-600 ">
           <TableHeader className="bg-gray-800">
             <TableRow>
               <TableHead className="p-4 text-left">Imagem</TableHead>

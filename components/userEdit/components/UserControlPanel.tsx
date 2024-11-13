@@ -64,7 +64,7 @@ const UserControlPanel = ({ user, setIsOpenEdit }: UserControlPanelProps) => {
               <ActionButton
                 onClick={() => handleOpenDialog("addStudent")}
                 icon={<IoIosPersonAdd className="text-3xl text-white" />}
-                label="Adicionar como aluno"
+                label="Adicionar ao quadro de alunos"
                 bgColor="bg-blue-500"
               />
             )}
@@ -72,7 +72,7 @@ const UserControlPanel = ({ user, setIsOpenEdit }: UserControlPanelProps) => {
               <ActionButton
                 onClick={() => handleOpenDialog("deleteStudent")}
                 icon={<MdPersonRemoveAlt1 className="text-3xl text-white" />}
-                label="Remover como aluno"
+                label="Remover do quadro de alunos"
                 bgColor="bg-red-500"
               />
             )}
@@ -80,7 +80,7 @@ const UserControlPanel = ({ user, setIsOpenEdit }: UserControlPanelProps) => {
               <ActionButton
                 onClick={() => handleOpenDialog("addGymAdmin")}
                 icon={<RiAdminFill className="text-3xl text-white" />}
-                label="Adicionar como Administrador"
+                label="Cadastre como Administrador"
                 bgColor="bg-green-500"
               />
             )}
@@ -88,7 +88,7 @@ const UserControlPanel = ({ user, setIsOpenEdit }: UserControlPanelProps) => {
               <ActionButton
                 onClick={() => handleOpenDialog("deleteGymAdmin")}
                 icon={<RiAdminFill className="text-3xl text-white" />}
-                label="Remover como Administrador"
+                label="Remova dos Administradores"
                 bgColor="bg-yellow-500"
               />
             )}

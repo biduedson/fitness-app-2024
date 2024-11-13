@@ -19,7 +19,7 @@ const DashboardPage = async () => {
   }
   if (!session?.user.gymAdmin) {
     return (
-      <div className="flex justify-center items-center h-screen text-white">
+      <div className="flex justify-center items-center h-screen text-primary-300">
         Não Autorizado
       </div>
     );
@@ -34,12 +34,12 @@ const DashboardPage = async () => {
 
   return (
     <>
-      <section className=" relative bg-primary-300 min-h-screen p-6 lg:p-0  ">
+      <section className=" relative bg-slate-100 min-h-screen p-6 lg:p-0  ">
         <NavbarUser />
         <div className="lg:hidden absolute top-4 left-4 z-50">
           <UserProfile />
         </div>
-        <h2 className="text-xl sm:text-3xl font-bold text-accent text-center mb-10 lg:mb-2 ">
+        <h2 className="text-xl sm:text-3xl font-bold text-accent text-center mt-2 mb-10 lg:mb-2 ">
           Dashboard de Usuários
         </h2>
         <TableUsers users={users} />

@@ -56,28 +56,30 @@ const AlertAction = ({
     case "addStudent":
       actionUrl = "/api/addstudent";
       actionMethod = "POST";
-      nameButtonAction = "Liberar";
+      nameButtonAction = "Adicionar";
       actionMessage = "Acesso os exercícios liberado.";
-      dialogTitle = "Deseja liberar o acesso aos exercícios ?";
+      dialogTitle = "Deseja adicionar este usuário do quadro de alunos ?";
       dialogDescription =
-        " Ao finalizar, o usuário terá o acesso ao guia de exercícios liberado";
+        " Ao finalizar, o usuário será adicionado do quadro de alunos";
       break;
     case "deleteStudent":
       actionUrl = "/api/deletestudent";
       actionMethod = "DELETE";
-      nameButtonAction = "Bloquear";
+      nameButtonAction = "Remover";
       actionMessage = "Acesso os exercícios bloqueado.";
-      dialogTitle = "Deseja bloquear o acesso aos exercícios ?";
+      dialogTitle = "Deseja remover este usuário do quadro de alunos ?";
       dialogDescription =
-        " Ao finalizar, o usuário terá o acesso ao guia de exercícios bloqueado";
+        " Ao finalizar,  o usuário sera removido  do quadro de alunos";
       break;
     case "addGymAdmin":
       actionUrl = "/api/addgymadmin";
       actionMethod = "POST";
       nameButtonAction = "Adicionar";
       actionMessage = "Administrador adicionado.";
-      dialogTitle = "Deseja adicionar como administrador?";
-      dialogDescription = " Ao finalizar, o usuário sera administrador.";
+      dialogTitle =
+        "Deseja adicionar este usuário ao quadro de  administradores ?";
+      dialogDescription =
+        " Ao finalizar, o usuário sera adicionado ao quadro de  administradores.";
 
       break;
     case "deleteGymAdmin":
@@ -85,9 +87,10 @@ const AlertAction = ({
       actionMethod = "DELETE";
       nameButtonAction = "Remover";
       actionMessage = "Administrador excluido.";
-      dialogTitle = "Deseja remover este administrador?";
+      dialogTitle =
+        "Deseja remover este usuário do quadro de  administradores ?";
       dialogDescription =
-        " Ao finalizar, o usuário não sera mais  administrador.";
+        " Ao finalizar, sera removido do quadro de  administradores.";
 
       break;
   }
@@ -128,12 +131,12 @@ const AlertAction = ({
 
   return (
     <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <AlertDialogContent className="bg-gray-800 ">
+      <AlertDialogContent className="bg-slate-100 shadow-lg shadow-slate-600 rounded-lg">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-red-600 sm:text-center">
             {dialogTitle!}
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-[16px] text-white sm:text-center">
+          <AlertDialogDescription className="text-[16px] text-primary-300 sm:text-center">
             {dialogDescription!}
           </AlertDialogDescription>
         </AlertDialogHeader>
