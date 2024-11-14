@@ -28,12 +28,11 @@ const categoryExercises = await db.exerciseCategory.findMany({
     },
   },
 });
+const data = await getServerSession(authOptions);
 
 // Verifica se o usuário é um aluno autorizado
 
 const ExerciseGuidePage = async () => {
-  const data = await getServerSession(authOptions);
-
   if (!data?.user.student) {
     return (
       <section
