@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { fadeIn } from "@/lib/variants";
 
 import {
   FaMapMarkerAlt,
@@ -50,11 +49,7 @@ const footerItem = {
 
 const Footer = ({ className }: FooterProps) => {
   return (
-    <motion.footer
-      variants={fadeIn("up", 0.4)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.2 }}
+    <footer
       className={
         className ? `${className} bg-primary-200 pt-24` : "bg-primary-200 pt-24"
       }
@@ -259,7 +254,7 @@ const Footer = ({ className }: FooterProps) => {
           </div>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   );
 };
 

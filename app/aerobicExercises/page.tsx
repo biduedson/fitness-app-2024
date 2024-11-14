@@ -75,18 +75,12 @@ export default function AerobicExercisesPage() {
           description=" Aumente seu desempenho com um plano de treino aeróbico personalizado.
         Escolha o nível ideal e acompanhe seu progresso!"
         />
-        <motion.div
-          variants={fadeIn("up", 0.4)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  Xxl:grid-cols-4 mt-8 lg:mt-0  max-w-6xl Xxl:max-w-[1400px]  Xxl:p-12 px-4 my-4 "
-        >
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  Xxl:grid-cols-4 mt-8 lg:mt-0  max-w-6xl Xxl:max-w-[1400px]  Xxl:p-12 px-4 my-4 lg:overflow-y-hidden [&::-webkit-scrollbar]:hidden">
           {aerobicExercises.map((exercise, index) => (
             <motion.div
               key={index}
               className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative lg:max-h-[700px]"
-              variants={fadeIn("up", 0.4)}
+              variants={fadeIn("up", 0.2)}
               initial="hidden"
               whileInView={"show"}
               viewport={{ once: false, amount: 0.2 }}
@@ -142,7 +136,7 @@ export default function AerobicExercisesPage() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <Footer className="sm:hidden" />
       </div>
