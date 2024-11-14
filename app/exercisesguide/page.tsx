@@ -65,7 +65,7 @@ const categoryGroup = await db.exerciseCategory.findMany({
 
 const data = await getServerSession(authOptions);
 
-export default function Page() {
+export default async function Page() {
   if (!data?.user.student) {
     return (
       <section
