@@ -34,7 +34,7 @@ const TitleWithDescriptionAnimation = ({
         initial="hidden"
         whileInView={"show"}
         viewport={{ once: false, amount: 0.2 }}
-        className="max-w-[600px] mx-auto text-center px-4"
+        className="max-w-[600px]  text-center px-4"
       >
         {description}
       </motion.p>
