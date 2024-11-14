@@ -63,7 +63,7 @@ export default function Exercises({ exercises, categoryGroup }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {!dataExercises ? (
             <div className="bg-white rounded-lg shadow-md text-center text-red-600 p-4">
-              <h1>Escolha a categoria de exercícios dejesada</h1>
+              <h1>Escolha a categoria de exercícios</h1>
             </div>
           ) : (
             dataExercises.map((exercise) => (
