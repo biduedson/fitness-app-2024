@@ -45,7 +45,7 @@ const LoginPage = () => {
           fitness!
         </p>
         <button
-          className="w-full flex items-center justify-center gap-4 py-3 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-300"
+          className="w-full flex items-center justify-center gap-4 py-3  shadow-lg shadow-slate-600 text-white bg-blue-500 rounded-full hover:bg-blue-600 transition duration-300"
           onClick={() => handleSignIn("google")}
         >
           <Image
@@ -57,7 +57,7 @@ const LoginPage = () => {
           <span className="font-semibold">Continue com Google</span>
         </button>
         <button
-          className="w-full flex items-center justify-center gap-4 py-3 text-white bg-blue-700 rounded-full hover:bg-blue-800 transition duration-300"
+          className="w-full flex items-center justify-center gap-4 py-3  shadow-lg shadow-slate-600 text-white bg-blue-700 rounded-full hover:bg-blue-800 transition duration-300"
           onClick={() => handleSignIn("facebook")}
         >
           <Image
@@ -69,7 +69,7 @@ const LoginPage = () => {
           <span className="font-semibold">Continue com Facebook</span>
         </button>
         <button
-          className="w-full flex items-center justify-center gap-4 py-3 text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full hover:bg-gradient-to-l transition duration-300"
+          className="w-full flex items-center justify-center gap-4 py-3 shadow-lg shadow-slate-600 text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full hover:bg-gradient-to-l transition duration-300"
           onClick={() => handleSignIn("instagram")}
         >
           <Image
