@@ -1,9 +1,7 @@
 // components/GuiaExercicios.tsx
 import Image from "next/image";
-import { useState } from "react";
 import { db } from "../_lib/prisma";
 import Exercises from "./_components/Exercise";
-import CategoryExercisesButton from "./_components/CategoryExercisesButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import UserProfile from "@/components/profile/UserProfile";
