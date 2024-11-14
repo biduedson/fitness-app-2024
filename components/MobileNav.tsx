@@ -2,10 +2,9 @@
 
 import { useMediaQuery } from "react-responsive";
 import { Link as ScrollLink } from "react-scroll";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/variants";
 import { useRouter } from "next/navigation";
 
 const MobileNav = ({
@@ -15,103 +14,93 @@ const MobileNav = ({
   contaynerStyle: string;
   closeNav: () => void;
 }) => {
-  const isMobile = useMediaQuery({
-    query: "(max-width:640px)",
-  });
+  const isMobile = useMediaQuery({ query: "(max-width:640px)" });
   const { data } = useSession();
-  const route = useRouter();
+  const router = useRouter();
 
   const links = [
-    { name: "início", target: "home", offset: -100, href: null },
-    { name: "sobre", target: "about", offset: -80, href: null },
-    { name: "modalidades", target: "class", offset: -80, href: null },
-    { name: "instrutores", target: "team", offset: 0, href: null },
-    { name: "planos", target: "prices", offset: -40, href: null },
-    { name: "depoimentos", target: "testimonial", offset: 0, href: null },
-    { name: "blog", target: "blog", offset: 0, href: null },
-
+    { name: "Início", target: "home", offset: -80 },
+    { name: "Sobre", target: "about", offset: -60 },
+    { name: "Modalidades", target: "class", offset: -60 },
+    { name: "Instrutores", target: "team", offset: 0 },
+    { name: "Planos", target: "prices", offset: -40 },
+    { name: "Depoimentos", target: "testimonial", offset: 0 },
+    { name: "Blog", target: "blog", offset: 0 },
     {
-      name: data?.user.student ? "logout" : "login",
+      name: data?.user.student ? "Logout" : "Login",
       target: "",
-      offset: -40,
+      offset: 0,
       href: "/login",
     },
   ];
 
   return (
-    <nav className={`${contaynerStyle} bg-primary-300 `}>
+    <nav className={`${contaynerStyle} bg-white text-foreground shadow-lg`}>
+      {/* Cabeçalho com visual elegante e minimalista */}
       <motion.div
-        variants={fadeIn("down", 0.2)}
-        initial="hidden"
-        whileInView={"show"}
-        viewport={{ once: false, amount: 0.2 }}
-        className="relative  w-full h-[150px] flex flex-col items-center mx-auto p-4 clip-custom-bottom
-        "
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeInOut" }}
+        className="relative w-full h-[150px] flex items-center justify-center "
       >
-        <Image
-          src="/assets/img/bannerExercisePage.png"
-          alt="banner"
-          fill
-          className="absolute object-cover rounded-b-[]"
-        />
+        <div className="relative w-full h-full mb-2  overflow-hidden border ">
+          <Image
+            src="/assets/img/bannerExercisePage.png"
+            alt="Imagem do Usuário"
+            fill
+            className="absolute object-cover"
+            priority
+          />
+        </div>
       </motion.div>
 
+      {/* Perfil do usuário */}
       {data?.user.student && (
-        <motion.div
-          variants={fadeIn("up", 0.2)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="absolute top-[7%] w-full flex flex-col items-center   "
-        >
-          <div className="relative w-[140px] h-[140px] mb-2">
+        <div className="flex flex-col items-center  text-center text-primary-foreground">
+          <div className="relative w-[70px] h-[70px] mb-2 rounded-full overflow-hidden border border-muted-foreground shadow-inner-smoke">
             <Image
               src={data?.user.image!}
-              alt="userImage"
+              alt="Imagem do Usuário"
               fill
-              className="absolute rounded-full object-cover shadow-slate-100  shadow-2xl"
-              sizes="(width: 140px)"
+              className="object-cover"
               priority
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className=" h3 capitalize">{data?.user.name!}</h3>
-            <span className=" lowercase text-sm">{data?.user.email}</span>
-          </div>
-        </motion.div>
+          <h3 className="text-lg font-medium text-primary-300">
+            {data?.user.name}
+          </h3>
+          <span className="text-muted-foreground text-sm">
+            {data?.user.email}
+          </span>
+        </div>
       )}
-      <div className="w-full  ">
-        <motion.div
-          variants={fadeIn("up", 0.2)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="flex flex-col w-full justify-center items-center gap-2  h-[65vh]  rounded-lg
-         "
-        >
-          {links.map((link, index) => {
-            return (
-              <ScrollLink
-                key={index}
-                offset={link.offset}
-                to={link.target}
-                smooth
-                spy
-                onClick={link.href ? () => route.push(link.href) : closeNav}
-                activeClass={
-                  ["login", "logout"].includes(link.name) ? "inative" : "active"
-                }
-                className={
-                  ["login", "logout"].includes(link.name)
-                    ? " flex items-center justify-center w-[180px] cursor-pointer text-[18px] rounded-2xl border-accent border-[1px] p-2 "
-                    : "cursor-pointer hover:text-accent transition-all text-[18px]"
-                }
-              >
-                {link.name}
-              </ScrollLink>
-            );
-          })}
-        </motion.div>
+
+      {/* Links de Navegação */}
+      <div className="flex flex-col items-center gap-4 mt-6 px-5 text-base">
+        {links.map((link, index) => (
+          <ScrollLink
+            key={index}
+            offset={link.offset}
+            to={link.target}
+            smooth
+            spy
+            onClick={() => {
+              if (link.name === "Logout") {
+                signOut();
+              } else if (link.href) {
+                router.push(link.href);
+              }
+              closeNav();
+            }}
+            className={`w-full py-2 px-3 text-center rounded-lg font-medium transition-colors ${
+              ["Login", "Logout"].includes(link.name)
+                ? "bg-destructive text-destructive-foreground shadow-sm shadow-slate-400"
+                : "bg-slate-100 shadow-sm shadow-black/50 text-secondary-foreground hover:bg-muted hover:text-muted-foreground"
+            }`}
+          >
+            {link.name}
+          </ScrollLink>
+        ))}
       </div>
     </nav>
   );
