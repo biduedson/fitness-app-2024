@@ -99,7 +99,7 @@ const MuscleGainGuidePage = () => {
             viewport={{ once: false, amount: 0.2 }}
             className="bg-white rounded-xl p-10 shadow-lg shadow-slate-400 relative overflow-hidden transform transition duration-500 hover:scale-105"
           >
-            <h2 className="text-3xl font-bold text-red-600 mb-4">
+            <h2 className="text-3xl font-bold text-red-600 mb-4 text-center">
               Dicas de Alimentação para Ganho de Massa Magra
             </h2>
             <ul className="space-y-2 text-primary-300 bg-blue-100 p-2 shadow-lg shadow-slate-300 rounded-lg">
@@ -133,7 +133,7 @@ const MuscleGainGuidePage = () => {
             viewport={{ once: false, amount: 0.2 }}
             className="bg-white rounded-xl p-10 shadow-lg shadow-slate-400 relative overflow-hidden transform transition duration-500 hover:scale-105"
           >
-            <h2 className="text-3xl font-bold text-red-600 mb-4">
+            <h2 className="text-3xl font-bold text-red-600 mb-4 text-center">
               Dicas de Alimentação para Emagrecimento
             </h2>
             <ul className="space-y-2 text-primary-300 bg-green-100 p-2 shadow-lg shadow-slate-300 rounded-lg">
