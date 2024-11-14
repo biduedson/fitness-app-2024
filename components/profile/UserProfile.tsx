@@ -73,7 +73,7 @@ const UserProfile = () => {
             <MenuItem
               label="Todos os exercícios"
               iconSrc="/assets/dunbels.png"
-              onclick={() => router.push("/guiaexercicio")}
+              onclick={() => router.push("/exercisesguide")}
             />
             <MenuItem
               label="Exercícios favoritos"
