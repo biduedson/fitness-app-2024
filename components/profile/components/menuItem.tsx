@@ -32,9 +32,9 @@ const MenuItem = ({
         onClick={logout}
       >
         <div className="flex items-center gap-2">
-          <div className="h-[50px] w-[50px] bg-slate-300 flex items-center justify-center rounded-full">
+          <div className="h-[50px] w-[50px] xl:h-[35px]  xl:w-[35px]  bg-slate-300 flex items-center justify-center rounded-full">
             {iconSrc ? (
-              <div className="relative w-[28px] h-[28px]">
+              <div className="relative w-[28px] h-[28px] lg:w-[20px] lg:h-[20px]">
                 <Image
                   src={iconSrc}
                   alt={`${label} Icon`}

@@ -27,7 +27,7 @@ const UserProfile = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="relative w-[40px] h-[40px] lg:w-[60px] lg:h-[60px] ">
+        <div className="relative w-[40px] h-[40px] lg:w-[60px] lg:h-[60px]  ">
           <Image
             src={data?.user.image!}
             fill
@@ -43,37 +43,37 @@ const UserProfile = () => {
       </SheetTrigger>
 
       <SheetContent
-        className="flex flex-col items-center justify-center"
-        side="left"
+        className="flex flex-col items-center  justify-center bg-transparent h-fit"
+        side="right"
       >
         <motion.div
           variants={fadeIn("down", 0.1)}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
-          className="w-full h-70 Xxl:w-[95%] bg-white absolute top-0 rounded-md shadow-2xl"
+          className="w-full   bg-white absolute top-0 rounded-md shadow-2xl"
         >
           <SheetHeader className="bg-accent w-full flex items-center justify-center h-[60px] rounded-t-md px-4">
             <SheetTitle className="text-white">Profile</SheetTitle>
           </SheetHeader>
 
-          <div className="w-full h-[220px] p-2 flex flex-col items-center shadow-md shadow-slate-300">
+          <div className="w-full h-[220px] lg:h-[140px] p-2 flex flex-col items-center shadow-md shadow-slate-300">
             <Image
               src={data?.user.image as string}
               alt="User"
               width={120}
               height={120}
-              className="object-cover shadow-md rounded-full"
+              className="object-cover shadow-md rounded-full lg:h-[80px] lg:w-[80px]"
             />
             <p>{data?.user.name}</p>
             <p className="text-accent font-semibold">{data?.user.email}</p>
           </div>
 
-          <div className="flex flex-col w-full h-full gap-2 py-8">
+          <div className="flex flex-col w-full h-full gap-2 py-8 lg:py-4">
             <MenuItem
               label="Todos os exercícios"
               iconSrc="/assets/dunbels.png"
-              onclick={() => router.push("/exerciseGuidePage")}
+              onclick={() => router.push("/guiaexercicio")}
             />
             <MenuItem
               label="Exercícios favoritos"
@@ -82,13 +82,13 @@ const UserProfile = () => {
             />
             <MenuItem
               label="Guia de exercícios aeróbicos"
-              iconComponent={<MdElectricBike className="text-2xl" />}
+              iconComponent={<MdElectricBike className="text-2xl xl:text-xl" />}
               onclick={() => router.push("/aerobicExercises")}
             />
 
             <MenuItem
               label="Guia de dieta e treino"
-              iconComponent={<GiMuscleUp className="text-2xl" />}
+              iconComponent={<GiMuscleUp className="text-2xl xl:text-xl" />}
               onclick={() => router.push("/MuscleGainGuidePage")}
             />
             {data?.user.gymAdmin && (
