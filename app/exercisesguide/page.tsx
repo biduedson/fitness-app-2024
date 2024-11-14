@@ -63,9 +63,9 @@ const categoryGroup = await db.exerciseCategory.findMany({
   },
 });
 
-const data = await getServerSession(authOptions);
-
 export default async function Page() {
+  const data = await getServerSession(authOptions);
+
   if (!data?.user.student) {
     return (
       <section
