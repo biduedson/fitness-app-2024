@@ -6,29 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import UserProfile from "@/components/profile/UserProfile";
 
-const gruposMusculares = [
-  "Peito",
-  "Costas",
-  "Ombros",
-  "Biceps",
-  "Triceps",
-  "Pernas",
-  "Abdominal",
-];
-
-const exercicios = {
-  Peito: [
-    { nome: "Supino Reto", imagem: "/imagens/supino-reto.jpg" },
-    { nome: "Supino Inclinado", imagem: "/imagens/supino-inclinado.jpg" },
-    { nome: "Flexões", imagem: "/imagens/flexoes.jpg" },
-  ],
-  Costas: [
-    { nome: "Barra Fixa", imagem: "/imagens/barra-fixa.jpg" },
-    { nome: "Remada Curvada", imagem: "/imagens/remada-curvada.jpg" },
-    { nome: "Puxada Alta", imagem: "/imagens/puxada-alta.jpg" },
-  ],
-  // ... adicione os exercícios para os outros grupos musculares
-};
 const exercises = await db.exercise.findMany({
   include: {
     category: true,
