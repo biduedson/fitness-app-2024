@@ -35,9 +35,20 @@ const MuscleGainGuidePage = () => {
       <div className="fixed z-50 w-full h-auto hidden lg:flex">
         <NavbarUser />
       </div>
-      {/* Header Section */}
-      <section className="fixed top-0 w-full h-full z-50 lg:z-10 lg:relative text-center overflow-y-scroll [&::-webkit-scrollbar]:hidden shadow-lg shadow-slate-600">
-        <div className="w-full h-full lg:mt-16">
+      {/* Header mobile*/}
+      <header className=" w-full h-[100px] fixed top-0 flex items-center bg-slate-100 z-50 pt-2 lg:hidden shadow-lg shadow-slate-400">
+        <div className="w-full  lg:mt-16">
+          <h1 className="text-2xl  font-extrabold text-red-600 mb-6 lg:animate-pulse text-center  ">
+            Níveis de Treino e Alimentação
+          </h1>
+        </div>
+        <div className="fixed  top-2 left-2 z-50 lg:hidden">
+          <UserProfile />
+        </div>
+      </header>
+      {/* Header desktop*/}
+      <header className="hidden lg:block  w-full h-auto z-10 relative text-center overflow-y-scroll [&::-webkit-scrollbar]:hidden shadow-lg shadow-slate-400">
+        <div className="w-full h-full lg:mt-16 bg-slate-100">
           <div className="relative w-full h-[300px]  ">
             <Image
               src="/assets/img/bannerExercisePage.png"
@@ -47,20 +58,17 @@ const MuscleGainGuidePage = () => {
               className="absolute"
             />
           </div>
-          <div className="fixed  top-2 left-2 z-50 lg:hidden">
-            <UserProfile />
-          </div>
         </div>
-        <div className="w-full absolute top-10 left-0 lg:mt-16">
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-red-600 mb-6 lg:animate-pulse">
+        <div className="w-full absolute top-10 left-0 mt-16">
+          <h1 className="text-5xl font-extrabold text-red-600 mb-6 lg:animate-pulse ">
             Guia Definitivo para Ganho de Massa Muscular
           </h1>
-          <p className="text-xl max-w-2xl mx-auto text-white mb-6">
+          <p className=" text-xl max-w-2xl mx-auto text-white mb-6">
             Melhore seu desempenho com um plano de treino detalhado. Escolha o
             nível certo e acompanhe suas conquistas!
           </p>
         </div>
-      </section>
+      </header>
       <motion.div
         variants={fadeIn("up", 0.1)}
         initial="hidden"
@@ -68,7 +76,7 @@ const MuscleGainGuidePage = () => {
         className="min-h-screen bg-gradient-to-br bg-slate-100 text-white font-sans relative"
       >
         {/* Levels Section */}
-        <section className="py-20 px-6  flex flex-col space-y-16  sm:space-y-20 container mx-auto overflow-y-scroll mt-[300px] lg:mt-0  [&::-webkit-scrollbar]:hidden">
+        <section className="py-20 px-6  flex flex-col space-y-16  sm:space-y-20 container mx-auto overflow-y-scroll mt-[80px] lg:mt-0  [&::-webkit-scrollbar]:hidden">
           {/* Level Card */}
           {/* auto-rows-fr faz todos do grid tem a mesma altura asim como no items-stretch do flex */}
           <div className=" gap-12   grid grid-cols-1 auto-rows-fr   lg:grid-cols-3  ">
