@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Prisma } from "@prisma/client";
 import { group } from "console";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FocusEvent } from "react";
 
 interface CategoryExercisesButtonProps {
@@ -53,10 +53,15 @@ const CategoryExercisesButton = ({
   const handleGrupoClick = (
     exercises: CategoryExercisesButtonProps["exercises"] | null
   ) => {
-    setExercises(null);
+    console.log("clicou");
     setExercises(exercises);
   };
-
+  const handleClick = useCallback(
+    (exercises: CategoryExercisesButtonProps["exercises"] | null) => {
+      setExercises(exercises);
+    },
+    []
+  );
   const scrollToView = (event: FocusEvent<HTMLElement>): void => {
     const target = event.target as HTMLElement;
     if (target) {
@@ -73,7 +78,7 @@ const CategoryExercisesButton = ({
         {categoryGroup.map((grupo) => (
           <Button
             key={grupo.name}
-            onClick={() => handleGrupoClick(grupo.exercises)}
+            onClick={() => handleClick(grupo.exercises)}
             onFocus={(event) => scrollToView(event)}
             className={`bg-red-600 min-w-[120px] focus:bg-primary/90    focus:translate-y-1.5 active:-scale-y-50  transition-all ease-in-out text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
           >
@@ -85,8 +90,12 @@ const CategoryExercisesButton = ({
         {categoryGroup.map((grupo) => (
           <Button
             key={grupo.name}
-            onClick={() => handleGrupoClick(grupo.exercises)}
-            className={`bg-red-600 min-w-[120px] focus:bg-primary/90 focus:translate-y-1.5 active:-scale-y-50 transition-all ease-in  text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
+            onClick={() => handleClick(grupo.exercises)}
+            className=" bg-red-600 min-w-[120px] 
+    focus:bg-primary/90 focus:scale-105 focus:duration-150 
+    active:scale-110 active:duration-150 
+    transition-transform ease-in-out 
+    text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 "
           >
             {grupo.name}
           </Button>
