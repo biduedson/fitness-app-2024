@@ -56,7 +56,7 @@ export default async function Page() {
     );
   }
   return (
-    <div className="bg-gray-100 min-h-screen w-full overflow-x-hidden">
+    <div className="bg-gray-100 min-h-screen   w-screen overflow-x-hidden">
       {/* Banner */}
       <div className="relative h-64">
         <Image

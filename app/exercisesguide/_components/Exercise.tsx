@@ -54,7 +54,7 @@ export default function Exercises({ exercises, categoryGroup }: Props) {
 
   return (
     <>
-      <div className="container mx-auto p-4 ">
+      <div className="w-full  p-4 ">
         <CategoryExercisesButton
           categoryGroup={categoryGroup}
           setExercises={setDataExercises}

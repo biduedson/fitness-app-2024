@@ -56,17 +56,30 @@ const CategoryExercisesButton = ({
     setExercises(exercises);
   };
   return (
-    <div className=" grid grid-cols-3 lg:flex gap-4 justify-center p-4 bg-white rounded-lg shadow-lg shadow-slate-300 mb-2">
-      {categoryGroup.map((grupo) => (
-        <Button
-          key={grupo.name}
-          onClick={() => handleGrupoClick(grupo.exercises)}
-          className={`bg-red-600 min-w-[120px] hover:bg-blue-700 text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
-        >
-          {grupo.name}
-        </Button>
-      ))}
-    </div>
+    <>
+      <div className=" xl:hidden flex   gap-2  min-w-full p-6  bg-white rounded-lg shadow-lg shadow-slate-300 mb-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+        {categoryGroup.map((grupo) => (
+          <Button
+            key={grupo.name}
+            onClick={() => handleGrupoClick(grupo.exercises)}
+            className={`bg-red-600 min-w-[120px] hover:bg-blue-700 text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
+          >
+            {grupo.name}
+          </Button>
+        ))}
+      </div>
+      <div className="hidden min-w-full  xl:flex gap-4 justify-center p-4 bg-white rounded-lg shadow-lg shadow-slate-300 mb-2">
+        {categoryGroup.map((grupo) => (
+          <Button
+            key={grupo.name}
+            onClick={() => handleGrupoClick(grupo.exercises)}
+            className={`bg-red-600 min-w-[120px] hover:bg-blue-700 text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
+          >
+            {grupo.name}
+          </Button>
+        ))}
+      </div>
+    </>
   );
 };
 

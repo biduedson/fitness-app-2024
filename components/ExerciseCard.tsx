@@ -86,6 +86,7 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
             fill
             alt="Exercise"
             className="object-cover rounded-t-lg"
+            unoptimized
           />
           <div
             className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer hover:bg-opacity-50 transition-opacity duration-200"
