@@ -22,8 +22,7 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
       const favoritedExercise = exercise.favoriteByStudents?.some(
         (favorite) => favorite.studentId === data.user.student?.id!
       );
-      console.log(data.user.id);
-      console.log(data.user.student.id);
+
       setIsFavorite(favoritedExercise);
     }
   }, [data, exercise.favoriteByStudents]);

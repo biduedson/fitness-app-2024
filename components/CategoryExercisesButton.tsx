@@ -78,7 +78,7 @@ const CategoryExercisesButton = ({
         {categoryGroup.map((grupo) => (
           <Button
             key={grupo.name}
-            onClick={() => handleClick(grupo.exercises)}
+            onClick={() => handleGrupoClick(grupo.exercises)}
             onFocus={(event) => scrollToView(event)}
             className={`bg-red-600 min-w-[120px] focus:bg-primary/90    focus:translate-y-1.5 active:-scale-y-50  transition-all ease-in-out text-white font-bold text-[12px] py-2 px-4 rounded shadow-lg shadow-slate-600 $`}
           >

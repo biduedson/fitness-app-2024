@@ -1,46 +1,46 @@
 // src/pages/ExerciseGuidePage.tsx
 "use server";
 import UserProfile from "@/components/profile/UserProfile";
-import FavoriteexerciseCategoryCard from "./components/FavoriteexerciseCategoryCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import Image from "next/image";
 import { db } from "../_lib/prisma";
-import NavbarUser from "@/components/NavBarUser";
-import CategoryFooterNav from "@/components/CategoryFooterNav";
-import Footer from "@/components/Footer";
+
+import FavoritExercise from "./components/FavoritExercise";
 
 const Page = async () => {
   const data = await getServerSession(authOptions);
   const studentId = data?.user.student?.id;
-  const categoryAndMyExercises = await db.exerciseCategory.findMany({
-    include: {
-      exercises: {
-        where: {
-          favoriteByStudents: {
-            some: {
-              studentId: studentId, // Filtrar pelo studentId específico
+
+  const allCategoriesWithmyFavoriteExercises =
+    await db.exerciseCategory.findMany({
+      include: {
+        exercises: {
+          where: {
+            favoriteByStudents: {
+              some: {
+                studentId: studentId, // Filtrar pelo studentId específico
+              },
             },
           },
-        },
-        include: {
-          category: true,
-          favoriteByStudents: {
-            where: {
-              studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
-            },
-            include: {
-              student: {
-                include: {
-                  user: true,
+          include: {
+            category: true,
+            favoriteByStudents: {
+              where: {
+                studentId: studentId, // Garantir que apenas os favoritos desse studentId sejam retornados
+              },
+              include: {
+                student: {
+                  include: {
+                    user: true,
+                  },
                 },
               },
             },
           },
         },
       },
-    },
-  });
+    });
 
   if (!data?.user.student) {
     return (
@@ -56,51 +56,30 @@ const Page = async () => {
   }
 
   return (
-    <section className="relative bg-primary-300 h-[100vh] flex flex-col overflow-y-hidden lg:overflow-y-scroll  lg:mt-24 [&::-webkit-scrollbar]:hidden">
-      <div className="fixed top-0 z-50 hidden lg:flex w-screen ">
-        <NavbarUser />
-      </div>
-      <div className="lg:hidden absolute top-2 left-2">
-        <UserProfile />
-      </div>
-      <div className="relative w-full h-[30%] md:h-[40%] lg:hidden mb-10">
+    <div className="bg-gray-100 min-h-screen   w-screen overflow-x-hidden">
+      {/* Banner */}
+      <div className="relative h-64">
         <Image
-          src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
-          alt="Guia de Exercícios"
-          layout="fill"
-          className="absolute object-cover rounded-lg shadow-lg "
+          src="/assets/img/bannerExercisePage.png"
+          alt="Banner Academia"
+          fill
+          className="object-cover"
         />
-      </div>
-      <div className="flex-1 py-4 px-5 md:px-20 ">
-        <div className="hidden relative w-full h-[30%] md:h-[40%] lg:flex mb-10">
-          <Image
-            src="/assets/img/bannerExercisePage.png" // Adicione sua imagem aqui
-            alt="Guia de Exercícios"
-            layout="fill"
-            className="absolute object-cover rounded-lg shadow-lg"
-          />
+        <div className="lg:hidden absolute top-2 left-2">
+          <UserProfile />
         </div>
-        <h2 className="text-4xl text-red-600 font-bold text-center mb-10">
-          Guia de Exercícios favoritos
-        </h2>
-        <div className="w-full pb-10 sm:pb-0 h-[400px] overflow-y-scroll lg:mb-40 [&::-webkit-scrollbar]:hidden">
-          <div className="grid grid-cols-1 pb-10 sm:pb-0 sm:grid-cols-2 md:grid-cols-3 gap-6  ">
-            {categoryAndMyExercises.map((category) => (
-              <FavoriteexerciseCategoryCard
-                key={category.id}
-                categoryName={category.name}
-              />
-            ))}
-          </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <h1 className="text-red-600 text-4xl font-bold">
+            Exercícios favoritos
+          </h1>
         </div>
       </div>
-      <div className="w-full h-auto lg:hidden">
-        <CategoryFooterNav />
-      </div>
-      <div className="min-w-screen hidden lg:flex flex-col">
-        <Footer />
-      </div>
-    </section>
+
+      {/* Botões dos Grupos Musculares */}
+
+      {/* Exibição dos Exercícios */}
+      <FavoritExercise categories={allCategoriesWithmyFavoriteExercises} />
+    </div>
   );
 };
 

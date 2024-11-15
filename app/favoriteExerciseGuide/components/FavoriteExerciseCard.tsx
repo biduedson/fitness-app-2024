@@ -41,7 +41,7 @@ interface FavoriteExerciseCardProps {
     };
   }>[];
   setExercices: React.Dispatch<
-    React.SetStateAction<FavoriteExerciseCardProps["exercises"]>
+    React.SetStateAction<FavoriteExerciseCardProps["exercises"] | null>
   >;
 }
 
@@ -51,7 +51,7 @@ const FavoriteExerciseCard = ({
   setExercices,
 }: FavoriteExerciseCardProps) => {
   const { data } = useSession();
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(true);
   const [messageFavorited, setMessageFavorited] = useState<string>("");
   const [messageVisible, setMessageVisible] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -59,15 +59,7 @@ const FavoriteExerciseCard = ({
 
   /*para evitar varias renderizações, se  usa  o useeffect para antes de carregar  
 a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
-  useEffect(() => {
-    if (data?.user) {
-      console.log(data.user.id);
-      const favoritedExercise = exercise.favoriteByStudents?.some(
-        (favorite) => favorite.student.userId === data.user.id!
-      );
-      setIsFavorite(favoritedExercise);
-    }
-  }, [data, exercise.favoriteByStudents]);
+
   const [openModal, setOpemModal] = useState(false);
 
   const handleFavoriteClick = async () => {

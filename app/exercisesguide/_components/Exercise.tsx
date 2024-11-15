@@ -2,14 +2,8 @@
 "use client";
 import ExerciseCard from "@/components/ExerciseCard";
 import { Prisma } from "@prisma/client";
-import Image from "next/image";
 import { useState } from "react";
-import CategoryExercisesButton from "./CategoryExercisesButton";
-
-interface Exercicio {
-  nome: string;
-  imagem: string;
-}
+import CategoryExercisesButton from "@/components/CategoryExercisesButton";
 
 interface Props {
   grupoSelecionado?: string;
