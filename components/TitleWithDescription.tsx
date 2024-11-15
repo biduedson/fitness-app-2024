@@ -1,6 +1,6 @@
+"use client";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-import { StringifyOptions } from "querystring";
 
 interface TitleWithDescriptionAnimationProps {
   title: string;
