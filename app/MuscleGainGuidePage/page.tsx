@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import { useRouter } from "next/navigation";
 import TitleWithDescription from "@/components/TitleWithDescription";
-import Image from "next/image";
 import Footer from "@/components/Footer";
 import NavbarUser from "@/components/NavBarUser";
 import { levelCard } from "../_constants/constants";
 import LoadingScreen from "@/components/LoadingScreen";
 import useAuth from "../_hooks/useAuth";
 import UserProfile from "@/components/profile/UserProfile";
+import AccessDenied from "@/components/AccessDenied";
 
 const MuscleGainGuidePage = () => {
   const router = useRouter();
@@ -23,11 +23,7 @@ const MuscleGainGuidePage = () => {
 
   if (!isAuthenticated || !isStudent) {
     return (
-      <section className="w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0">
-        <h4 className="h4 text-white text-center">
-          Somente alunos têm acesso a este conteúdo
-        </h4>
-      </section>
+      <AccessDenied message=" Somente alunos têm acesso a este conteúdo" />
     );
   }
   return (

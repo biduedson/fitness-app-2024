@@ -5,6 +5,8 @@ import Exercises from "./_components/Exercise";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../_lib/auth";
 import UserProfile from "@/components/profile/UserProfile";
+import NavbarUser from "@/components/NavBarUser";
+import AccessDenied from "@/components/AccessDenied";
 
 const exercises = await db.exercise.findMany({
   include: {
@@ -45,18 +47,14 @@ export default async function Page() {
 
   if (!data?.user.student) {
     return (
-      <section
-        className="w-full flex h-[100vh] justify-center items-center bg-primary-300 px-4 lg:px-0"
-        id="exercises"
-      >
-        <h4 className="text-white text-center text-xl">
-          Somente alunos têm acesso a este conteúdo
-        </h4>
-      </section>
+      <AccessDenied message=" Somente alunos têm acesso a este conteúdo" />
     );
   }
   return (
-    <div className="bg-gray-100 min-h-screen   w-screen overflow-x-hidden">
+    <div className="bg-gray-100 min-h-screen  relative  w-screen overflow-x-hidden">
+      <div className="fixed top-0  z-50 w-full h-auto hidden lg:flex ">
+        <NavbarUser />
+      </div>
       {/* Banner */}
       <div className="relative h-64">
         <Image

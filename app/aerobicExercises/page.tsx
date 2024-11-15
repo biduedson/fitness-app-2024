@@ -11,6 +11,7 @@ import useAuth from "../_hooks/useAuth";
 import LoadingScreen from "@/components/LoadingScreen";
 import { fadeIn } from "@/lib/variants";
 import TitleWithDescription from "@/components/TitleWithDescription";
+import AccessDenied from "@/components/AccessDenied";
 
 export default function AerobicExercisesPage() {
   const { isLoading, isAuthenticated, isStudent, logout } = useAuth();
@@ -29,13 +30,7 @@ export default function AerobicExercisesPage() {
     return <LoadingScreen message="Loading..." />;
   }
   if (!isAuthenticated || !isStudent) {
-    return (
-      <section className="w-full flex h-[100svh] justify-center items-center bg-primary-300 px-4 lg:px-0">
-        <h4 className="h4 text-white text-center">
-          Somente alunos têm acesso a este conteúdo
-        </h4>
-      </section>
-    );
+    return <AccessDenied message="Somente alunos têm acesso a este conteúdo" />;
   }
   return (
     <div className="relative w-screen min-h-screen ">

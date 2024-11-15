@@ -10,6 +10,7 @@ import TableUsers from "./components/TableUsers";
 import { redirect } from "next/navigation";
 import UserProfile from "@/components/profile/UserProfile";
 import NavbarUser from "@/components/NavBarUser";
+import AccessDenied from "@/components/AccessDenied";
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
@@ -18,11 +19,7 @@ const DashboardPage = async () => {
     redirect("/login");
   }
   if (!session?.user.gymAdmin) {
-    return (
-      <div className="flex justify-center items-center h-screen text-primary-300">
-        Não Autorizado
-      </div>
-    );
+    return <AccessDenied message="acesso não autorizado." />;
   }
 
   const users = await db.user.findMany({

@@ -27,7 +27,7 @@ const NavbarUser = () => {
       {/* Links do Menu (Visíveis em telas maiores) */}
       <div className="hidden lg:flex space-x-8 items-center ">
         <button
-          onClick={() => router.push("/exerciseGuidePage")}
+          onClick={() => router.push("/exercisesguide")}
           className="hover:text-gray-300 transition"
         >
           Exercícios
