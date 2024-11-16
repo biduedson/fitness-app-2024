@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation";
 import { IoCaretDownOutline } from "react-icons/io5";
 import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
-import { Loader, LogOutIcon } from "lucide-react";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { LogOutIcon } from "lucide-react";
 
 const NavbarUser = () => {
   const { data } = useSession();
@@ -81,7 +80,6 @@ const NavbarUser = () => {
               priority
               className="object-cover shadow-md rounded-full border-[2px] border-white"
             />
-
             <motion.div
               variants={fadeIn("down", 0.2)}
               initial="hidden"
@@ -99,25 +97,16 @@ const NavbarUser = () => {
             </motion.div>
           </>
         )}
-        {data?.user.image && (
-          <>
-            <div
-              className="absolute p-1 bottom-[-2px] left-4 bg-white flex items-center justify-center w-[10px] h-[10px]
+        <div
+          className="absolute p-1 bottom-[-2px] left-4 bg-white flex items-center justify-center w-[10px] h-[10px]
          rounded-full z-50 cursor-pointer"
-              onClick={() => setIsOpenLogout(!isOpenLogout)}
-            >
-              <p className="bg-slate-300 rounded-full">
-                <IoCaretDownOutline />
-              </p>
-            </div>
-            <p className="hidden lg:block  text-sm">{data?.user.name}</p>
-          </>
-        )}
-        {!data?.user.image && (
-          <p className="animate-pulse text-sm">
-            <Loader className="animate-spin" />
+          onClick={() => setIsOpenLogout(!isOpenLogout)}
+        >
+          <p className="bg-slate-300 rounded-full">
+            <IoCaretDownOutline />
           </p>
-        )}
+        </div>
+        <p className="hidden lg:block  text-sm">{data?.user.name}</p>
       </div>
     </nav>
   );

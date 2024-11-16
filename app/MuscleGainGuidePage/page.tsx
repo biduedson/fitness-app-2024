@@ -1,27 +1,25 @@
+"use client";
 import TitleWithDescription from "@/components/TitleWithDescription";
 import Footer from "@/components/Footer";
 import NavbarUser from "@/components/NavBarUser";
 import { foodPlan, levelCard, weightLossPlan } from "../_constants/constants";
 import UserProfile from "@/components/profile/UserProfile";
 import AccessDenied from "@/components/AccessDenied";
-import MuscleBuildingDiet from "./MuscleBuildingDiet";
-import FatLossMealPlan from "./FatLossMealPlan";
-import ProgressiveWorkoutPlan from "./ProgressiveWorkoutPlan";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../_lib/auth";
+import MuscleBuildingDiet from "./_components/MuscleBuildingDiet";
+import FatLossMealPlan from "./_components/FatLossMealPlan";
+import ProgressiveWorkoutPlan from "./_components/ProgressiveWorkoutPlan";
+
 import LoadingScreen from "@/components/LoadingScreen";
+import useAuth from "../_hooks/useAuth";
 
-const MuscleGainGuidePage = async () => {
-  const session = await getServerSession(authOptions);
-
-  if (!session?.user) {
+const MuscleGainGuidePage = () => {
+  const { isLoading, isAuthenticated, isStudent, logout } = useAuth();
+  if (isLoading) {
     return <LoadingScreen message="Loading..." />;
   }
-
-  if (!session?.user.student) {
+  if (!isAuthenticated || !isStudent) {
     return <AccessDenied message="Somente alunos têm acesso a este conteúdo" />;
   }
-
   return (
     <div className="relative w-screen min-h-screen">
       <div className="fixed top-2 left-2 z-50 lg:hidden">
