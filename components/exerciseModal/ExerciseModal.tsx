@@ -52,7 +52,7 @@ const EnhancedExerciseModal = ({
       <AlertDialog open={isOpen}>
         <AlertDialogContent className="rounded-xl">
           <AlertDialogHeader>
-            <AlertDialogTitle className="w-full h-[300px] lg:h-[200px]">
+            <AlertDialogTitle className="w-full h-[250px] lg:h-[200px]">
               <div className="relative w-full  h-full ">
                 <Image
                   src={imageUrl}
