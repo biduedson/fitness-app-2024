@@ -17,18 +17,18 @@ const LevelExerciseCard = ({ level }: LevelExerciseProps) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
-      className="w-full max-h-[350px] lg:max-h-[220px] flex flex-col justify-between overflow-y-scroll [&::-webkit-scrollbar]:hidden"
+      className="w-full  flex flex-col justify-between shadow-lg shadow-slate-400  overflow-y-scroll [&::-webkit-scrollbar]:hidden"
     >
       {/* Séries e Repetições com Descrição */}
       <div className="grid gap-4 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-        <div className="bg-gray-100 p-4 rounded-md shadow-md mb-4 lg:mb-8">
+        <div className="bg-gray-100 p-4 rounded-md shadow-md  ">
           <h3 className="text-xl text-accent font-semibold mb-2">
             Séries e Repetições
           </h3>
           <div className="space-y-3 ">
             <div
               key={level.title}
-              className={`bg-gradient-to-r p-4 rounded-md shadow-md mb-4 text-white ${level.colors}`}
+              className={`bg-gradient-to-r p-4 rounded-md mb-4 text-white ${level.colors}`}
             >
               <h4 className="text-lg font-semibold">{level.title}</h4>
               <p className="text-sm mb-2">{level.description}</p>
