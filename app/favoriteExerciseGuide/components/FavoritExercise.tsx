@@ -11,6 +11,7 @@ import {
 } from "@/app/interfaces/ExercicesInterfacesProps";
 import TitleWithDescriptionAnimation from "@/components/TitleWithDescription";
 import NewExerciseCard from "@/components/NewExerciseCard";
+import { motion } from "framer-motion";
 
 export default function FvoritExercise({ categories }: ICategoryandExercises) {
   const { data } = useSession();
@@ -39,7 +40,13 @@ export default function FvoritExercise({ categories }: ICategoryandExercises) {
             </div>
           ) : (
             dataExercises.map((exercise) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0 }} // Começa invisível
+                animate={{ opacity: 1 }} // Fica totalmente visível
+                transition={{
+                  duration: 1.8, // Duração rápida
+                  ease: "easeOut", // Suavidade na transição
+                }}
                 key={exercise.name}
                 className="bg-white rounded-lg shadow-md"
               >
@@ -53,7 +60,7 @@ export default function FvoritExercise({ categories }: ICategoryandExercises) {
                   setExercices={setDataExercises}
                   exercises={dataExercises}
                 />*/}
-              </div>
+              </motion.div>
             ))
           )}
         </div>

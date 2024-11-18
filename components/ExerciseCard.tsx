@@ -101,7 +101,7 @@ const ExerciseCard = ({ exercise }: IExerciseItemProps) => {
                 className="absolute inset-0 bg-black rounded-xl shadow-lg shadow-slate-400 bg-opacity-30 flex items-center justify-center cursor-pointer hover:bg-opacity-50 transition-opacity duration-200"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <span className="text-white text-xl lg:text-2xl font-semibold">
+                <span className="text-white text-sm lg:text-2xl font-semibold">
                   Ver Exercício
                 </span>
               </div>

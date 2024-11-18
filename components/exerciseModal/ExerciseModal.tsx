@@ -75,11 +75,7 @@ const EnhancedExerciseModal = ({
                 </div>
                 <div className="absolute top-0 left-0 ">
                   <button onClick={() => setIsOpen(false)}>
-                    <IoCloseCircle
-                      className={`text-5xl ${
-                        isFavorite ? "text-accent" : "text-gray-300"
-                      }`}
-                    />
+                    <IoCloseCircle className="text-5xl  text-accent" />
                   </button>
                 </div>
               </div>
