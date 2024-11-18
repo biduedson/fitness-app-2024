@@ -2,9 +2,11 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { Session } from "next-auth";
 
 const useAuth = () => {
   const { data: session, status } = useSession();
+  const [uSersession, setUSersession] = useState<Session | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isStudent, setIsStudent] = useState(false);
   const [isGynAdmin, setIsGynAdmin] = useState(false);
@@ -15,6 +17,7 @@ const useAuth = () => {
     setIsLoggedIn(false);
     setIsStudent(false);
     setIsGynAdmin(false);
+    setUSersession(null);
   };
 
   useEffect(() => {
@@ -25,6 +28,7 @@ const useAuth = () => {
       setIsLoggedIn(!!session?.user);
       setIsStudent(!!session?.user?.student);
       setIsGynAdmin(!!session?.user?.gymAdmin);
+      setUSersession(session);
     }
   }, [status, session]);
 
@@ -35,6 +39,7 @@ const useAuth = () => {
     isStudent,
     isGynAdmin,
     logout,
+    uSersession,
   };
 };
 
