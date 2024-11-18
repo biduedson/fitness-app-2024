@@ -34,7 +34,6 @@ const CardioWorkoutGuide = ({ aerobicExercises }: CardioWorkoutGuideProps) => {
       {aerobicExercises.map((exercise, index) => (
         <motion.div
           whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
           transition={{ timeConstant: 0.2 }}
           key={index}
           className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative lg:max-h-[700px] 

@@ -14,11 +14,13 @@ interface ProgressiveWorkoutPlanProps {
 const ProgressiveWorkoutPlan = ({ levelCard }: ProgressiveWorkoutPlanProps) => {
   return (
     <motion.div
-      variants={fadeIn("down", 0.2)}
-      initial="hidden"
-      whileInView={"show"}
-      viewport={{ once: false, amount: 0.2 }}
-      className="bg-white rounded-xl p-10 shadow-lg shadow-slate-400 relative overflow-hidden transform transition duration-500 hover:scale-105"
+      initial={{ opacity: 0 }} // Começa invisível
+      animate={{ opacity: 1 }} // Fica totalmente visível
+      transition={{
+        duration: 1.8, // Duração rápida
+        ease: "easeOut", // Suavidade na transição
+      }}
+      className="bg-white rounded-xl p-10 shadow-lg shadow-slate-400 relative overflow-hidden "
     >
       <h2 className="text-3xl font-bold text-red-600  text-center mb-4 ">
         Evolução no Treino: Do Iniciante ao Atleta Avançado
