@@ -16,6 +16,7 @@ import {
 import { ReactElement, useState } from "react";
 import LevelExerciseCard from "./components/LevelExerciseCard";
 import LevelExerciseButtons from "./components/LevelExerciseButtons";
+import { IoCloseCircle } from "react-icons/io5";
 
 interface EnhancedExerciseModalProps {
   isOpen: boolean;
@@ -72,11 +73,20 @@ const EnhancedExerciseModal = ({
                     <FaShareAlt className="text-2xl text-gray-300" />
                   </button>
                 </div>
+                <div className="absolute top-0 left-0 ">
+                  <button onClick={() => setIsOpen(false)}>
+                    <IoCloseCircle
+                      className={`text-5xl ${
+                        isFavorite ? "text-accent" : "text-gray-300"
+                      }`}
+                    />
+                  </button>
+                </div>
               </div>
             </AlertDialogTitle>
             <AlertDialogDescription>
               <div className="p-2 flex-1">
-                <h2 className=" text-sm lg:text-lg text-accent font-bold text-center mb-2">
+                <h2 className=" text-sm lg:text-lg text-accent font-bold text-center ">
                   {exerciseName}
                 </h2>
                 <LevelExerciseButtons
@@ -87,14 +97,7 @@ const EnhancedExerciseModal = ({
               </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel
-              className="bg-red-600 text-white"
-              onClick={() => setIsOpen(false)}
-            >
-              Fechar
-            </AlertDialogCancel>
-          </AlertDialogFooter>
+          <AlertDialogFooter></AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </>
