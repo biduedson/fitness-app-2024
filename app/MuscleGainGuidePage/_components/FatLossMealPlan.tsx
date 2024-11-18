@@ -14,7 +14,7 @@ interface MuscleBuildingDietProps {
 const FatLossMealPlan = ({ weightLossPlan }: MuscleBuildingDietProps) => {
   return (
     <motion.div
-      variants={fadeIn("up", 0.6)}
+      variants={fadeIn("down", 0.2)}
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: false, amount: 0.2 }}
@@ -23,9 +23,12 @@ const FatLossMealPlan = ({ weightLossPlan }: MuscleBuildingDietProps) => {
       <h2 className="text-3xl font-bold text-red-600 mb-4 text-center">
         Plano Alimentar para Emagrecimento e Perda de Gordura
       </h2>
-      <ul className="py-4 text-primary-300 sm:grid-cols-2 grid lg:grid-cols-3 gap-4">
+      <ul className="py-4 text-primary-300 sm:grid-cols-2 grid lg:grid-cols-3 gap-4 lg:gap-8">
         {weightLossPlan.map((refeicao) => (
-          <li
+          <motion.li
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ timeConstant: 0.2 }}
             key={refeicao.id}
             className={`p-4 rounded-lg shadow-lg shadow-slate-300 ${refeicao.cor} `}
           >
@@ -39,7 +42,7 @@ const FatLossMealPlan = ({ weightLossPlan }: MuscleBuildingDietProps) => {
                 </li>
               ))}
             </ul>
-          </li>
+          </motion.li>
         ))}
       </ul>
     </motion.div>

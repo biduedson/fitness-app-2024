@@ -30,9 +30,12 @@ const CardioWorkoutGuide = ({ aerobicExercises }: CardioWorkoutGuideProps) => {
     });
   };
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4  Xxl:grid-cols-4 mt-8 lg:mt-0  max-w-6xl Xxl:max-w-[1400px]  Xxl:p-12 px-4 my-4 lg:overflow-y-hidden [&::-webkit-scrollbar]:hidden">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4   Xxl:grid-cols-4 mt-8 lg:mt-0  max-w-6xl Xxl:max-w-[1400px]  Xxl:p-12 px-4 py-8 lg:overflow-y-hidden [&::-webkit-scrollbar]:hidden">
       {aerobicExercises.map((exercise, index) => (
         <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ timeConstant: 0.2 }}
           key={index}
           className="bg-white rounded-lg shadow-lg shadow-slate-500 overflow-hidden relative lg:max-h-[700px] 
          "

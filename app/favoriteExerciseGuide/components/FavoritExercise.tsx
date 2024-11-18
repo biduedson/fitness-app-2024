@@ -9,6 +9,8 @@ import {
   ICategoryandExercises,
   IExercises,
 } from "@/app/interfaces/ExercicesInterfacesProps";
+import TitleWithDescriptionAnimation from "@/components/TitleWithDescription";
+import NewExerciseCard from "@/components/NewExerciseCard";
 
 export default function FvoritExercise({ categories }: ICategoryandExercises) {
   const { data } = useSession();
@@ -19,15 +21,21 @@ export default function FvoritExercise({ categories }: ICategoryandExercises) {
 
   return (
     <>
+      <TitleWithDescriptionAnimation
+        title="Exercícios Favoritos"
+        description="Escolha Sua Categoria e Potencialize Seus Resultados!"
+      />
       <div className="w-full  p-4 ">
         <FavoriteCategoryButtons
           categories={categories}
           setExercises={setDataExercises}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {!dataExercises ? (
-            <div className="bg-white rounded-lg shadow-md text-center text-red-600 p-4">
-              <h1>Escolha a categoria de exercícios</h1>
+            <div className="w-screen flex justify-center">
+              <div className="bg-white  rounded-lg shadow-md text-center text-red-600 p-4">
+                <h1>Escolha a categoria de exercícios</h1>
+              </div>
             </div>
           ) : (
             dataExercises.map((exercise) => (
@@ -35,11 +43,16 @@ export default function FvoritExercise({ categories }: ICategoryandExercises) {
                 key={exercise.name}
                 className="bg-white rounded-lg shadow-md"
               >
-                <FavoriteExerciseCard
+                <NewExerciseCard
                   exercise={exercise}
                   setExercices={setDataExercises}
                   exercises={dataExercises}
                 />
+                {/* <FavoriteExerciseCard
+                  exercise={exercise}
+                  setExercices={setDataExercises}
+                  exercises={dataExercises}
+                />*/}
               </div>
             ))
           )}

@@ -9,6 +9,7 @@ import { db } from "../_lib/prisma";
 import FavoritExercise from "./components/FavoritExercise";
 import NavbarUser from "@/components/NavBarUser";
 import AccessDenied from "@/components/AccessDenied";
+import TitleWithDescriptionAnimation from "@/components/TitleWithDescription";
 
 const Page = async () => {
   const data = await getServerSession(authOptions);
@@ -66,11 +67,7 @@ const Page = async () => {
         <div className="lg:hidden absolute top-2 left-2">
           <UserProfile />
         </div>
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-red-600 text-4xl font-bold">
-            Exercícios favoritos
-          </h1>
-        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center"></div>
       </div>
 
       {/* Botões dos Grupos Musculares */}

@@ -1,17 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { IExerciseItemProps } from "@/app/interfaces/ExercicesInterfacesProps";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { useSession } from "next-auth/react";
-import { FaHeart } from "react-icons/fa";
-import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
-import ExerciseModal from "@/components/exerciseModal/ExerciseModal";
-import { fadeIn } from "@/lib/variants";
-import { truncateText } from "@/app/util/truncateText";
 import { Prisma } from "@prisma/client";
-import { Trash2 } from "lucide-react";
-import AlertAction from "@/components/AlertAction";
+import { Card, CardContent, CardHeader } from "./ui/card";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { toggleFavoriteExercise } from "@/app/_actions/favotiteExercisesToggle";
+import { motion } from "framer-motion";
+import ExerciseModal from "./exerciseModal/ExerciseModal";
+import { truncateText } from "@/app/util/truncateText";
+import { FaHeart } from "react-icons/fa";
+import AlertAction from "./AlertAction";
 
 interface FavoriteExerciseCardProps {
   exercise: Prisma.ExerciseGetPayload<{
@@ -47,7 +45,7 @@ interface FavoriteExerciseCardProps {
   >;
 }
 
-const FavoriteExerciseCard = ({
+const NewExerciseCard = ({
   exercise,
   exercises,
   setExercices,
@@ -116,80 +114,53 @@ a pagina verificarse  o exercicio ja foi favoritado pelo user logado*/
         alertButtonName="Remover"
         alertFunctionAction={() => handleFavoriteClick()}
       />
-      <div
-        key={exercise.id}
-        className="relative m-2 p-2 shadow-lg rounded-lg bg-white flex flex-col items-center justify-center hover:shadow-xl transition-shadow duration-200 ease-in-out"
-      >
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          whileHover={{ scale: 1.3 }}
-          onClick={() => setOpenAlertAction(true)}
-          className="absolute top-2 rigth-2 flex z-30 items-center justify-center right-2 text-white bg-slate-300 rounded-full w-8 h-8  hover:text-red-500 transition-colors duration-200"
-        >
-          <FaHeart className="text-red-600" />
-        </motion.button>
-        <motion.div
-          variants={fadeIn("up", 0.1)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="relative h-[150px] w-[150px] sm:h-[200px] sm:w-[200px] lg:w-[200px] lg:h-[200px] Xxl:w-[180px] xl:h-[200px] xl:w-[180px] Xxl:h-[200px] rounded-lg overflow-hidden"
-        >
-          <Image
-            src={exercise.imageUrl!}
-            fill
-            alt="Exercise"
-            className="object-cover rounded-t-lg"
-          />
-          <div
-            className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer hover:bg-opacity-50 transition-opacity duration-200"
-            onClick={() => setIsOpen(!isOpen)}
+      <motion.div>
+        <Card className=" w-full h-full relative">
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.3 }}
+            onClick={() => setOpenAlertAction(true)}
+            className="absolute top-2 rigth-2 flex z-30 items-center justify-center right-2 text-white bg-slate-300 rounded-full w-8 h-8  hover:text-red-500 transition-colors duration-200"
           >
-            <span className="text-white text-2xl font-semibold">
-              Ver Exercício
-            </span>
-          </div>
-        </motion.div>
+            <FaHeart className="text-red-600" />
+          </motion.button>
+          <CardHeader className="flex flex-col items-start w-full  px-1">
+            <p className="text-[12px] uppercase font-bold">
+              Categoria:{" "}
+              <span className="text-red-600">{exercise.category.name}</span>
+            </p>
 
-        <motion.div
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.2 }}
-          className="relative mt-2 w-full text-center p-2 bg-red-600 rounded-b-lg text-white font-semibold text-lg flex items-center justify-center cursor-pointer"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          {isHovered && (
+            <h4 className="font-bold text-[12px] text-red-600">
+              {truncateText(exercise.name, 25)}
+            </h4>
+          </CardHeader>
+          <CardContent>
             <motion.div
-              variants={fadeIn("up", 0.1)}
-              initial="hidden"
-              whileInView={"show"}
-              viewport={{ once: false, amount: 0.2 }}
-              className=" w-full absolute top-[-20px] mt-2 p-4 bg-gray-200 text-black rounded-lg z-50"
+              whileHover={{ scale: 1.1 }}
+              transition={{ timeConstant: 0.1 }}
+              className="py-2 relative "
             >
-              {exercise.name}
+              <Image
+                alt="Exercise image"
+                className="object-cover rounded-xl   "
+                src={exercise.imageUrl!}
+                width={100}
+                height={60}
+              />
+              <div
+                className="absolute inset-0 bg-black rounded-xl shadow-lg shadow-slate-400 bg-opacity-30 flex items-center justify-center cursor-pointer hover:bg-opacity-50 transition-opacity duration-200"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <span className="text-white text-xl lg:text-2xl font-semibold">
+                  Ver Exercício
+                </span>
+              </div>
             </motion.div>
-          )}
-          {truncateText(exercise.name, 10)}
-
-          {messageVisible && (
-            <motion.div
-              variants={fadeIn("up", 0.1)}
-              initial="hidden"
-              animate={"show"}
-              onAnimationComplete={() =>
-                setTimeout(() => setMessageVisible(false), 400)
-              }
-              className="absolute bottom-[-40px] left-0 right-0 text-sm bg-white text-gray-800 p-1 rounded shadow-md"
-            >
-              {messageFavorited}
-            </motion.div>
-          )}
-        </motion.div>
-      </div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </>
   );
 };
 
-export default FavoriteExerciseCard;
+export default NewExerciseCard;

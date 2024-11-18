@@ -72,7 +72,7 @@ export const levelCard = [
       "Frequência: 2 a 3 vezes por semana",
       "Foco em exercícios compostos que ativam grandes grupos musculares",
     ],
-    colors: "from-gray-700 to-gray-800",
+    colors: "bg-blue-100 text-blue-600",
   },
   {
     title: "Intermediários",
@@ -84,7 +84,7 @@ export const levelCard = [
       "Frequência: 3 a 5 vezes por semana",
       "Introdução de variações de exercícios e aumento gradual de carga",
     ],
-    colors: "from-gray-800 to-gray-900",
+    colors: "bg-green-100 text-green-600",
   },
   {
     title: "Avançados",
@@ -96,7 +96,7 @@ export const levelCard = [
       "Frequência: 4 a 6 vezes por semana",
       "Uso de métodos avançados, como drop sets, supersets e periodização",
     ],
-    colors: "from-gray-700 to-gray-800",
+    colors: "bg-red-100 text-red-600",
   },
 ];
 

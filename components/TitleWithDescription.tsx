@@ -17,7 +17,7 @@ const TitleWithDescriptionAnimation = ({
       className={
         clasName
           ? `${clasName} flex flex-col  items-center gap-2  bg-slate-100`
-          : "flex flex-col  items-center gap-2 mb-8 bg-slate-100"
+          : "flex flex-col  items-center gap-2 my-4 bg-slate-100"
       }
     >
       <motion.h2
